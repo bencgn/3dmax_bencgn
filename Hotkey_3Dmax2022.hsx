@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MaxHotkeyTransformations Locked="false"/>
+<MaxHotkeyTransformations Locked="false">
+    <Unassign_Hotkey Shortcut="Q" Description="Select" Id="1909744250-40008"/>
+    <Unassign_Hotkey Shortcut="Q" Description="Select Object" Id="6-40709"/>
+    <Unassign_Hotkey Shortcut="Q" Description="Smart Select" Id="647394-SmartSelect`Selection"/>
+    <Unassign_Hotkey Shortcut="F3" Description="Wireframe / Smooth+Highlights Toggle" Id="0-272"/>
+    <Unassign_Hotkey Shortcut="V" Description="Viewports" Id="1261319018-Viewports"/>
+    <Assign_Hotkey Shortcut="V" Description="Wireframe / Smooth+Highlights Toggle" Id="0-272"/>
+</MaxHotkeyTransformations>
