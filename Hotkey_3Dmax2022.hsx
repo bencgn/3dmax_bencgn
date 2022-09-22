@@ -9,4 +9,6 @@
     <Unassign_Hotkey Shortcut="Space" Description="Lock" Id="1261319018-Lock"/>
     <Unassign_Hotkey Shortcut="Ctrl+D" Description="Select None" Id="0-40043"/>
     <Assign_Hotkey Shortcut="Space" Description="Select Object" Id="0-50027"/>
+    <Assign_Hotkey Shortcut="Ctrl+Space" Description="Remove" Id="1250838234-40053"/>
+    <Assign_Hotkey Shortcut="Ctrl+Space" Description="Remove" Id="369982487-40053"/>
 </MaxHotkeyTransformations>
