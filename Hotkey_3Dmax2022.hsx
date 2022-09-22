@@ -6,4 +6,7 @@
     <Unassign_Hotkey Shortcut="F3" Description="Wireframe / Smooth+Highlights Toggle" Id="0-272"/>
     <Unassign_Hotkey Shortcut="V" Description="Viewports" Id="1261319018-Viewports"/>
     <Assign_Hotkey Shortcut="V" Description="Wireframe / Smooth+Highlights Toggle" Id="0-272"/>
+    <Unassign_Hotkey Shortcut="Space" Description="Lock" Id="1261319018-Lock"/>
+    <Unassign_Hotkey Shortcut="Ctrl+D" Description="Select None" Id="0-40043"/>
+    <Assign_Hotkey Shortcut="Space" Description="Select Object" Id="0-50027"/>
 </MaxHotkeyTransformations>
