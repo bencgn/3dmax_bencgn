@@ -11,4 +11,8 @@
     <Assign_Hotkey Shortcut="Space" Description="Select Object" Id="0-50027"/>
     <Assign_Hotkey Shortcut="Ctrl+Space" Description="Remove" Id="1250838234-40053"/>
     <Assign_Hotkey Shortcut="Ctrl+Space" Description="Remove" Id="369982487-40053"/>
+    <Unassign_Hotkey Shortcut=";" Description="Repeat Last Operation" Id="1250838234-40052"/>
+    <Assign_Hotkey Shortcut="D" Description="Repeat Last Operation" Id="1250838234-40052"/>
+    <Unassign_Hotkey Shortcut=";" Description="Repeat Last Operation" Id="369982487-40052"/>
+    <Assign_Hotkey Shortcut="D" Description="Repeat Last Operation" Id="369982487-40052"/>
 </MaxHotkeyTransformations>
