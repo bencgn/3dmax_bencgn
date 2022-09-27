@@ -10,6 +10,7 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	button btBox "Box"  	width:50  	 	across:3
 	button btCylinder "Cylinder"  	width:50  	 	across:3
 	button btSphere "Sphere"  	width:50  	 	across:3
+	button btPlane "Plane"  	width:50  	 	across:1
 	button btNoo "a--------------------------------a"  	width:170 across:1
 	button btNone "None Mat"  	width:50  	 	across:1
 	
@@ -73,8 +74,14 @@ Sphere radius:500 pos:[0,0,0] isSelected:on
 	(
 $. mat = null
 	)
+	--btPlane
+	on btPlane pressed do
+	(
+Plane length:250 width:250 pos:[0,0,0] isSelected:on
+	)
 	
 	
+
 	
 )
 createDialog rOSTools

@@ -15,4 +15,11 @@
     <Assign_Hotkey Shortcut="D" Description="Repeat Last Operation" Id="1250838234-40052"/>
     <Unassign_Hotkey Shortcut=";" Description="Repeat Last Operation" Id="369982487-40052"/>
     <Assign_Hotkey Shortcut="D" Description="Repeat Last Operation" Id="369982487-40052"/>
+    <Assign_Hotkey Shortcut="Ctrl+Shift+H" Description="Hide Unselected" Id="647394-Hide_Unselected`Uni-Hide/UnHider"/>
+    <Unassign_Hotkey Shortcut="Ctrl+Shift+A" Description="Select Similar" Id="0-40099"/>
+    <Unassign_Hotkey Shortcut="Alt+U" Description="Unhide All" Id="0-277"/>
+    <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Unhide All" Id="0-277"/>
+    <Unassign_Hotkey Shortcut="Alt+H" Description="Hide Selection" Id="0-223"/>
+    <Unassign_Hotkey Shortcut="H" Description="Select By Name" Id="0-50029"/>
+    <Assign_Hotkey Shortcut="H" Description="Hide Selected" Id="647394-HideSelected`Ribbon - Modeling"/>
 </MaxHotkeyTransformations>
