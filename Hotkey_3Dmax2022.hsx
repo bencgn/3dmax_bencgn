@@ -22,4 +22,19 @@
     <Unassign_Hotkey Shortcut="Alt+H" Description="Hide Selection" Id="0-223"/>
     <Unassign_Hotkey Shortcut="H" Description="Select By Name" Id="0-50029"/>
     <Assign_Hotkey Shortcut="H" Description="Hide Selected" Id="647394-HideSelected`Ribbon - Modeling"/>
+    <Assign_Hotkey Shortcut="C" Description="Chamfer Settings" Id="369982487-40056"/>
+    <Unassign_Hotkey Shortcut="Ctrl+V" Description="Clone" Id="0-40213"/>
+    <Assign_Hotkey Shortcut="Ctrl+V" Description="Convert to Vertex (Poly)" Id="647394-EPoly_Convert_Sel_To_Vertex`Editable Polygon Object"/>
+    <Assign_Hotkey Shortcut="F3" Description="New Script" Id="0-40469"/>
+    <Assign_Hotkey Shortcut="Shift+W" Description="Stitch" Id="2077580866-40043"/>
+    <Unassign_Hotkey Shortcut="Shift+R" Description="Break Selected Vertices" Id="2077580866-40013"/>
+    <Assign_Hotkey Shortcut="Shift+E" Description="Relax" Id="647394-UVWUnwrap_Relax`UVW Unwrap"/>
+    <Assign_Hotkey Shortcut="Shift+R" Description="Break By Subobject" Id="2077580866-40270"/>
+    <Assign_Hotkey Shortcut="Shift+F" Description="Pack" Id="2077580866-40074"/>
+    <Assign_Hotkey Shortcut="Shift+E" Description="Relax Dialog" Id="2077580866-40136"/>
+    <Unassign_Hotkey Shortcut="C" Description="Camera View" Id="0-40068"/>
+    <Unassign_Hotkey Shortcut="Shift+C" Description="Hide Cameras Toggle" Id="0-40185"/>
+    <Assign_Hotkey Shortcut="Shift+C" Description="AutoPivot_Center" Id="647394-AutoPivot_Center`Visuali Studio"/>
+    <Unassign_Hotkey Shortcut="Alt+Shift+C" Description="Create Camera (Physical) From View" Id="647394-PhysicalCamera_CreateFromView`Lights and Cameras"/>
+    <Assign_Hotkey Shortcut="Alt+Shift+C" Description="AutoPivot_Bottom" Id="647394-AutoPivot_Bottom`Visuali Studio"/>
 </MaxHotkeyTransformations>
