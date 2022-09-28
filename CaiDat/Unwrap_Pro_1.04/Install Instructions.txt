@@ -1,0 +1,9 @@
+1) Close 3ds Max.
+2) a) Install the Microsoft Visual 2010 C++ Redistributable if you are using 3ds max 2014 or lower.
+   b) Install the Microsoft Visual 2015-2019 C++ Redistributable if you are using 3ds max 2015 or higher.
+3) Copy the "plugins" folder and the "libiomp5md.dll" file from the folder that matches your 3ds Max version to your 3ds Max installation directory e.g. "C:\Program Files\Autodesk\3ds Max xxxx"
+
+	!IMPORTANT! - if an "libiomp5md.dll" file already exists in your 3ds Max folder rename the existing file to "libiomp5md.dll.old" and copy the new one; if 3ds Max gives an error at startup delete 
+		      the copied file and change the "libiomp5md.dll.old" file back to "libiomp5md.dll", now see it runs without errors
+
+4) Open 3ds Max and look for "Unwrap Pro" in the modifier list.
