@@ -1,10 +1,10 @@
 rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	(
 	button btConvertPoly "ConvertPoly"  	width:130  	 	across:1
-	button btCollapto "Collapse To"  	width:130  	 	across:1
+	button btCollapto "Collapse To"  	width:130  	 	across:1 	
 	
 	group "Need" (
-	button btSetup "SetUpOfBen"  	width:130  	 	across:1
+	button btSetup "SetUpOfBen "  	width:130  	 	across:1
 	button btOpenUnwrap "Open Unwrap"  	width:130  	 	across:1
 	button btUVMap11 "UV Map 1m"  	width:130  	 	across:1)
 	group "Export" (
