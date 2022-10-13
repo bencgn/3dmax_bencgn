@@ -2,25 +2,37 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	(
 	button btConvertPoly "ConvertPoly"  	width:130  	 	across:1
 	button btCollapto "Collapse To"  	width:130  	 	across:1
+	
+	group "Need" (
 	button btSetup "SetUpOfBen"  	width:130  	 	across:1
 	button btOpenUnwrap "Open Unwrap"  	width:130  	 	across:1
-	button btUVMap11 "UV Map 1m"  	width:130  	 	across:1
-	button btToolExport "Open Tool Export"  	width:130  	 	across:1
-	button btNo "a--------------------------------a"  	width:170 across:1
+	button btUVMap11 "UV Map 1m"  	width:130  	 	across:1)
+	group "Export" (
+	button btToolExport "Open Tool Export"  	width:130  	 	across:1)
+	
+	group "Model" (
 	button btBox "Box"  	width:50  	 	across:3
 	button btCylinder "Cylinder"  	width:50  	 	across:3
 	button btSphere "Sphere"  	width:50  	 	across:3
-	button btPlane "Plane"  	width:50  	 	across:1
-	button btNoo "a--------------------------------a"  	width:170 across:1
-	button btNone "None Mat"  	width:50  	 	across:2
-	button btNormal "Normal"  	width:50  	 	across:2
+	button btPlane "Plane"  	width:50  	 	across:1)
+	
+	group "Mirror" (
+		  	 	
 	button btMirrorx "Mirror_X"  	width:50  	 	across:3
 	button btMirrory "Mirror_Y"  	width:50  	 	across:3
-	button btMirrorz "Mirror_Z"  	width:50  	 	across:3
+	button btMirrorz "Mirror_Z"  	width:50  	 	across:3)
 		
-	button btNoso "a---------------------------------a"  	width:170 across:1	
-	button xx "xx"  	width:50  	 	across:1	
-		
+	group "MTL" (
+	button btNone "None Mat"  	width:50  	 	across:2
+	button btNormal "Normal"  	width:50		across:2
+	button btStandard "Step 1: Standard MTL"  	width:130  	 	across:1
+	button btWireFrame "select 1: mtl WireFrame"  	width:130  	 	across:1		
+	button btColor "select 2: mtl Color"  	width:130  	 	across:1)
+	
+	
+	
+	
+	
 	--ConvertPoly
 	on btConvertPoly pressed do
 	(
@@ -123,8 +135,8 @@ modPanel.addModToSelection (mirror ()) ui:on
 $.modifiers[#Mirror].copy = on
 maxOps.CollapseNodeTo $ 1 off
 	)
-	--xx
-	on xx pressed do
+	--btStandard
+	on btStandard pressed do
 	(
 		max select
 meditMaterials[1] = Standardmaterial ()
@@ -137,7 +149,27 @@ meditMaterials[7] = Standardmaterial ()
 meditMaterials[8] = Standardmaterial ()
 meditMaterials[9] = Standardmaterial ()
 	)
-
+	
+	--btWireFrame
+	on btWireFrame pressed do
+	(
+		meditMaterials[9].opacity = 0
+		max select
+		$.material = meditMaterials[9]
+		
+	)
+	--btColor
+	on btColor pressed do
+	(
+meditMaterials[8].Diffuse = color 64 64 64
+meditMaterials[8].ambient = color 64 64 64
+meditMaterials[8].Diffuse = color 64 64 64
+meditMaterials[8].ambient = color 64 64 64
+meditMaterials[8].specularLevel = 79
+meditMaterials[8].glossiness = 25
+		max select
+		$.material = meditMaterials[8]
+	)
 	
 
 )
