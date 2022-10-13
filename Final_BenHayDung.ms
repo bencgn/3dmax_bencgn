@@ -19,7 +19,7 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	button btMirrorz "Mirror_Z"  	width:50  	 	across:3
 		
 	button btNoso "a---------------------------------a"  	width:170 across:1	
-		
+	button xx "xx"  	width:50  	 	across:1	
 		
 	--ConvertPoly
 	on btConvertPoly pressed do
@@ -123,7 +123,22 @@ modPanel.addModToSelection (mirror ()) ui:on
 $.modifiers[#Mirror].copy = on
 maxOps.CollapseNodeTo $ 1 off
 	)
+	--xx
+	on xx pressed do
+	(
+		max select
+meditMaterials[1] = Standardmaterial ()
+meditMaterials[2] = Standardmaterial ()
+meditMaterials[3] = Standardmaterial ()
+meditMaterials[4] = Standardmaterial ()
+meditMaterials[5] = Standardmaterial ()
+meditMaterials[6] = Standardmaterial ()
+meditMaterials[7] = Standardmaterial ()
+meditMaterials[8] = Standardmaterial ()
+meditMaterials[9] = Standardmaterial ()
+	)
+
 	
-	
+
 )
 createDialog rOSTools

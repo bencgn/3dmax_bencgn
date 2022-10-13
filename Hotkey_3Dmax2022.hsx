@@ -38,4 +38,6 @@
     <Unassign_Hotkey Shortcut="Alt+Shift+C" Description="Create Camera (Physical) From View" Id="647394-PhysicalCamera_CreateFromView`Lights and Cameras"/>
     <Assign_Hotkey Shortcut="Alt+Shift+C" Description="AutoPivot_Bottom" Id="647394-AutoPivot_Bottom`Visuali Studio"/>
     <Assign_Hotkey Shortcut="Shift+D" Description="Dot Ring" Id="647394-DotRing`PolyTools"/>
+    <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Auto Smooth" Id="1250838234-40009"/>
+    <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Auto Smooth" Id="369982487-40009"/>
 </MaxHotkeyTransformations>
