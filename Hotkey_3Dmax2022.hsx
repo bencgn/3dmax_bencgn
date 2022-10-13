@@ -37,4 +37,5 @@
     <Assign_Hotkey Shortcut="Shift+C" Description="AutoPivot_Center" Id="647394-AutoPivot_Center`Visuali Studio"/>
     <Unassign_Hotkey Shortcut="Alt+Shift+C" Description="Create Camera (Physical) From View" Id="647394-PhysicalCamera_CreateFromView`Lights and Cameras"/>
     <Assign_Hotkey Shortcut="Alt+Shift+C" Description="AutoPivot_Bottom" Id="647394-AutoPivot_Bottom`Visuali Studio"/>
+    <Assign_Hotkey Shortcut="Shift+D" Description="Dot Ring" Id="647394-DotRing`PolyTools"/>
 </MaxHotkeyTransformations>
