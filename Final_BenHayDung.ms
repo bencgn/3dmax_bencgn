@@ -2,7 +2,7 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	(
 	button btConvertPoly "ConvertPoly"  	width:130  	 	across:1
 	button btCollapto "Collapse To"  	width:130  	 	across:1 	
-	
+	button btInst "Select Inst"  	width:130  	 	across:1 
 	group "Need" (
 	button btSetup "SetUpOfBen "  	width:130  	 	across:1
 	button btOpenUnwrap "Open Unwrap"  	width:130  	 	across:1
@@ -26,12 +26,42 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	button btNone "None Mat"  	width:50  	 	across:2
 	button btNormal "Normal"  	width:50		across:2
 	button btStandard "Step 1: Standard MTL"  	width:130  	 	across:1
-	button btWireFrame "select 1: mtl WireFrame"  	width:130  	 	across:1		
-	button btColor "select 2: mtl Color"  	width:130  	 	across:1)
-	
-	
-	
-	
+	button btWireFrame "WireFrame"  	width:50  	 	across:2		
+	button btColor "Color"  	width:50  	 	across:2)
+	group "ViewPort" (
+	button btL "Left"  	width:40  	 	across:4
+	button btR "Right"  	width:40		across:4
+	button btT "Top"  	width:40	across:4
+	button btB "Botton"  	width:40  	 	across:4		
+	)
+	--ConvertPoly
+	on btInst pressed do
+	(
+			
+		macros.run "Selection" "SelectInstances"
+
+	)
+	--ConvertPoly
+	on btL pressed do
+	(
+		max vpt left	
+		max zoomext sel
+	)
+	on btR  pressed do
+	(
+		max vpt right	
+		max zoomext sel
+	)
+	on btT pressed do
+	(
+max vpt top	
+		max zoomext sel
+	)
+	on btB pressed do
+	(
+		max vpt bottom	
+		max zoomext sel
+	)
 	
 	--ConvertPoly
 	on btConvertPoly pressed do
@@ -41,7 +71,7 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	--ConvertPoly
 	on btCollapto pressed do
 	(
-maxOps.CollapseNodeTo $ 1 off
+maxOps.CollapseNodeTo $ 100 off
 	)
 	--SetUpOfBen
 	on btSetup pressed do
