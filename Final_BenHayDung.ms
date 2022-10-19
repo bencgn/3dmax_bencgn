@@ -3,6 +3,7 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	button btConvertPoly "ConvertPoly"  	width:130  	 	across:1
 	button btCollapto "Collapse To"  	width:130  	 	across:1 	
 	button btInst "Select Inst"  	width:130  	 	across:1 
+	button btClean "CleanDeadFace"  	width:130  	 	across:1 
 	group "Need" (
 	button btSetup "SetUpOfBen "  	width:130  	 	across:1
 	button btOpenUnwrap "Open Unwrap"  	width:130  	 	across:1
@@ -34,6 +35,18 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	button btT "Top"  	width:40	across:4
 	button btB "Botton"  	width:40  	 	across:4		
 	)
+	
+	
+	
+
+--ConvertPoly
+	on btClean pressed do
+	(
+			
+		polyop.collapseDeadStructs $
+
+	)
+	
 	--ConvertPoly
 	on btInst pressed do
 	(
@@ -71,7 +84,7 @@ max vpt top
 	--ConvertPoly
 	on btCollapto pressed do
 	(
-maxOps.CollapseNodeTo $ 100 off
+maxOps.CollapseNodeTo $ 1 off
 	)
 	--SetUpOfBen
 	on btSetup pressed do
