@@ -37,10 +37,19 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	)
 	group "Open Outside" (
 	button btQa "Quick Attach"  	width:100  	 	across:1
-		
+	button miauuAlignObjsToVector "AlignObjsToVector"  	width:100  	 	across:1
+	button Pivot_Bottom "Pivot_Bottom"  	width:100  	 	across:1		
 	)
-	
-	
+	--Quick Attach
+	on Pivot_Bottom pressed do
+	(
+		macros.run "Visuali Studio" "AutoPivot_Bottom"
+	)
+	--Quick Attach
+	on miauuAlignObjsToVector pressed do
+	(
+		macros.run "miauu" "miauuAlignObjsToVector"
+	)
 --Quick Attach
 	on btQa pressed do
 	(
