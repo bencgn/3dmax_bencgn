@@ -35,9 +35,18 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	button btT "Top"  	width:40	across:4
 	button btB "Botton"  	width:40  	 	across:4		
 	)
+	group "Open Outside" (
+	button btQa "Quick Attach"  	width:100  	 	across:1
+		
+	)
 	
 	
-	
+--Quick Attach
+	on btQa pressed do
+	(
+		macros.run "# Scripts" "Quick_Attach"
+	)
+
 
 --ConvertPoly
 	on btClean pressed do
