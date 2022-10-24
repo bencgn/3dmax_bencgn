@@ -38,8 +38,18 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	group "Open Outside" (
 	button btQa "Quick Attach"  	width:100  	 	across:1
 	button miauuAlignObjsToVector "AlignObjsToVector"  	width:100  	 	across:1
-	button Pivot_Bottom "Pivot_Bottom"  	width:100  	 	across:1		
+	button Pivot_Bottom "Pivot_Bottom"  	width:100  	 	across:1
+	button detachbyID "detachbyID"  	width:100  	 	across:1		
+
 	)
+	
+	
+	--Quick Attach
+	on detachbyID pressed do
+	(
+	fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\detachbyID.ms"
+	)
+	
 	--Quick Attach
 	on Pivot_Bottom pressed do
 	(
