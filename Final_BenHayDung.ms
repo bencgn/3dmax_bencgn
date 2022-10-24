@@ -40,9 +40,28 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	button miauuAlignObjsToVector "AlignObjsToVector"  	width:100  	 	across:1
 	button Pivot_Bottom "Pivot_Bottom"  	width:100  	 	across:1
 	button detachbyID "detachbyID"  	width:100  	 	across:1		
-
+	button objectrename "rename_Pro"  	width:100  	 	across:1
+	)
+	group "Assembly Tool" (
+	button assemblytoolrunfirst "RUNFIRST"  	width:100  	 	across:1
+	button assemblytoolOpen "Open"  	width:100  	 	across:1
+	)
+	--Quick Attach
+	on assemblytoolrunfirst pressed do
+	(
+	fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\assemblytool_1.191_0.mzp"
 	)
 	
+	on assemblytoolOpen pressed do
+	(
+macros.run "Utopia" "AssemblyTool"
+	)
+	
+	--Quick Attach
+	on objectrename pressed do
+	(
+	fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\objectrename.mse"
+	)
 	
 	--Quick Attach
 	on detachbyID pressed do
