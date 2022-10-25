@@ -1,13 +1,18 @@
-rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
+rollout rOSTools "BEN Tool Demo" rolledUp:false width:220
 	(
-	button btConvertPoly "ConvertPoly"  	width:130  	 	across:1
-	button btCollapto "Collapse To"  	width:130  	 	across:1 	
-	button btInst "Select Inst"  	width:130  	 	across:1 
-	button btClean "CleanDeadFace"  	width:130  	 	across:1 
+	button btConvertPoly "ConvertPoly"  	width:100  	 	across:2
+	button btCollapto "Collapse To"  	width:100  	 	across:2 	
+	button btInst "Select Inst"  	width:100  	 	across:2 
+	button btClean "CleanDeadFace"  	width:100  	 	across:2 
+	
+		
+		
 	group "Need" (
-	button btSetup "SetUpOfBen "  	width:130  	 	across:1
-	button btOpenUnwrap "Open Unwrap"  	width:130  	 	across:1
+	button btSetup "SetUpOfBen "  	width:100  	 	across:2
+	button btOpenUnwrap "Open Unwrap"  	width:100  	 	across:2
 	button btUVMap11 "UV Map 1m"  	width:130  	 	across:1)
+	
+	
 	group "Export" (
 	button btToolExport "Open Tool Export"  	width:130  	 	across:1)
 	
@@ -15,8 +20,8 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	button btBox "Box"  	width:50  	 	across:3
 	button btCylinder "Cylinder"  	width:50  	 	across:3
 	button btSphere "Sphere"  	width:50  	 	across:3
-	button btPlane "Plane"  	width:50  	 	across:1
-	button btDummy "Dummy"  	width:50  	 	across:1	
+	button btPlane "Plane"  	width:50  	 	across:2
+	button btDummy "Dummy"  	width:50  	 	across:2	
 		)
 	
 	group "Mirror" (
@@ -31,24 +36,29 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	button btStandard "Step 1: Standard MTL"  	width:130  	 	across:1
 	button btWireFrame "WireFrame"  	width:50  	 	across:2		
 	button btColor "Color"  	width:50  	 	across:2)
+	
 	group "ViewPort" (
 	button btL "Left"  	width:40  	 	across:4
 	button btR "Right"  	width:40		across:4
 	button btT "Top"  	width:40	across:4
 	button btB "Botton"  	width:40  	 	across:4		
 	)
+	
 	group "Open Outside" (
 	button btQa "Quick Attach"  	width:100  	 	across:1
 	button miauuAlignObjsToVector "AlignObjsToVector"  	width:100  	 	across:1
 	button Pivot_Bottom "Pivot_Bottom"  	width:100  	 	across:1
-	button detachbyID "detachbyID"  	width:100  	 	across:1		
-	button objectrename "rename_Pro"  	width:100  	 	across:1
+	button detachbyID "detachbyID"  	width:100  	 	across:2		
+	button objectrename "rename_Pro"  	width:100  	 	across:2
 	button helperManager "helperManager"  	width:100  	 	across:1
 	)
+	
 	group "Assembly Tool" (
 	button assemblytoolrunfirst "RUNFIRST"  	width:100  	 	across:1
 	button assemblytoolOpen "Open"  	width:100  	 	across:1
 	)
+	
+	
 	--Quick Attach
 	on helperManager pressed do
 	(
