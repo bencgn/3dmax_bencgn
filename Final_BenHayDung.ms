@@ -15,7 +15,9 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	button btBox "Box"  	width:50  	 	across:3
 	button btCylinder "Cylinder"  	width:50  	 	across:3
 	button btSphere "Sphere"  	width:50  	 	across:3
-	button btPlane "Plane"  	width:50  	 	across:1)
+	button btPlane "Plane"  	width:50  	 	across:1
+	button btDummy "Dummy"  	width:50  	 	across:1	
+		)
 	
 	group "Mirror" (
 		  	 	
@@ -41,11 +43,24 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:170
 	button Pivot_Bottom "Pivot_Bottom"  	width:100  	 	across:1
 	button detachbyID "detachbyID"  	width:100  	 	across:1		
 	button objectrename "rename_Pro"  	width:100  	 	across:1
+	button helperManager "helperManager"  	width:100  	 	across:1
 	)
 	group "Assembly Tool" (
 	button assemblytoolrunfirst "RUNFIRST"  	width:100  	 	across:1
 	button assemblytoolOpen "Open"  	width:100  	 	across:1
 	)
+	--Quick Attach
+	on helperManager pressed do
+	(
+	macros.run "LB Tools" "helperManager"
+	)
+	
+	--Quick Attach
+	on btDummy pressed do
+	(
+	Dummy pos:[0,0,0] isSelected:on
+	)
+	
 	--Quick Attach
 	on assemblytoolrunfirst pressed do
 	(
