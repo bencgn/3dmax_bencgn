@@ -1,16 +1,18 @@
-rollout rOSTools "BEN Tool Demo" rolledUp:false width:220
+rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	(
-	button btConvertPoly "ConvertPoly"  	width:100  	 	across:2
-	button btCollapto "Collapse To"  	width:100  	 	across:2 	
-	button btInst "Select Inst"  	width:100  	 	across:2 
-	button btClean "CleanDeadFace"  	width:100  	 	across:2 
+	button btConvertPoly "ConvertPoly"  	width: 80  	 	across:2
+	button btCollapto "Collapse To"  	width:80  	 	across:2 	
+	button btInst "Select Inst"  	width:80  	 	across:2 
+	button btClean "CleanDeadFace"  	width:80  	 	across:2 
 	
 		
 		
 	group "Need" (
-	button btSetup "SetUpOfBen "  	width:100  	 	across:2
-	button btOpenUnwrap "Open Unwrap"  	width:100  	 	across:2
-	button btUVMap11 "UV Map 1m"  	width:130  	 	across:1)
+	button btSetup "SetUpOfBen "  	width:80  	 	across:2
+	button btOpenUnwrap "Open Unwrap"  	width:80  	 	across:2
+	button btUVMap11 "UV Map 1m"  	width:130  	 	across:1
+	button Reset00 "Reset00"  	width:130  	 	across:1	
+		)
 	
 	
 	group "Export" (
@@ -48,9 +50,9 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:220
 	button btQa "Quick Attach"  	width:100  	 	across:1
 	button miauuAlignObjsToVector "AlignObjsToVector"  	width:100  	 	across:1
 	button Pivot_Bottom "Pivot_Bottom"  	width:100  	 	across:1
-	button detachbyID "detachbyID"  	width:100  	 	across:2		
-	button objectrename "rename_Pro"  	width:100  	 	across:2
-	button helperManager "helperManager"  	width:100  	 	across:1
+	button detachbyID "detachbyID"  	width:80  	 	across:2		
+	button objectrename "rename_Pro"  	width:80  	 	across:2
+	button helperManager "helperManager"  	width:80  	 	across:1
 	)
 	
 	group "Assembly Tool" (
@@ -58,7 +60,13 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:220
 	button assemblytoolOpen "Open"  	width:100  	 	across:1
 	)
 	
-	
+	--Quick Attach
+	on Reset00 pressed do
+	(
+	move $ [0,-0,0]
+scale $ [1,1,1]
+rotate $ (angleaxis 0 [0,0,0])
+	)
 	--Quick Attach
 	on helperManager pressed do
 	(
