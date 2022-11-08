@@ -21,7 +21,6 @@
     <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Unhide All" Id="0-277"/>
     <Unassign_Hotkey Shortcut="Alt+H" Description="Hide Selection" Id="0-223"/>
     <Unassign_Hotkey Shortcut="H" Description="Select By Name" Id="0-50029"/>
-    <Assign_Hotkey Shortcut="H" Description="Hide Selected" Id="647394-HideSelected`Ribbon - Modeling"/>
     <Assign_Hotkey Shortcut="C" Description="Chamfer Settings" Id="369982487-40056"/>
     <Unassign_Hotkey Shortcut="Ctrl+V" Description="Clone" Id="0-40213"/>
     <Assign_Hotkey Shortcut="Ctrl+V" Description="Convert to Vertex (Poly)" Id="647394-EPoly_Convert_Sel_To_Vertex`Editable Polygon Object"/>
@@ -40,4 +39,5 @@
     <Assign_Hotkey Shortcut="Shift+D" Description="Dot Ring" Id="647394-DotRing`PolyTools"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Auto Smooth" Id="1250838234-40009"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Auto Smooth" Id="369982487-40009"/>
+    <Assign_Hotkey Shortcut="H" Description="Hide Selection" Id="0-223"/>
 </MaxHotkeyTransformations>

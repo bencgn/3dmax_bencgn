@@ -37,7 +37,9 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	button btNormal "Normal"  	width:50		across:2
 	button btStandard "Step 1: Standard MTL"  	width:130  	 	across:1
 	button btWireFrame "WireFrame"  	width:50  	 	across:2		
-	button btColor "Color"  	width:50  	 	across:2)
+	button btColor "Color"  	width:50  	 	across:2
+	button btTake "btTake"  	width:50  	 	across:1	
+	)
 	
 	group "ViewPort" (
 	button btL "Left"  	width:40  	 	across:4
@@ -59,15 +61,20 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	button assemblytoolrunfirst "RUNFIRST"  	width:100  	 	across:1
 	button assemblytoolOpen "Open"  	width:100  	 	across:1
 	)
-	
-	--Quick Attach
+	--btTake
+	on btTake pressed do
+	(
+	meditMaterials[13] = sceneMaterials["Standardmaterial"]
+	$.material = meditMaterials[13]
+	)
+	--Reset00
 	on Reset00 pressed do
 	(
 	move $ [0,-0,0]
 scale $ [1,1,1]
 rotate $ (angleaxis 0 [0,0,0])
 	)
-	--Quick Attach
+	--helperManager
 	on helperManager pressed do
 	(
 	macros.run "LB Tools" "helperManager"
