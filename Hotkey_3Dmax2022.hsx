@@ -40,4 +40,5 @@
     <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Auto Smooth" Id="1250838234-40009"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Auto Smooth" Id="369982487-40009"/>
     <Assign_Hotkey Shortcut="H" Description="Hide Selection" Id="0-223"/>
+    <Assign_Hotkey Shortcut="Ctrl+Alt+R" Description="Array" Id="0-40114"/>
 </MaxHotkeyTransformations>
