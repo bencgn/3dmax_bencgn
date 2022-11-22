@@ -27,7 +27,7 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 		)
 	
 	group "Mirror" (
-		  	 	
+	button XYZ "XYZ"  	width:50  	 	across:1	  	 	
 	button btMirrorx "Mirror_X"  	width:50  	 	across:3
 	button btMirrory "Mirror_Y"  	width:50  	 	across:3
 	button btMirrorz "Mirror_Z"  	width:50  	 	across:3)
@@ -60,6 +60,13 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	group "Assembly Tool" (
 	button assemblytoolrunfirst "RUNFIRST"  	width:100  	 	across:1
 	button assemblytoolOpen "Open"  	width:100  	 	across:1
+	)
+	--btTake
+	on XYZ pressed do
+	(
+	$.EditablePoly.MakePlanarIn #X
+$.EditablePoly.MakePlanarIn #Y
+$.EditablePoly.MakePlanarIn #Z
 	)
 	--btTake
 	on btTake pressed do

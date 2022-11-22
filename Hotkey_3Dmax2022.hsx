@@ -18,7 +18,6 @@
     <Assign_Hotkey Shortcut="Ctrl+Shift+H" Description="Hide Unselected" Id="647394-Hide_Unselected`Uni-Hide/UnHider"/>
     <Unassign_Hotkey Shortcut="Ctrl+Shift+A" Description="Select Similar" Id="0-40099"/>
     <Unassign_Hotkey Shortcut="Alt+U" Description="Unhide All" Id="0-277"/>
-    <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Unhide All" Id="0-277"/>
     <Unassign_Hotkey Shortcut="Alt+H" Description="Hide Selection" Id="0-223"/>
     <Unassign_Hotkey Shortcut="H" Description="Select By Name" Id="0-50029"/>
     <Assign_Hotkey Shortcut="C" Description="Chamfer Settings" Id="369982487-40056"/>
@@ -37,8 +36,9 @@
     <Unassign_Hotkey Shortcut="Alt+Shift+C" Description="Create Camera (Physical) From View" Id="647394-PhysicalCamera_CreateFromView`Lights and Cameras"/>
     <Assign_Hotkey Shortcut="Alt+Shift+C" Description="AutoPivot_Bottom" Id="647394-AutoPivot_Bottom`Visuali Studio"/>
     <Assign_Hotkey Shortcut="Shift+D" Description="Dot Ring" Id="647394-DotRing`PolyTools"/>
-    <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Auto Smooth" Id="1250838234-40009"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Auto Smooth" Id="369982487-40009"/>
     <Assign_Hotkey Shortcut="H" Description="Hide Selection" Id="0-223"/>
     <Assign_Hotkey Shortcut="Ctrl+Alt+R" Description="Array" Id="0-40114"/>
+    <Assign_Hotkey Shortcut="Ctrl+Alt+E" Description="CrossCut Screen-Space" Id="647394-crossCutScreen`Shortcuts"/>
+    <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Unhide All" Id="0-277"/>
 </MaxHotkeyTransformations>
