@@ -41,4 +41,5 @@
     <Assign_Hotkey Shortcut="Ctrl+Alt+R" Description="Array" Id="0-40114"/>
     <Assign_Hotkey Shortcut="Ctrl+Alt+E" Description="CrossCut Screen-Space" Id="647394-crossCutScreen`Shortcuts"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Unhide All" Id="0-277"/>
+    <Assign_Hotkey Shortcut="Ctrl+Shift+O" Description="Open Edge Mode" Id="2077580866-40098"/>
 </MaxHotkeyTransformations>

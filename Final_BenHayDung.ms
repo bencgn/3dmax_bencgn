@@ -4,6 +4,7 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	button btCollapto "Collapse To"  	width:80  	 	across:2 	
 	button btInst "Select Inst"  	width:80  	 	across:2 
 	button btClean "CleanDeadFace"  	width:80  	 	across:2 
+	button ExportSelect "ExportSelect"  	width: 100  	 	across:1
 	
 		
 		
@@ -57,10 +58,40 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	button helperManager "helperManager"  	width:80  	 	across:1
 	)
 	
+	
+	group "Hien Thi" (
+		button displayname "Ten Object"  	width:100  	 	across:1
+		button displaygroup "Ten Group"  	width:100  	 	across:1
+
+	)
+	
+	
 	group "Assembly Tool" (
 	button assemblytoolrunfirst "RUNFIRST"  	width:100  	 	across:1
 	button assemblytoolOpen "Open"  	width:100  	 	across:1
 	)
+	
+	
+	
+--DisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplay
+	on displayname pressed do
+	(
+	fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\displayname.ms"
+	)
+	
+	on displaygroup pressed do
+	(
+	fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\displaygroup.ms"
+	)
+--DisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplay
+	on ExportSelect pressed do
+	(select $
+actionMan.executeAction 0 "40373"  -- File: Export Selected
+	)
+	
+	
+	
+	
 	--btTake
 	on XYZ pressed do
 	(
