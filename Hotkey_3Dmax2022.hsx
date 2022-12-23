@@ -42,4 +42,6 @@
     <Assign_Hotkey Shortcut="Ctrl+Alt+E" Description="CrossCut Screen-Space" Id="647394-crossCutScreen`Shortcuts"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Unhide All" Id="0-277"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+O" Description="Open Edge Mode" Id="2077580866-40098"/>
+    <Unassign_Hotkey Shortcut="Ctrl+C" Description="Create Camera (Physical) From View" Id="647394-PhysicalCamera_CreateFromView`Lights and Cameras"/>
+    <Assign_Hotkey Shortcut="Ctrl+C" Description="Copy Objects" Id="647394-QuadMenu_CopyObjects`[3DGROUND]"/>
 </MaxHotkeyTransformations>

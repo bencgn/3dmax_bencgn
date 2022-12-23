@@ -85,7 +85,9 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	)
 --DisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplay
 	on ExportSelect pressed do
-	(select $
+	(move $ [0,0,0]
+		
+		select $
 actionMan.executeAction 0 "40373"  -- File: Export Selected
 	)
 	
