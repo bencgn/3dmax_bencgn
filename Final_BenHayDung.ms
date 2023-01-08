@@ -70,10 +70,18 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	button assemblytoolrunfirst "RUNFIRST"  	width:100  	 	across:1
 	button assemblytoolOpen "Open"  	width:100  	 	across:1
 	)
+	group "kilaD" (
+	button kilaD "kilaD"  	width:100  	 	across:1
 	
+	)
 	
 	
 --DisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplay
+	on kilaD pressed do
+	(
+	macros.run "kilaD" "openGhostTown"
+	)
+	
 	on displayname pressed do
 	(
 	fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\displayname.ms"
