@@ -21,7 +21,7 @@ rollout rOSTools "Update and Set Up" rolledUp:false width:170
 	(
 	fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\lbtools_helper_manager.mzp"
 	)
-
+	
 
 )
 createDialog rOSTools

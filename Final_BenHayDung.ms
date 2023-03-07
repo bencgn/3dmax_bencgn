@@ -1,5 +1,6 @@
 rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	(
+	
 	button btConvertPoly "ConvertPoly"  	width: 80  	 	across:2
 	button btCollapto "Collapse To"  	width:80  	 	across:2 	
 	button btInst "Select Inst"  	width:80  	 	across:2 
@@ -46,7 +47,12 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	button btL "Left"  	width:40  	 	across:4
 	button btR "Right"  	width:40		across:4
 	button btT "Top"  	width:40	across:4
-	button btB "Botton"  	width:40  	 	across:4		
+	button btB "Botton"  	width:40  	 	across:4	
+
+	button HideUnselected "HideUnselected"  	width: 80  	 	across:1
+	button UnhideAll "Unhide All"  	width: 80  	 	across:1
+	button Deletex "Deletex"  	width: 80  	 	across:1
+
 	)
 	
 	group "Open Outside" (
@@ -108,6 +114,23 @@ actionMan.executeAction 0 "40373"  -- File: Export Selected
 	$.EditablePoly.MakePlanarIn #X
 $.EditablePoly.MakePlanarIn #Y
 $.EditablePoly.MakePlanarIn #Z
+	)
+	
+	--HideUnselected
+	on HideUnselected pressed do
+	(
+	actionMan.executeAction 0 "281"  -- Tools: Hide Unselected
+	)
+	
+	--UnhideAll
+	on UnhideAll pressed do
+	(
+actionMan.executeAction 0 "277"  -- Tools: Unhide All	
+	)
+	--UnhideAll
+	on Deletex pressed do
+	(
+actionMan.executeAction 0 "40020"  -- Edit: Delete Objects	
 	)
 	--btTake
 	on btTake pressed do
