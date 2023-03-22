@@ -1,0 +1,26 @@
+Thank you for purchasing IFW Normals Script.
+
+For testing it, just drag and drop IFWNormals.mse to your 3dsmax viewport, or click Scripting->Run Script and choose IFWNormals.mse
+
+For installation:
+	- Run 3ds max as Administrator
+	- click Scripting->Run Script and choose IFWNormals.mzp, restart 3ds max
+	- now you can add it to your toolbar, hotkey,... like any other command in "Customize/Customize user interface" menu, under category "Cattomic"
+
+For using it:
+	Run the script, select the objects you want and press generate
+	You can adjust the threshold angle for coplanar faces to be weighted like one
+	If you edit your Poly, change smoothing groups, ... you will need to generate normals again, select the object, and press generate again.
+
+
+Ver. history
+
+1.2 
+	-Big speed improvement on large models:	Time needed to build now grows linearly with face number instead of exponentially
+	-Bug fix: sometimes you had to manually delete previously generated modifier if you need to regenerate it, now this action is automatic
+1.1 
+	-minor speed improvement - not released
+1.0 
+	-Release
+	
+	

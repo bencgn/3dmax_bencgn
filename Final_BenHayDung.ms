@@ -1,4 +1,4 @@
-rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
+rollout rOSTools "BEN Tool Demo" rolledUp:false width:200
 	(
 	
 	button btConvertPoly "ConvertPoly"  	width: 80  	 	across:2
@@ -64,6 +64,10 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	button detachbyID "detachbyID"  	width:80  	 	across:2		
 	button objectrename "rename_Pro"  	width:80  	 	across:2
 	button helperManager "helperManager"  	width:80  	 	across:1
+	button IFWNormals "IFWNormals"  	width:80  	 	across:1
+	button polydamageV1_01 "polydamage"  	width:100  	 	across:1
+	button QuadRemesher "QuadRemesher"  	width:100  	 	across:1
+
 	)
 	
 	
@@ -82,6 +86,22 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	button kilaD "kilaD"  	width:100  	 	across:1
 	
 	)
+	
+		
+		
+--QuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesher
+	on QuadRemesher pressed do
+	(
+macros.run "Exoside" "QuadRemesher"	)		
+--IFWNormalsIFWNormalsIFWNormalsIFWNormalsIFWNormalsIFWNormalsIFWNormalsIFWNormalsIFWNormals
+	on IFWNormals pressed do
+	(
+fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Face_Weighted_Normals\\IFWNormals.mse"	)
+--polydamageV1_01polydamageV1_01polydamageV1_01polydamageV1_01polydamageV1_01polydamageV1_01polydamageV1_01polydamageV1_01
+	on polydamageV1_01 pressed do
+	(
+fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\polydamageV1_01\\polydamage_nm.mse"	)
+
 	
 	
 --DisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplay
