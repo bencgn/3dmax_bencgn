@@ -1,13 +1,18 @@
-import pymxs
+try(DestroyDialog UVEditor)catch()
 
-# Get a reference to 3ds Max application
-max_app = pymxs.runtime.max
+rollout UVEditor "Unwrap UVW Modifier"
+(
+	button openUVBtn "Open UV Editor"
+	
+	on openUVBtn pressed do
+	(
+		modPanel.setCurrentObject $	
+		modPanel.addModToSelection (Unwrap_UVW ()) ui:on
+		modifierPanel.setCurrentModifier (modPanel.getCurrentObject()) (Unwrap_UVW ())
+		UVW = modPanel.getCurrentObject().modifiers[modPanel.getCurrentObject().modifiers.count]
+		UVW.setMapChannel 2
+		UVW.Edit()
+	)
+)
 
-# Get the main toolbar
-main_toolbar = max_app.getToolBar("Main UI")
-
-# Get the docking panel
-dock_panel = main_toolbar.getDockableWindow("Dockable Window Name")
-
-# Dock the panel to the left side of the viewport
-dock_panel.dock(pymxs.runtime.dockLeft)
+createDialog UVEditor

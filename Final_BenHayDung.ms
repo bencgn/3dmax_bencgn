@@ -6,6 +6,8 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	button btInst "Select Inst"  	width:80  	 	across:2 
 	button btClean "CleanDeadFace"  	width:80  	 	across:2 
 	button ExportSelect "ExportSelect"  	width: 100  	 	across:1
+	button OpenChanel2 "OpenChanel2"  	width: 100  	 	across:1
+
 	
 		
 		
@@ -97,6 +99,16 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:180
 	(
 	fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\displaygroup.ms"
 	)
+--DisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplay
+	on OpenChanel2 pressed do
+	(
+	
+modPanel.addModToSelection (Unwrap_UVW ()) ui:on
+$.modifiers[#unwrap_uvw].unwrap.setMapChannel 2
+$.modifiers[#unwrap_uvw].unwrap.scale ()
+	)
+	
+	
 --DisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplay
 	on ExportSelect pressed do
 	(move $ [0,0,0]
