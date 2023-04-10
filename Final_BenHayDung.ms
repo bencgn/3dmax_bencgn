@@ -20,7 +20,9 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:200
 	
 	
 	group "Export" (
-	button btToolExport "Open Tool Export"  	width:130  	 	across:1)
+	button btToolExport "Open Tool Export"  	width:130  	 	across:1
+	button SetUnity "SetUnity Export"  	width:130  	 	across:1)
+
 	
 	group "Model" (
 	button btBox "Box"  	width:50  	 	across:3
@@ -88,8 +90,12 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:200
 	)
 	
 		
-		
 --QuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesher
+	on SetUnity pressed do
+	(
+macros.run "Tools" "PivotMode_Toggle"
+rotate $ (angleaxis 90 [90,0,0])		)			
+--QuadRemesherQuadRemeswherQuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesher
 	on QuadRemesher pressed do
 	(
 macros.run "Exoside" "QuadRemesher"	)		
