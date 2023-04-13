@@ -1,0 +1,8 @@
+In order to set up UVPackmaster 3 in Blender, follow the guide: https://uvpackmaster.com/doc3/blender/latest/10-uvpackmaster-setup/
+
+If you experience an issue with the procedure, contact us at support@uvpackmaster.com
+
+
+
+Thank you for your support,
+UVPackmaster team
