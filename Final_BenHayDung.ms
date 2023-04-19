@@ -69,6 +69,7 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:200
 	button IFWNormals "IFWNormals"  	width:80  	 	across:1
 	button polydamageV1_01 "polydamage"  	width:100  	 	across:1
 	button QuadRemesher "QuadRemesher"  	width:100  	 	across:1
+	button Detach_Elements "Detach_Elements"  	width:100  	 	across:1
 
 	)
 	
@@ -89,7 +90,12 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:200
 	
 	)
 	
-		
+	--Detach_Elements
+	on Detach_Elements pressed do
+	(
+fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\Detach_Elements.ms"		)	
+
+
 --QuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesher
 	on SetUnity pressed do
 	(
