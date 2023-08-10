@@ -1,0 +1,18 @@
+[ISubPalette,"ZPlugin:Swap Max"]
+
+[IButton,"ZPlugin:Swap Max:Import FBX",
+    [
+        [FileNameSetNext,"D:\Zbrush_SWAPMAX\export3dmax.fbx"]
+        [IPress,Tool:FBXImport]
+    ],
+    "Import FBX from D:\Zbrush_SWAPMAX\export3dmax.fbx"
+]
+
+[IButton,"ZPlugin:Swap Max:Export FBX",
+    [
+        [FileNameSetNext,"D:\Zbrush_SWAPMAX\export3dmax.fbx"]
+        [IPress,Tool:FBXExport]
+    ],
+    "Export FBX to D:\Zbrush_SWAPMAX\export3dmax.fbx"
+]
+
