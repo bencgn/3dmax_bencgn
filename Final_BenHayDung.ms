@@ -1,6 +1,6 @@
 rollout rOSTools "BEN Tool Demo" rolledUp:false width:200
 	(
-	
+	label createdByLabel "Tool created by: bencgn"
 	button btConvertPoly "ConvertPoly"  	width: 80  	 	across:2
 	button btCollapto "Collapse To"  	width:80  	 	across:2 	
 	button btInst "Select Inst"  	width:80  	 	across:2 
