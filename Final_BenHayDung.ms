@@ -82,7 +82,11 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:200
 
 	)
 	
-	
+	group "Pivot Unity" (
+		button setPivot "Pivot"  	width:100  	 	across:1
+		button Pivot90 "Set x=90"  	width:100  	 	across:1
+
+	)
 	group "Assembly Tool" (
 	button assemblytoolrunfirst "RUNFIRST"  	width:100  	 	across:1
 	button assemblytoolOpen "Open"  	width:100  	 	across:1
@@ -91,6 +95,15 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:200
 	button kilaD "kilaD"  	width:100  	 	across:1
 	
 	)
+	
+	--setPivot
+	on setPivot pressed do
+	(
+macros.run "Tools" "PivotMode_Toggle"		)
+
+	on setPivot pressed do
+	(
+macros.run "Tools" "PivotMode_Toggle"		)
 	
 	--Detach_Elements
 	on Detach_Elements pressed do
