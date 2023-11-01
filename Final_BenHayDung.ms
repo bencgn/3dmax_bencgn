@@ -1,37 +1,36 @@
 
 
-rollout rOSTools "BEN Tool Demo" rolledUp:false width:200
+rollout rOSTools "BEN Tool Demo" rolledUp:false width:450
 	(
-	label createdByLabel "Tool created by: bencgn"
-	button btConvertPoly "ConvertPoly"  	width: 80  	 	across:2
-	button btCollapto "Collapse To"  	width:80  	 	across:2 	
-	button btInst "Select Inst"  	width:80  	 	across:2 
-	button btClean "CleanDeadFace"  	width:80  	 	across:2 
-	button ExportSelect "ExportSelect"  	width: 100  	 	across:1
-	button OpenChanel2 "OpenChanel2"  	width: 100  	 	across:1
-
+	label createdByLabel "Tool created by: bencgn" 
+		label createdByLabel "https://github.com/bencgn/3dmax_bencgn"
+		group "Fuck" (
+	button btConvertPoly "ConvertPoly"  	width: 80  	 	across:5
+	button btCollapto "Collapse To"  	width:80  	 	across:5 	
+	button btInst "Select Inst"  	width:80  	 	across:5 
+	button btClean "CleanDeadFace"  	width:80  	 	across:5 
+	button ExportSelect "ExportSelect"  	width: 100  	 	across:5
+	button OpenChanel2 "OpenChanel2"  	width: 100  	 	across:5
+		)
 	
-		
-		
-	group "Need" (
-	button btSetup "SetUpOfBen "  	width:80  	 	across:2
-	button btOpenUnwrap "Open Unwrap"  	width:80  	 	across:2
+	button btSetup "SetUpOfBen "  	width:80  	 	across:1
+	button btOpenUnwrap "Open Unwrap"  	width:80  	 	across:1
 	button btUVMap11 "UV Map 1m"  	width:130  	 	across:1
 	button Reset00 "Reset00"  	width:130  	 	across:1	
-		)
+		
 	
 	
 	group "Export" (
-	button btToolExport "Open Tool Export"  	width:130  	 	across:1
-	button SetUnity "SetUnity Export"  	width:130  	 	across:1)
+	button btToolExport "Open Tool Export"  	width:130  	 	across:2
+	button SetUnity "SetUnity Export"  	width:130  	 	across:2)
 
 	
 	group "Model" (
-	button btBox "Box"  	width:50  	 	across:3
-	button btCylinder "Cylinder"  	width:50  	 	across:3
-	button btSphere "Sphere"  	width:50  	 	across:3
-	button btPlane "Plane"  	width:50  	 	across:2
-	button btDummy "Dummy"  	width:50  	 	across:2	
+	button btBox "Box"  	width:50  	 	across:5
+	button btCylinder "Cylinder"  	width:50  	 	across:5
+	button btSphere "Sphere"  	width:50  	 	across:5
+	button btPlane "Plane"  	width:50  	 	across:5
+	button btDummy "Dummy"  	width:50  	 	across:5	
 		)
 	
 	group "Mirror" (
@@ -46,7 +45,7 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:200
 	button btStandard "Step 1: Standard MTL"  	width:130  	 	across:1
 	button btWireFrame "WireFrame"  	width:50  	 	across:2		
 	button btColor "Color"  	width:50  	 	across:2
-	button btTake "btTake"  	width:50  	 	across:1	
+
 	)
 	
 	group "ViewPort" (
@@ -71,20 +70,22 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:200
 	button IFWNormals "IFWNormals"  	width:80  	 	across:1
 	button polydamageV1_01 "polydamage"  	width:100  	 	across:1
 	button QuadRemesher "QuadRemesher"  	width:100  	 	across:1
-	button Detach_Elements "Detach_Elements"  	width:100  	 	across:1
+	button detach "Detach_Elements"  	width:100  	 	across:1
 
 	)
 	
 	
 	group "Hien Thi" (
-		button displayname "Ten Object"  	width:100  	 	across:1
-		button displaygroup "Ten Group"  	width:100  	 	across:1
+		button displayname "Ten Object"  	width:100  	 	across:2
+		button displaygroup "Ten Group"  	width:100  	 	across:2
 
 	)
 	
 	group "Pivot Unity" (
-		button setPivot "Pivot"  	width:100  	 	across:1
-		button Pivot90 "Set x=90"  	width:100  	 	across:1
+		button setPivot "Pivot"  	width:100  	 	across:3
+		button Pivot90 "Set x=90"  	width:100  	 	across:3
+		button Move000 "Move to Origin"  	width:100  	 	across:3
+
 
 	)
 	group "Assembly Tool" (
@@ -97,16 +98,31 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:200
 	)
 	
 	--setPivot
-	on setPivot pressed do
-	(
-macros.run "Tools" "PivotMode_Toggle"		)
+	on Move000 pressed do
+	(-- Get the selected objects
+        local selectedObjects = getCurrentSelection()
+        
+        -- Check if any objects are selected
+        if selectedObjects.count > 0 do
+        (
+            -- Move each selected object to the world origin
+            for obj in selectedObjects do
+            (
+                obj.position = [0,0,0]
+            )
+            
+            -- Deselect the objects after moving
+            clearSelection()	)
+		)
+
+	
 
 	on setPivot pressed do
 	(
 macros.run "Tools" "PivotMode_Toggle"		)
 	
 	--Detach_Elements
-	on Detach_Elements pressed do
+	on detach pressed do
 	(
 fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\Detach_Elements.ms"		)	
 
@@ -191,12 +207,7 @@ actionMan.executeAction 0 "277"  -- Tools: Unhide All
 	(
 actionMan.executeAction 0 "40020"  -- Edit: Delete Objects	
 	)
-	--btTake
-	on btTake pressed do
-	(
-	meditMaterials[13] = sceneMaterials["Standardmaterial"]
-	$.material = meditMaterials[13]
-	)
+	
 	--Reset00
 	on Reset00 pressed do
 	(
