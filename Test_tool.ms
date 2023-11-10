@@ -1,23 +1,36 @@
-rollout rOSTools "Rename Objects"
+try(destroyDialog pickAndAssignMaterial) catch()
+
+rollout pickAndAssignMaterial "Pick and Assign Material"
 (
-    button renameButton "Rename"
+    label lblPick "Pick a material from this object:"
+    pickButton btnPickMaterial "Pick Material"
     
-    on renameButton pressed do
+    label lblAssign "Assign the picked material to selected objects:"
+    button btnAssignMaterial "Assign Material"
+    
+    local pickedMaterial = undefined -- Variable to store the picked material
+    
+    on btnPickMaterial picked obj do
     (
-        if selection.count == 2 do
+        if isKindOf obj Material do
         (
-            local obj1 = selection[1]
-            local obj2 = selection[2]
-            
-            if isValidNode(obj1) and isValidNode(obj2) do
-            (
-                obj2.name = obj1.name
-                
-            )
-            
+            pickedMaterial = obj
+            format "Picked Material: %\n" pickedMaterial.name to:MaxScriptListener
         )
-        
+    )
+    
+    on btnAssignMaterial pressed do
+    (
+        if isValidNode pickedMaterial do
+        (
+            local selectedObjects = getCurrentSelection()
+            for obj in selectedObjects where isKindOf obj GeometryClass do
+            (
+                obj.material = pickedMaterial
+            )
+            format "Assigned Material: % to % objects\n" pickedMaterial.name selectedObjects.count to:MaxScriptListener
+        )
     )
 )
 
-createDialog rOSTools 200 80
+createDialog pickAndAssignMaterial 300 150

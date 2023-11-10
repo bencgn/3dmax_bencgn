@@ -3,7 +3,6 @@
 rollout rOSTools "BEN Tool Demo" rolledUp:false width:450
 	(
 	label createdByLabel "Tool created by: bencgn" 
-		label createdByLabel "https://github.com/bencgn/3dmax_bencgn"
 		group "Fuck" (
 	button btConvertPoly "ConvertPoly"  	width: 80  	 	across:5
 	button btCollapto "Collapse To"  	width:80  	 	across:5 	
@@ -24,6 +23,14 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:450
 	button btToolExport "Open Tool Export"  	width:130  	 	across:2
 	button SetUnity "SetUnity Export"  	width:130  	 	across:2)
 
+		group "Rename" (
+			
+	label lblInstructions "Select objects and click a button to rename them:"
+	button Set_high "Set _high"  	width:130  	 	across:3
+	button Set_low  "Set _low"  	width:130  	 	across:3
+	button Set_  "Suffix _"  	width:130  	 	across:3
+			
+			)
 	
 	group "Model" (
 	button btBox "Box"  	width:50  	 	across:5
@@ -57,7 +64,7 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:450
 	button HideUnselected "HideUnselected"  	width: 80  	 	across:1
 	button UnhideAll "Unhide All"  	width: 80  	 	across:1
 	button Deletex "Deletex"  	width: 80  	 	across:1
-
+	
 	)
 	
 	group "Open Outside" (
@@ -96,6 +103,59 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:450
 	button kilaD "kilaD"  	width:100  	 	across:1
 	
 	)
+	
+	
+	
+	--Rename
+	on Set_ pressed do
+    (
+        local selectedObjects = getCurrentSelection()
+        for obj in selectedObjects do
+        (
+            obj.name = (obj.name + "_")
+        )
+    )
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	on Set_low pressed do
+    (
+        local selectedObjects = getCurrentSelection()
+        for obj in selectedObjects do
+        (
+            if not (matchPattern obj.name pattern:"*_low") do
+            (
+                if not (matchPattern obj.name pattern:"*_high") do
+                (
+                    obj.name = (obj.name + "_low")
+                )
+            )
+        )
+    )
+	
+	
+		
+	on Set_high pressed do
+    (
+        local selectedObjects = getCurrentSelection()
+        for obj in selectedObjects do
+        (
+            if not (matchPattern obj.name pattern:"*_high") do
+            (
+                if not (matchPattern obj.name pattern:"*_low") do
+                (
+                    obj.name = (obj.name + "_high")
+                )
+            )
+        )
+    )
+	
 	
 	--setPivot
 	on Move000 pressed do
@@ -203,8 +263,10 @@ $.EditablePoly.MakePlanarIn #Z
 actionMan.executeAction 0 "277"  -- Tools: Unhide All	
 	)
 	--UnhideAll
+
 	on Deletex pressed do
 	(
+		
 actionMan.executeAction 0 "40020"  -- Edit: Delete Objects	
 	)
 	
