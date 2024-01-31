@@ -397,7 +397,7 @@ $.modifiers[#UVW_Map].maptype = 4
 $.modifiers[#UVW_Map].length = 100
 $.modifiers[#UVW_Map].width = 100
 $.modifiers[#UVW_Map].height = 100
-macros.run "Modifier Stack" "Convert_to_Poly"
+
 	)
 	--vidu
 	on btToolExport pressed do
