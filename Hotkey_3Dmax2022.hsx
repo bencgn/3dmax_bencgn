@@ -47,8 +47,8 @@
     <Assign_Hotkey Shortcut="X" Description="Delete" Id="455101522-40001"/>
     <Unassign_Hotkey Shortcut="Del" Description="Delete" Id="455101522-40001"/>
     <Unassign_Hotkey Shortcut="Alt+I" Description="Hide Unselected" Id="0-281"/>
-    <Unassign_Hotkey Shortcut="Alt+U" Description="Unhide All" Id="369982487-40033"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Auto Smooth" Id="369982487-40009"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Auto Smooth" Id="1250838234-40009"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Auto Smooth (Poly)" Id="647394-EPoly_Autosmooth`Editable Polygon Object"/>
+    <Assign_Hotkey Shortcut="Ctrl+Shift+H" Description="Hide Unselected" Id="0-281"/>
 </MaxHotkeyTransformations>
