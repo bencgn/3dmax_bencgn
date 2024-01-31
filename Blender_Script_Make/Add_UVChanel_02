@@ -1,0 +1,6 @@
+import bpy
+
+for obj in bpy.context.selected_objects:
+    # Make sure this is a mesh object and that it doesn't already use this UV Map
+    if obj.type == 'MESH' and "UV_ao" not in obj.data.uv_layers:
+        obj.data.uv_layers.new(name="UV_ao")
