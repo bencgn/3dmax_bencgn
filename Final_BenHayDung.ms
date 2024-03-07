@@ -26,10 +26,13 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:450
 		group "Rename" (
 			
 	label lblInstructions "Select objects and click a button to rename them:"
-	button Set_high "Set _high"  	width:130  	 	across:3
-	button Set_low  "Set _low"  	width:130  	 	across:3
-	button Set_  "Suffix _"  	width:130  	 	across:3
-			
+	button Set_high "Set _high"  	width:130  	 	across:2
+	button Set_low  "Set _low"  	width:130  	 	across:2
+	button Set_LOD00  "Set_LOD00"  	width:130  	 	across:1
+	button Set_LOD01  "Set_LOD01"  	width:130  	 	across:1
+
+	button Set_  "Suffix _"  	width:130  	 	across:1
+	
 			)
 	
 	group "Model" (
@@ -41,10 +44,10 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:450
 		)
 	
 	group "Mirror" (
-	button XYZ "XYZ"  	width:50  	 	across:1	  	 	
-	button btMirrorx "Mirror_X"  	width:50  	 	across:3
-	button btMirrory "Mirror_Y"  	width:50  	 	across:3
-	button btMirrorz "Mirror_Z"  	width:50  	 	across:3)
+	button XYZ "XYZ"  	width:50  	 	across:4	  	 	
+	button btMirrorx "Mirror_X"  	width:50  	 	across:4
+	button btMirrory "Mirror_Y"  	width:50  	 	across:4
+	button btMirrorz "Mirror_Z"  	width:50  	 	across:4)
 		
 	group "MTL" (
 	button btNone "None Mat"  	width:50  	 	across:2
@@ -122,7 +125,8 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:450
 	
 	
 	
-	
+		--set
+
 	
 	on Set_low pressed do
     (
@@ -156,7 +160,35 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:450
         )
     )
 	
+	on Set_LOD00 pressed do
+    (
+        local selectedObjects = getCurrentSelection()
+        for obj in selectedObjects do
+        (
+            if not (matchPattern obj.name pattern:"*_LOD00") do
+            (
+                if not (matchPattern obj.name pattern:"*_LOD01") do
+                (
+                    obj.name = (obj.name + "_LOD00")
+                )
+            )
+        )
+    )
 	
+	on Set_LOD01 pressed do
+    (
+        local selectedObjects = getCurrentSelection()
+        for obj in selectedObjects do
+        (
+            if not (matchPattern obj.name pattern:"*_LOD01") do
+            (
+                if not (matchPattern obj.name pattern:"*_LOD00") do
+                (
+                    obj.name = (obj.name + "_LOD01")
+                )
+            )
+        )
+    )
 	--setPivot
 	on Move000 pressed do
 	(-- Get the selected objects
