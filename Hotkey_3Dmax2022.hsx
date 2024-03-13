@@ -52,4 +52,5 @@
     <Assign_Hotkey Shortcut="Ctrl+Shift+A" Description="Auto Smooth (Poly)" Id="647394-EPoly_Autosmooth`Editable Polygon Object"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+H" Description="Hide Unselected" Id="0-281"/>
     <Assign_Hotkey Shortcut="Alt+H" Description="Unhide All" Id="0-277"/>
+    <Assign_Hotkey Shortcut="Shift+Q" Description="Straighten Edges" Id="2077580866-40263"/>
 </MaxHotkeyTransformations>
