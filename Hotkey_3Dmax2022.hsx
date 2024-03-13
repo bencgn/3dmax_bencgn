@@ -53,4 +53,5 @@
     <Assign_Hotkey Shortcut="Ctrl+Shift+H" Description="Hide Unselected" Id="0-281"/>
     <Assign_Hotkey Shortcut="Alt+H" Description="Unhide All" Id="0-277"/>
     <Assign_Hotkey Shortcut="Shift+Q" Description="Straighten Edges" Id="2077580866-40263"/>
+    <Assign_Hotkey Shortcut="Alt+V" Description="Rotate To Grid" Id="647394-RotateToGrid`Custom"/>
 </MaxHotkeyTransformations>
