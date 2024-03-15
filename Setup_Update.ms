@@ -25,11 +25,18 @@ rollout rOSTools "Update and Set Up" rolledUp:false width:170
 		button polydamage_nm "polydamage_nm"  	width:140  	 	across:1
 		
 		button QuadRemesher_10_3dsMax "QuadRemesher_10_3dsMax"  	width:140  	 	across:1
+		
+		button uniconnector_v4 "Call uniconnector_v4.22"  	width:140  	 	across:1
+
+		
 		)
 	
 
 	
-	
+	on uniconnector_v4 pressed do
+	(
+	fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\First_Run\\uniconnector_v4.22.ms"
+	)
 	--
 	on RunPivotBottom pressed do
 	(
