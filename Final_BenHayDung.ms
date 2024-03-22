@@ -1,6 +1,6 @@
 
 
-rollout rOSTools "BEN Tool Demo" rolledUp:false width:450
+rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 	(
 	label createdByLabel "Tool created by: bencgn" 
 		group "Fuck" (
@@ -71,16 +71,16 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:450
 	)
 	
 	group "Open Outside" (
-	button btQa "Quick Attach"  	width:100  	 	across:1
-	button miauuAlignObjsToVector "AlignObjsToVector"  	width:100  	 	across:1
-	button Pivot_Bottom "Pivot_Bottom"  	width:100  	 	across:1
-	button detachbyID "detachbyID"  	width:80  	 	across:2		
-	button objectrename "rename_Pro"  	width:80  	 	across:2
-	button helperManager "helperManager"  	width:80  	 	across:1
-	button IFWNormals "IFWNormals"  	width:80  	 	across:1
-	button polydamageV1_01 "polydamage"  	width:100  	 	across:1
-	button QuadRemesher "QuadRemesher"  	width:100  	 	across:1
-	button detach "Detach_Elements"  	width:100  	 	across:1
+	button btQa "Quick Attach"  	width:100  	 	across:4
+	button miauuAlignObjsToVector "AlignObjsToVector"  	width:100  	 	across:4
+	button Pivot_Bottom "Pivot_Bottom"  	width:100  	 	across:4
+	button detachbyID "detachbyID"  	width:80  	 	across:4		
+	button objectrename "rename_Pro"  	width:80  	 	across:3
+	button helperManager "helperManager"  	width:80  	 	across:3
+	button IFWNormals "IFWNormals"  	width:80  	 	across:3
+	button polydamageV1_01 "polydamage"  	width:100  	 	across:3
+	button QuadRemesher "QuadRemesher"  	width:100  	 	across:3
+	button detach "Detach_Elements"  	width:100  	 	across:3
 
 	)
 	
@@ -120,11 +120,7 @@ rollout rOSTools "BEN Tool Demo" rolledUp:false width:450
     )
 	
 	
-	
-	
-	
-	
-	
+
 		--set
 
 	
