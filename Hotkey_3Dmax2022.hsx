@@ -56,4 +56,5 @@
     <Assign_Hotkey Shortcut="Alt+V" Description="Rotate To Grid" Id="647394-RotateToGrid`Custom"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+G" Description="UniConnector" Id="647394-uniconnector`Niklit Scripts"/>
     <Assign_Hotkey Shortcut="Ctrl+Alt+G" Description="Uconnector FlowConnect Switcher" Id="647394-FlowConnectSwitcher_macro`Niklit Scripts"/>
+    <Assign_Hotkey Shortcut="Ctrl+Shift+1" Description="Set Pivot Rotation X to 90" Id="647394-SetPivotRotationX90`Custom Tools"/>
 </MaxHotkeyTransformations>

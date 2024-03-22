@@ -1,36 +1,43 @@
-try(destroyDialog pickAndAssignMaterial) catch()
-
-rollout pickAndAssignMaterial "Pick and Assign Material"
+rollout SetPivotRotationRollout "Set Pivot Rotation"
 (
-    label lblPick "Pick a material from this object:"
-    pickButton btnPickMaterial "Pick Material"
+    label lblInstructions "Click the text to set pivot rotation to 90 degrees on X-axis:"
+    button btnSetPivot "Set Pivot Rotation" width: 80
     
-    label lblAssign "Assign the picked material to selected objects:"
-    button btnAssignMaterial "Assign Material"
-    
-    local pickedMaterial = undefined -- Variable to store the picked material
-    
-    on btnPickMaterial picked obj do
+    on btnSetPivot pressed do
     (
-        if isKindOf obj Material do
+        -- Get the selected object
+        local obj = selection[1]
+        
+        -- Check if an object is selected
+        if obj != undefined then
         (
-            pickedMaterial = obj
-            format "Picked Material: %\n" pickedMaterial.name to:MaxScriptListener
+            -- Set the pivot rotation
+            obj.pivot.rotation = eulerangles 90 0 0
+            messageBox "Pivot rotation set to 90 degrees on the X-axis."
+        )
+        else
+        (
+            messageBox "No object selected!"
         )
     )
-    
-    on btnAssignMaterial pressed do
+
+    on lblInstructions mouseUp do
     (
-        if isValidNode pickedMaterial do
+        -- Get the selected object
+        local obj = selection[1]
+        
+        -- Check if an object is selected
+        if obj != undefined then
         (
-            local selectedObjects = getCurrentSelection()
-            for obj in selectedObjects where isKindOf obj GeometryClass do
-            (
-                obj.material = pickedMaterial
-            )
-            format "Assigned Material: % to % objects\n" pickedMaterial.name selectedObjects.count to:MaxScriptListener
+            -- Set the pivot rotation
+            obj.pivot.rotation = eulerangles 90 0 0
+            messageBox "Pivot rotation set to 90 degrees on the X-axis."
+        )
+        else
+        (
+            messageBox "No object selected!"
         )
     )
 )
 
-createDialog pickAndAssignMaterial 300 150
+createDialog SetPivotRotationRollout width:200 height:50
