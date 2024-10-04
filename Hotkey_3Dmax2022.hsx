@@ -57,4 +57,10 @@
     <Assign_Hotkey Shortcut="Ctrl+Shift+G" Description="UniConnector" Id="647394-uniconnector`Niklit Scripts"/>
     <Assign_Hotkey Shortcut="Ctrl+Alt+G" Description="Uconnector FlowConnect Switcher" Id="647394-FlowConnectSwitcher_macro`Niklit Scripts"/>
     <Assign_Hotkey Shortcut="Ctrl+Shift+1" Description="Set Pivot Rotation X to 90" Id="647394-SetPivotRotationX90`Custom Tools"/>
+    <Assign_Hotkey Shortcut="Ctrl+Shift+E" Description="Weight Tool Dialog (Skin)" Id="647394-WeightTool_Dialog`Skin Modifier"/>
+    <Unassign_Hotkey Shortcut="`" Description="Redraw All Views" Id="0-40130"/>
+    <Unassign_Hotkey Shortcut="/" Description="Play Animation" Id="0-50021"/>
+    <Assign_Hotkey Shortcut="`" Description="Play Animation" Id="0-50021"/>
+    <Unassign_Hotkey Shortcut="Alt+`" Description="Show End Result" Id="647394-Show_End_Result_Toggle`Modifier Stack"/>
+    <Assign_Hotkey Shortcut="Alt+`" Description="Go to Start Frame" Id="0-50019"/>
 </MaxHotkeyTransformations>

@@ -22,6 +22,17 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 	group "Export" (
 	button btToolExport "Open Tool Export"  	width:130  	 	across:2
 	button SetUnity "SetUnity Export"  	width:130  	 	across:2)
+	
+	
+	
+		group "Scale" (
+	button ScaleX2 "Scale X2 (10000)"  	width:130  	 	across:2
+	button ScaleX1 "Scale X2 (1000)"  	width:130  	 	across:2
+	button ScaleTest1 "ScaleTest1"  	width:130  	 	across:2
+	button ScaleTest2 "ScaleTest2"  	width:130  	 	across:2
+
+			
+			)
 
 		group "Rename" (
 			
@@ -108,6 +119,15 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 	)
 	
 	
+	--Scale
+	on ScaleX2 pressed do
+    (
+		
+        
+    )
+	
+	
+
 	
 	--Rename
 	on Set_ pressed do
