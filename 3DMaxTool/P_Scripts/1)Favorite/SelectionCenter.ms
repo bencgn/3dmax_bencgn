@@ -1,0 +1,1 @@
+macros.run "About_Hotkey" "UseSelectionCenter"

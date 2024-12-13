@@ -5,15 +5,12 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 	label createdByLabel "Tool created by: bencgn" 
 		group "Fuck" (
 	button btConvertPoly "ConvertPoly"  	width: 80  	 	across:5
-	button btCollapto "Collapse To"  	width:80  	 	across:5 	
 	button btInst "Select Inst"  	width:80  	 	across:5 
 	button btClean "CleanDeadFace"  	width:80  	 	across:5 
 	button ExportSelect "ExportSelect"  	width: 100  	 	across:5
 	button OpenChanel2 "OpenChanel2"  	width: 100  	 	across:5
 		)
 	
-	button btSetup "SetUpOfBen "  	width:80  	 	across:1
-	button btOpenUnwrap "Open Unwrap"  	width:80  	 	across:1
 	button btUVMap11 "UV Map 1m"  	width:130  	 	across:1
 	button Reset00 "Reset00"  	width:130  	 	across:1	
 		
@@ -55,10 +52,10 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 		)
 	
 	group "Mirror" (
-	button XYZ "XYZ"  	width:50  	 	across:4	  	 	
-	button btMirrorx "Mirror_X"  	width:50  	 	across:4
-	button btMirrory "Mirror_Y"  	width:50  	 	across:4
-	button btMirrorz "Mirror_Z"  	width:50  	 	across:4)
+	button XYZ "XYZ"  	width:50  	 	across:2	  	 	
+	button btMirrorx "Mirror_X"  	width:50  	 	across:2
+	button btMirrory "Mirror_Y"  	width:50  	 	across:2
+	button btMirrorz "Mirror_Z"  	width:50  	 	across:2)
 		
 	group "MTL" (
 	button btNone "None Mat"  	width:50  	 	across:2
@@ -102,10 +99,9 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 
 	)
 	
-	group "Pivot Unity" (
-		button setPivot "Pivot"  	width:100  	 	across:3
-		button Pivot90 "Set x=90"  	width:100  	 	across:3
-		button Move000 "Move to Origin"  	width:100  	 	across:3
+	group "Group " (
+		button setPivot "Pivot"  	width:100  	 	across:2
+		button Move000 "Move to Origin"  	width:100  	 	across:2
 
 
 	)
@@ -113,22 +109,8 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 	button assemblytoolrunfirst "RUNFIRST"  	width:100  	 	across:1
 	button assemblytoolOpen "Open"  	width:100  	 	across:1
 	)
-	group "kilaD" (
-	button kilaD "kilaD"  	width:100  	 	across:1
-	
-	)
-	
-	
-	--Scale
-	on ScaleX2 pressed do
-    (
-		
-        
-    )
-	
-	
 
-	
+
 	--Rename
 	on Set_ pressed do
     (
@@ -256,10 +238,7 @@ fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\polydamageV1_01\\polydamage_nm.mse"	)
 	
 	
 --DisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplay
-	on kilaD pressed do
-	(
-	macros.run "kilaD" "openGhostTown"
-	)
+
 	
 	on displayname pressed do
 	(
@@ -419,24 +398,9 @@ max vpt top
 	(
 		macros.run "Modifier Stack" "Convert_to_Poly"
 	)
-	--ConvertPoly
-	on btCollapto pressed do
-	(
-maxOps.CollapseNodeTo $ 1 off
-	)
-	--SetUpOfBen
-	on btSetup pressed do
-	(
-		max tool maximize
-		macros.run "Scene Explorer" "SELayerExplorer"
-		max render scene
-	)
-	--OpenUnwrap
-	on btOpenUnwrap pressed do
-	(
-modPanel.addModToSelection (Unwrap_UVW ()) ui:on
-	$.modifiers[#unwrap_uvw].unwrap2.setFreeFormMode on
-	)
+	
+
+
 	--btUVMap11
 	on btUVMap11 pressed do
 	(

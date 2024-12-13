@@ -1,0 +1,1 @@
+$.modifiers[#Symmetry].flip = not ($.modifiers[#Symmetry].flip)
