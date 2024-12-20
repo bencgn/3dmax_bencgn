@@ -1,0 +1,14 @@
+# This is an Asset Catalog Definition file for Blender.
+#
+# Empty lines and lines starting with `#` will be ignored.
+# The first non-ignored line should be the version indicator.
+# Other lines are of the format "UUID:catalog/path/for/assets:simple catalog name"
+
+VERSION 1
+
+f2b828ab-47ae-4a02-9454-62d6db33bfc0:Divine Accessories:Divine Accessories
+a4d47b45-91ea-4111-a4dd-9486ac88bdf5:Divine Buttons:Divine Buttons
+28a4d55b-4124-4e65-aafd-8592b5bbba72:Divine Materials:Divine Materials
+7cc48f92-06e7-438b-9c08-a0703fb68286:Divine Pockets:Divine Pockets
+1859239b-f908-4fef-bde1-c677a7c55daa:Divine Shoes:Divine Shoes
+0bdcabae-a011-4dd4-bebc-01bd85c82193:Divine Threads & Zips:Divine Threads & Zips
