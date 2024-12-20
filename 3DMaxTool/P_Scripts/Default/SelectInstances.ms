@@ -1,1 +1,0 @@
-macros.run "Selection" "SelectInstances"

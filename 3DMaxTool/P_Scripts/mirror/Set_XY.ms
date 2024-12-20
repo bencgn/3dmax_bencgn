@@ -1,1 +1,0 @@
-selection[1].modifiers[#Mirror].mirror_axis = 3

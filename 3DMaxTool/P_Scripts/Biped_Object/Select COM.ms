@@ -1,1 +1,0 @@
-	try(select $Bip001) catch()

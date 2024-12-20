@@ -1,1 +1,0 @@
-setTransformLockFlags $ #None

@@ -1,1 +1,0 @@
-$.modifiers[#Symmetry].axis=2

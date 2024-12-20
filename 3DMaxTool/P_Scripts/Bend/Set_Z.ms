@@ -1,1 +1,0 @@
-$.modifiers[#Bend].BendAxis=2

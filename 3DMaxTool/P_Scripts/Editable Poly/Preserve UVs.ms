@@ -1,1 +1,0 @@
-selection[1].preserveUVs=not (selection[1].preserveUVs)

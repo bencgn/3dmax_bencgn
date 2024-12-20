@@ -1,2 +1,0 @@
-
-skinOps.CopyWeights  (modPanel.GetcurrentObject())

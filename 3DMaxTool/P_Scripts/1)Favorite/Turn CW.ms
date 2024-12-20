@@ -1,3 +1,0 @@
-(
-PolyBoost.SmartRotate 45
-)

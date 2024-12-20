@@ -1,1 +1,0 @@
-macros.run "Objects Systems" "Biped"

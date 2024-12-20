@@ -1,1 +1,0 @@
-StartObjectCreation Torus
