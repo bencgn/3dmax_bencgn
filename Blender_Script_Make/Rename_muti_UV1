@@ -1,8 +1,0 @@
-import bpy
-
-for obj in bpy.context.selected_objects:
-    
-    try:
-        obj.data.uv_layers.data.uv_layer_stencil.name = 'UVmap'
-    except:    
-        continue
