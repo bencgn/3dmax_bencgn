@@ -1,0 +1,2 @@
+
+skinOps.PasteWeights  (modPanel.GetcurrentObject())

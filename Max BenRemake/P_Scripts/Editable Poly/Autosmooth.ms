@@ -1,0 +1,1 @@
+macros.run "Editable Polygon Object" "EPoly_Autosmooth"

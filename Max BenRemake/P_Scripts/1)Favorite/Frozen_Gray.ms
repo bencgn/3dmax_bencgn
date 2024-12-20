@@ -1,0 +1,1 @@
+$.showFrozenInGray = not ($selection[1].showFrozenInGray)
