@@ -1,8 +1,0 @@
-name "Copy To"
-version 3.0
-
-copy "copyTo.mcr" to "$userMacros"
-drop install.ms
-run install.ms
-
-clear temp

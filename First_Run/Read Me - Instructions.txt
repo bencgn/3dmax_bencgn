@@ -1,9 +1,0 @@
-PolyDamage Plugin for 3dsmax by PolyDesign3D
-
-How to install:
-
--- Copy "polydamage_nm.mse" to "C:\Program Files\Autodesk\3ds Max 20**\scripts"
--- Drag and drop "polydamage_macro.ms" file to the 3dsmax viewport.
-
--- Go to Customize > Customize user interface > Keyboard tab > find PolyDamageV1 and assign an hotkey.
--- Use this hotkey to run plugin.
