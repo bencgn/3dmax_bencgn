@@ -32,13 +32,7 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 	
 			)
 	
-	group "Model" (
-	button btBox "Box"  	width:50  	 	across:5
-	button btCylinder "Cylinder"  	width:50  	 	across:5
-	button btSphere "Sphere"  	width:50  	 	across:5
-	button btPlane "Plane"  	width:50  	 	across:5
-	button btDummy "Dummy"  	width:50  	 	across:5	
-		)
+
 	
 	group "Mirror" (
 	button XYZ "XYZ"  	width:50  	 	across:2	  	 	
@@ -46,20 +40,10 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 	button btMirrory "Mirror_Y"  	width:50  	 	across:2
 	button btMirrorz "Mirror_Z"  	width:50  	 	across:2)
 		
-	group "MTL" (
-	button btNone "None Mat"  	width:50  	 	across:2
-	button btNormal "Normal"  	width:50		across:2
 
-	button btWireFrame "WireFrame"  	width:50  	 	across:2		
-	button btColor "Color"  	width:50  	 	across:2
-
-	)
 	
 	group "ViewPort" (
-	button btL "Left"  	width:40  	 	across:4
-	button btR "Right"  	width:40		across:4
-	button btT "Top"  	width:40	across:4
-	button btB "Botton"  	width:40  	 	across:4	
+
 
 	button HideUnselected "HideUnselected"  	width: 80  	 	across:1
 	button UnhideAll "Unhide All"  	width: 80  	 	across:1
@@ -67,26 +51,9 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 	
 	)
 	
-	group "Open Outside" (
-	button btQa "Quick Attach"  	width:100  	 	across:4
-	button miauuAlignObjsToVector "AlignObjsToVector"  	width:100  	 	across:4
-	button Pivot_Bottom "Pivot_Bottom"  	width:100  	 	across:4
-	button detachbyID "detachbyID"  	width:80  	 	across:4		
-	button objectrename "rename_Pro"  	width:80  	 	across:3
-	button helperManager "helperManager"  	width:80  	 	across:3
-	button IFWNormals "IFWNormals"  	width:80  	 	across:3
-	button polydamageV1_01 "polydamage"  	width:100  	 	across:3
-	button QuadRemesher "QuadRemesher"  	width:100  	 	across:3
-	button detach "Detach_Elements"  	width:100  	 	across:3
 
-	)
 	
-	
-	group "Hien Thi" (
-		button displayname "Ten Object"  	width:100  	 	across:2
-		button displaygroup "Ten Group"  	width:100  	 	across:2
 
-	)
 	
 	group "Group " (
 		button setPivot "Pivot"  	width:100  	 	across:2
@@ -94,11 +61,6 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 
 
 	)
-	group "Assembly Tool" (
-	button assemblytoolrunfirst "RUNFIRST"  	width:100  	 	across:1
-	button assemblytoolOpen "Open"  	width:100  	 	across:1
-	)
-
 
 	--Rename
 	on Set_ pressed do
@@ -221,19 +183,8 @@ fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Face_Weighted_Normals\\IFWNormals.mse"	)
 fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\polydamageV1_01\\polydamage_nm.mse"	)
 
 	
-	
---DisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplay
 
 	
-	on displayname pressed do
-	(
-	fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\displayname.ms"
-	)
-	
-	on displaygroup pressed do
-	(
-	fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\displaygroup.ms"
-	)
 --DisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplay
 	on OpenChanel2 pressed do
 	(
@@ -301,16 +252,7 @@ rotate $ (angleaxis 0 [0,0,0])
 	Dummy pos:[0,0,0] isSelected:on
 	)
 	
-	--Quick Attach
-	on assemblytoolrunfirst pressed do
-	(
-	fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\assemblytool_1.191_0.mzp"
-	)
-	
-	on assemblytoolOpen pressed do
-	(
-macros.run "Utopia" "AssemblyTool"
-	)
+
 	
 	--Quick Attach
 	on objectrename pressed do
@@ -335,48 +277,7 @@ macros.run "Utopia" "AssemblyTool"
 		macros.run "miauu" "miauuAlignObjsToVector"
 	)
 --Quick Attach
-	on btQa pressed do
-	(
-		macros.run "# Scripts" "Quick_Attach"
-	)
-
-
---ConvertPoly
-	on btClean pressed do
-	(
-			
-		polyop.collapseDeadStructs $
-
-	)
 	
-	--ConvertPoly
-	on btInst pressed do
-	(
-			
-		macros.run "Selection" "SelectInstances"
-
-	)
-	--ConvertPoly
-	on btL pressed do
-	(
-		max vpt left	
-		max zoomext sel
-	)
-	on btR  pressed do
-	(
-		max vpt right	
-		max zoomext sel
-	)
-	on btT pressed do
-	(
-max vpt top	
-		max zoomext sel
-	)
-	on btB pressed do
-	(
-		max vpt bottom	
-		max zoomext sel
-	)
 	
 	--ConvertPoly
 	on btConvertPoly pressed do
@@ -401,31 +302,8 @@ $.modifiers[#UVW_Map].height = 100
 	(
 macros.run "N00BY" "Macro_Export"	
 	)	
-	--btBox
-	on btBox pressed do
-	(
-Box length:1000 width:1000 height:1000 pos:[0,0,0] isSelected:on
-	)
-	--btBox
-	on btCylinder pressed do
-	(
-Cylinder radius:200 height:200 pos:[0,0,0] isSelected:on
-	)
-	--btSphere
-	on btSphere pressed do
-	(
-Sphere radius:500 pos:[0,0,0] isSelected:on
-	)
-	--btNone
-	on btNone pressed do
-	(
-$. mat = null
-	)
-	--btPlane
-	on btPlane pressed do
-	(
-Plane length:250 width:250 pos:[0,0,0] isSelected:on
-	)
+	
+
 	
 	--btNormal
 	on btNormal pressed do
@@ -467,26 +345,8 @@ maxOps.CollapseNodeTo $ 1 off
 	)
 
 	
-	--btWireFrame
-	on btWireFrame pressed do
-	(
-		meditMaterials[9].opacity = 0
-		max select
-		$.material = meditMaterials[9]
-		
-	)
-	--btColor
-	on btColor pressed do
-	(
-meditMaterials[8].Diffuse = color 64 64 64
-meditMaterials[8].ambient = color 64 64 64
-meditMaterials[8].Diffuse = color 64 64 64
-meditMaterials[8].ambient = color 64 64 64
-meditMaterials[8].specularLevel = 79
-meditMaterials[8].glossiness = 25
-		max select
-		$.material = meditMaterials[8]
-	)
+
+
 	
 
 )

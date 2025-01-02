@@ -69,9 +69,9 @@
     <Unassign_Hotkey Shortcut="Ctrl+Alt+V" Description="Toggle ViewCube Visibility" Id="1920373763-73"/>
     <Assign_Hotkey Shortcut="Ctrl+Alt+V" Description="Paste Weights (Skin)" Id="647394-PasteWeights`Skin Modifier"/>
     <Unassign_Hotkey Shortcut="Alt+S" Description="Cycle Active Snap Type" Id="0-40906"/>
-    <Assign_Hotkey Shortcut="Alt+S" Description="P_SkinWeightTool" Id="647394-P_SkinWeightTool`P_Scripts"/>
     <Assign_Hotkey Shortcut="Alt+V" Description="Blend Weights (Skin)" Id="647394-BlendWeights`Skin Modifier"/>
     <Assign_Hotkey Shortcut="Ctrl+Alt+G" Description="Btest" Id="647394-Btest`Btest"/>
     <Assign_Hotkey Shortcut="Alt+F" Description="P_Scripts" Id="647394-P_Scripts`P_Scripts"/>
     <Assign_Hotkey Shortcut="Ctrl+\" Description="Custom batch exporter ;)" Id="647394-Macro_Export`N00BY"/>
+    <Assign_Hotkey Shortcut="Alt+S" Description="P_SkinWeightTool" Id="647394-P_SkinWeightTool`P_Scripts"/>
 </MaxHotkeyTransformations>
