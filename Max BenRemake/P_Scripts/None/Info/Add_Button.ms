@@ -19,6 +19,11 @@
 	add_button "Biped" "0" across:2
 	add_button "Bones" "9" across:1
 	add_button "Circle" "C" across:2
+	add_button "Dummy" "" across:0
+	add_button "Import" "" across:0
+	add_button "Export_Batch" "" across:0
+	add_button "StandardMTL" "" across:0
+	add_button "AssemblyTool" "" across:0
 
 	return NTL
 )

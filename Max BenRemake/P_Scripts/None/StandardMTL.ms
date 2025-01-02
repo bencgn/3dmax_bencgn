@@ -1,0 +1,10 @@
+		max select
+meditMaterials[1] = Standardmaterial ()
+meditMaterials[2] = Standardmaterial ()
+meditMaterials[3] = Standardmaterial ()
+meditMaterials[4] = Standardmaterial ()
+meditMaterials[5] = Standardmaterial ()
+meditMaterials[6] = Standardmaterial ()
+meditMaterials[7] = Standardmaterial ()
+meditMaterials[8] = Standardmaterial ()
+meditMaterials[9] = Standardmaterial ()

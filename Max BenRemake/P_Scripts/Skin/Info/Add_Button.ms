@@ -20,6 +20,7 @@
 	add_button "Paint Weight" "Z" across:0
 	add_button "Weight Dialog" "P" across:0
 	add_button "Convert_Poly" "" across:0
+	add_button "AssemblyTool" "" across:0
 
 	return NTL
 )

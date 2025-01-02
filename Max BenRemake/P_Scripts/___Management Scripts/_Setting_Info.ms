@@ -1,7 +1,7 @@
 (
-bgcolor=(DotNetClass "System.Drawing.Color").FromArgb 255 128 192
+bgcolor=(DotNetClass "System.Drawing.Color").FromArgb 255 128 128
 bgcolor2=(DotNetClass "System.Drawing.Color").FromArgb 0 0 0
-bgcolor3=(DotNetClass "System.Drawing.Color").FromArgb 0 255 64
+bgcolor3=(DotNetClass "System.Drawing.Color").FromArgb 255 0 128
 bordercolor=(DotNetClass "System.Drawing.Color").FromArgb 255 0 128
 FontColor=(DotNetClass "System.Drawing.Color").FromArgb 0 0 0
 DisfocusFontColor=(DotNetClass "System.Drawing.Color").FromArgb 240 240 240

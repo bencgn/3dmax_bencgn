@@ -17,6 +17,7 @@
 	add_button "BackFaceCull" "" across:1
 	add_button "ResetXForm" "" across:2
 	add_button "DeleteAnim" "" across:0
+	add_button "Delete" "" across:0
 	add_button "EditPoly" "" across:0
 	add_button "Convert_Poly" "" across:0
 
