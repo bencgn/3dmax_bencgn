@@ -13,7 +13,8 @@
 	add_button "Ring" "2" across:2
 	add_button "Copy" "C" across:1
 	add_button "Paste" "V" across:2
-	add_button "Skin Weigth Absolute" "D" across:0
+	add_button "VertexSkinOn" "" across:1
+	add_button "Skin Weigth Absolute" "D" across:3
 	add_button "Skin Weigth Relative" "F" across:0
 	add_button "Remove Zero Weight" "R" across:0
 	add_button "Skin Mirror" "W" across:0

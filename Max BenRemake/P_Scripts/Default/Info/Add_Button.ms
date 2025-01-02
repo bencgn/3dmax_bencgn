@@ -19,7 +19,7 @@
 	add_button "MaterialNone" "" across:1
 	add_button "WireFrameMat" "" across:2
 	add_button "P_SkinWeightTool" "" across:0
-	add_button "Delete" "" across:0
+	add_button "Delete" "D" across:0
 	add_button "EditPoly" "" across:0
 	add_button "Convert_Poly" "" across:0
 
