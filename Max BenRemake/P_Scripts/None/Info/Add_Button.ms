@@ -24,6 +24,9 @@
 	add_button "Export_Batch" "" across:0
 	add_button "StandardMTL" "" across:0
 	add_button "AssemblyTool" "" across:0
+	add_button "SelectBone" "" across:0
+	add_button "SelectAll_Filter" "" across:0
+	add_button "SelectShape" "" across:0
 
 	return NTL
 )
