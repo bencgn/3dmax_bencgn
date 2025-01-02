@@ -16,20 +16,9 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 		
 	
 	
-	group "Export" (
-	button btToolExport "Open Tool Export"  	width:130  	 	across:2
-	button SetUnity "SetUnity Export"  	width:130  	 	across:2)
-	
-	
-	
-		group "Scale" (
-	button ScaleX2 "Scale X2 (10000)"  	width:130  	 	across:2
-	button ScaleX1 "Scale X2 (1000)"  	width:130  	 	across:2
-	button ScaleTest1 "ScaleTest1"  	width:130  	 	across:2
-	button ScaleTest2 "ScaleTest2"  	width:130  	 	across:2
 
-			
-			)
+	
+	
 
 		group "Rename" (
 			
@@ -60,7 +49,7 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 	group "MTL" (
 	button btNone "None Mat"  	width:50  	 	across:2
 	button btNormal "Normal"  	width:50		across:2
-	button btStandard "Step 1: Standard MTL"  	width:130  	 	across:1
+
 	button btWireFrame "WireFrame"  	width:50  	 	across:2		
 	button btColor "Color"  	width:50  	 	across:2
 
@@ -217,11 +206,7 @@ macros.run "Tools" "PivotMode_Toggle"		)
 fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\Run\\Detach_Elements.ms"		)	
 
 
---QuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesher
-	on SetUnity pressed do
-	(
-macros.run "Tools" "PivotMode_Toggle"
-rotate $ (angleaxis 90 [90,0,0])		)			
+				
 --QuadRemesherQuadRemeswherQuadRemesherQuadRemesherQuadRemesherQuadRemesherQuadRemesher
 	on QuadRemesher pressed do
 	(
@@ -480,20 +465,7 @@ modPanel.addModToSelection (mirror ()) ui:on
 $.modifiers[#Mirror].copy = on
 maxOps.CollapseNodeTo $ 1 off
 	)
-	--btStandard
-	on btStandard pressed do
-	(
-		max select
-meditMaterials[1] = Standardmaterial ()
-meditMaterials[2] = Standardmaterial ()
-meditMaterials[3] = Standardmaterial ()
-meditMaterials[4] = Standardmaterial ()
-meditMaterials[5] = Standardmaterial ()
-meditMaterials[6] = Standardmaterial ()
-meditMaterials[7] = Standardmaterial ()
-meditMaterials[8] = Standardmaterial ()
-meditMaterials[9] = Standardmaterial ()
-	)
+
 	
 	--btWireFrame
 	on btWireFrame pressed do
