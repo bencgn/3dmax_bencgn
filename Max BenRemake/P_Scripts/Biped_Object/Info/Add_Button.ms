@@ -21,6 +21,7 @@
 	add_button "SetKey" "" across:1
 	add_button "SetPlantedKey" "" across:2
 	add_button "Delete_AniKey" "" across:0
+	add_button "Convert_Poly" "" across:0
 
 	return NTL
 )

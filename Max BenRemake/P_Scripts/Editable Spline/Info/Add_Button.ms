@@ -11,6 +11,7 @@
 	add_button "Type_To_Bazier_Corner" "2" across:0
 	add_button "Type_To_Corner" "3" across:0
 	add_button "Type_To_Smooth" "4" across:0
+	add_button "Convert_Poly" "" across:0
 
 	return NTL
 )

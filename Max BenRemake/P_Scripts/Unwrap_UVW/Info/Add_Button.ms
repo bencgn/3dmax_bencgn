@@ -5,8 +5,6 @@
 		append NTL #(title, shortcut, across)
 	)
 
-	add_button "Amount" "" across:0
-	add_button "Curve" "" across:0
 	add_button "Convert_Poly" "" across:0
 
 	return NTL

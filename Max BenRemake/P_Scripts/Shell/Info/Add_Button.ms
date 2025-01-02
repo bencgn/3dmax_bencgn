@@ -8,6 +8,7 @@
 	add_button "Inner Amount" "" across:0
 	add_button "Outer Amount" "" across:0
 	add_button "Segments" "" across:0
+	add_button "Convert_Poly" "" across:0
 
 	return NTL
 )

@@ -10,6 +10,7 @@
 	add_button "Set_X" "A" across:0
 	add_button "Set_Y" "S" across:0
 	add_button "Set_Z" "D" across:0
+	add_button "Convert_Poly" "" across:0
 
 	return NTL
 )
