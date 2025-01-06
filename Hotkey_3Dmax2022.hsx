@@ -74,4 +74,5 @@
     <Assign_Hotkey Shortcut="Alt+F" Description="P_Scripts" Id="647394-P_Scripts`P_Scripts"/>
     <Assign_Hotkey Shortcut="Ctrl+\" Description="Custom batch exporter ;)" Id="647394-Macro_Export`N00BY"/>
     <Assign_Hotkey Shortcut="Alt+S" Description="P_SkinWeightTool" Id="647394-P_SkinWeightTool`P_Scripts"/>
+    <Assign_Hotkey Shortcut="Ctrl+Alt+Shift+E" Description="Export Selected" Id="0-40373"/>
 </MaxHotkeyTransformations>
