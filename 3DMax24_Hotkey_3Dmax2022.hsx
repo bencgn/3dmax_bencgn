@@ -75,4 +75,7 @@
     <Assign_Hotkey Shortcut="Ctrl+\" Description="Custom batch exporter ;)" Id="647394-Macro_Export`N00BY"/>
     <Assign_Hotkey Shortcut="Alt+S" Description="P_SkinWeightTool" Id="647394-P_SkinWeightTool`P_Scripts"/>
     <Assign_Hotkey Shortcut="Ctrl+Alt+Shift+E" Description="Export Selected" Id="0-40373"/>
+    <Assign_Hotkey Shortcut="Alt+Shift+`" Description="Spline Cleaner" Id="647394-SplineCleaner`Spline Dynamics"/>
+    <Assign_Hotkey Shortcut="D" Description="Repeat Last" Id="647394-RepeatLast`Ribbon - Modeling"/>
+    <Assign_Hotkey Shortcut="Shift+R" Description="Fuse Vertices (Spline)" Id="647394-ESpline_Fuse_Vertex`Editable Spline Object"/>
 </MaxHotkeyTransformations>
