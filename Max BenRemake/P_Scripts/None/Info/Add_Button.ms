@@ -27,6 +27,7 @@
 	add_button "SelectBone" "" across:0
 	add_button "SelectAll_Filter" "" across:0
 	add_button "SelectShape" "" across:0
+	add_button "3DMax24_Final_BenHayDung" "" across:0
 
 	return NTL
 )
