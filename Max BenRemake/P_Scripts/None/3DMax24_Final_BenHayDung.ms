@@ -290,11 +290,12 @@ rotate $ (angleaxis 0 [0,0,0])
 	--btUVMap11
 	on btUVMap11 pressed do
 	(
-		modPanel.addModToSelection (Uvwmap ()) ui:on
+modPanel.addModToSelection (Uvwmap ()) ui:on
 $.modifiers[#UVW_Map].maptype = 4
-$.modifiers[#UVW_Map].length = 100
-$.modifiers[#UVW_Map].width = 100
-$.modifiers[#UVW_Map].height = 100
+$.modifiers[#UVW_Map].width = 1
+$.modifiers[#UVW_Map].height = 1
+$.modifiers[#UVW_Map].length = 1
+
 
 	)
 	--vidu

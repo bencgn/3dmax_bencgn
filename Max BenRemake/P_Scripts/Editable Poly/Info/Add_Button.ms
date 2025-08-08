@@ -27,6 +27,7 @@
 	add_button "Delete" "" across:0
 	add_button "Move To Zero" "" across:0
 	add_button "Convert_Poly" "" across:0
+	add_button "NormalEdit" "" across:0
 
 	return NTL
 )
