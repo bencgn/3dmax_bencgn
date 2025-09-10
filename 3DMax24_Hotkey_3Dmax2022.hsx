@@ -78,4 +78,9 @@
     <Assign_Hotkey Shortcut="Alt+Shift+`" Description="Spline Cleaner" Id="647394-SplineCleaner`Spline Dynamics"/>
     <Assign_Hotkey Shortcut="D" Description="Repeat Last" Id="647394-RepeatLast`Ribbon - Modeling"/>
     <Assign_Hotkey Shortcut="Shift+R" Description="Fuse Vertices (Spline)" Id="647394-ESpline_Fuse_Vertex`Editable Spline Object"/>
+    <Assign_Hotkey Shortcut="Num+0" Description="Use Solid Colors Toggle" Id="0-618"/>
+    <Assign_Hotkey Shortcut="Num+1" Description="Use Gradient Colors Toggle" Id="0-617"/>
+    <Unassign_Hotkey Shortcut="B" Description="Edit Soft Selection Mode" Id="1250838234-40119"/>
+    <Unassign_Hotkey Shortcut="B" Description="Edit Soft Selection Mode" Id="369982487-41016"/>
+    <Assign_Hotkey Shortcut="B" Description="Edge Bridge" Id="647394-EdgeBridge`Ribbon - Modeling"/>
 </MaxHotkeyTransformations>
