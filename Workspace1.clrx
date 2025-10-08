@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ADSK_CLR>
+    <IconImageScales>
+        <appFrameColorTheme value="0" />
+        <enabledSatScale value="100.000000" />
+        <enabledValueScale value="100.000000" />
+        <enabledAlphaScale value="100.000000" />
+        <enabledContrastScale value="0.000000" />
+        <enabledGradientMapScale value="0.000000" />
+        <disabledSatScale value="0.000000" />
+        <disabledValueScale value="80.000000" />
+        <disabledAlphaScale value="100.000000" />
+        <disabledContrastScale value="0.000000" />
+        <disabledGradientMapScale value="0.000000" />
+        <enabledInvertImage value="0" />
+        <disabledInvertImage value="0" />
+    </IconImageScales>
+    <CustomColors>
+        <category name="Appearance">
+            <color id="1" value="#ffffff" disabled="#8f8f8f" name="Text" />
+            <color id="4" value="#5f8ac1" name="Active Command" />
+            <color id="5" value="#383838" name="3D Highlight" />
+            <color id="6" value="#0b0b0b" name="3D Shadow" />
+            <color id="8" value="#222f38" name="Active Caption" />
+            <color id="9" value="#ffb100" name="ToolTip (Viewport) Background" />
+            <color id="10" value="#000000" name="ToolTip (Viewport) Text" />
+            <color id="11" value="#b2b2b2" name="Highlight Text" />
+            <color id="13" value="#1e6edc" name="Item Highlight" />
+            <color id="14" value="#5f8ac1" name="Modifier Sub-object Selection" />
+            <color id="15" value="#0b0b0b" name="3D Dark Shadow" />
+            <color id="16" value="#333333" name="3D Light" />
+            <color id="17" value="#aaaaaa" name="App Workspace" />
+            <color id="25" value="#5f8ac1" disabled="#4f6076" hover="#496a93" name="Pressed Buttons" />
+            <color id="26" value="#444444" name="Time slider Background" />
+            <color id="33" value="#000000" name="Selection Rubber Band" />
+            <color id="34" value="#5f8ac1" name="Modifier Selection" />
+            <color id="38" value="#5f8ac1" name="Pressed Hierarchy Button" />
+            <color id="93" value="#33ffff" name="Adaptive Degradation Active" />
+            <color id="111" value="#444444" name="Background Odd" />
+            <color id="112" value="#515151" name="Background Even" />
+            <color id="113" value="#646464" disabled="#595959" hover="#383838" name="Button" />
+            <color id="114" value="#dcdcdc" disabled="#8f8f8f" hover="#ffffff" name="Button Text" />
+            <color id="115" value="#dcdcdc" disabled="#8f8f8f" hover="#ffffff" name="Button Text Pressed" />
+            <color id="116" value="#d0d0d0" name="Focus Border" />
+            <color id="117" value="#383838" name="UI Borders" />
+            <color id="118" value="#8f2f2f" name="Animation Key Brackets" />
+            <color id="127" value="#848484" name="ToolTip (UI) Background" />
+            <color id="128" value="#eeeeee" hover="#eeeeee" name="ToolTip (UI) Text" />
+            <color id="129" value="#515151" name="Row Background" />
+            <color id="130" value="#4a4a4a" name="Row Alternate Background" />
+            <color id="131" value="#333333" name="Render Message Background" />
+            <color id="132" value="#cccccc" name="Render Message Text" />
+            <color id="133" value="#9bd5ef" name="Render Message System" />
+            <color id="134" value="#faa21b" name="Render Message Warning" />
+            <color id="135" value="#ec4841" name="Render Message Error" />
+            <color id="136" value="#ffcb78" name="Search Text Highlight" />
+            <color id="17332" value="#ff0000" name="Auto Key Button" />
+            <color id="17408" value="#4c4c4c" name="Unselected Tabs" />
+            <color id="17424" value="#3a843e" name="Set Key Mode" />
+        </category>
+        <category name="Trackbar">
+            <color id="18" value="#2a2a2a" name="Trackbar Background" />
+            <color id="19" value="#354657" name="Trackbar Selected Background" />
+            <color id="20" value="#bcbcbc" name="Trackbar Text" />
+            <color id="21" value="#646464" name="Trackbar Ticks" />
+            <color id="22" value="#000000" name="Keys: Unknown" />
+            <color id="23" value="#ffffff" name="Keys: Selected" />
+            <color id="24" value="#fdea12" name="Trackbar Cursor" />
+            <color id="79" value="#a30000" name="Keys: Position" />
+            <color id="80" value="#007a00" name="Keys: Rotation" />
+            <color id="81" value="#0000c9" name="Keys: Scale" />
+            <color id="82" value="#000000" name="Keys: Transform" />
+            <color id="83" value="#000000" name="Keys: Objects" />
+            <color id="84" value="#000000" name="Keys: Materials" />
+            <color id="85" value="#000000" name="Keys: Mixed" />
+            <color id="107" value="#00ff00" name="Trackbar Cached Line" />
+            <color id="108" value="#ffff00" name="Trackbar Cache Line" />
+        </category>
+        <category name="Viewports">
+            <color id="27" value="#323232" name="Viewport Border" />
+            <color id="28" value="#7c6a2c" name="Viewport Active Border" />
+            <color id="64" value="#f5009c" name="Show Dependencies" />
+            <color id="105" value="#1a1a1a" name="Viewport Gradient Background Top" />
+            <color id="106" value="#4d4d4d" name="Viewport Gradient Background Bottom" />
+            <color id="109" value="#ffff00" name="Preview Highlights" />
+            <color id="110" value="#00b2ff" name="Selection Highlights" />
+            <color id="17325" value="#c0c000" name="Safeframe Live" />
+            <color id="17326" value="#00d7d7" name="Safeframe Action" />
+            <color id="17327" value="#c89600" name="Safeframe Title" />
+            <color id="17328" value="#c8c8c8" name="Viewport Label" />
+            <color id="17329" value="#3c3c3c" name="Inactive Viewport Label" />
+            <color id="17330" value="#eecc55" name="Arcball" />
+            <color id="17331" value="#c0c0c0" name="Arcball Highlight" />
+            <color id="17361" value="#00ff00" name="Viewport Background" />
+            <color id="17367" value="#cc7fcc" name="12-Field Grid" />
+            <color id="17384" value="#ff00ff" name="Safeframe User" />
+            <color id="17392" value="#eecc55" name="Viewport Clipping" />
+            <color id="17395" value="#e100e1" name="Cross Hair Cursor" />
+            <color id="17443" value="#e0e0e0" name="Statistics" />
+            <color id="17446" value="#808080" name="Hidden Line Unselected" />
+            <color id="17447" value="#e5cc19" name="Viewport Label Highlight" />
+        </category>
+        <category name="ActiveShade">
+            <color id="35" value="#464646" name="ImageViewer Background" />
+            <color id="36" value="#ce0202" name="ActiveShade Progress (Horizontal)" />
+            <color id="37" value="#15a402" name="ActiveShade Progress (Vertical)" />
+        </category>
+        <category name="Track View">
+            <color id="39" value="#3f3f3f" name="Track View Background" />
+            <color id="40" value="#383838" name="Track View Inactive Background" />
+            <color id="44" value="#b63434" name="Function Curves: X" />
+            <color id="45" value="#319431" name="Function Curves: Y" />
+            <color id="46" value="#4157ff" name="Function Curves: Z" />
+            <color id="47" value="#c8c800" name="Function Curves: W" />
+            <color id="48" value="#32c6c8" name="Function Curves: Float" />
+            <color id="49" value="#ffffff" name="Function Curves: Selected" />
+            <color id="50" value="#dcdcdc" name="Track Text" />
+            <color id="51" value="#8f8e79" name="Time: Selected Instant" />
+            <color id="52" value="#ffff00" name="Keys: Cursor" />
+            <color id="53" value="#535353" name="Selected Track Background" />
+            <color id="54" value="#434343" name="Track Bar: Disabled" />
+            <color id="55" value="#464646" name="Track Bar End: Disabled" />
+            <color id="56" value="#171717" name="Track Bar: Enabled" />
+            <color id="57" value="#8f8f8f" name="Track Bar End: Enabled" />
+            <color id="58" value="#cab423" name="Time: Slider Line" />
+            <color id="59" value="#343434" name="Time: Grid" />
+            <color id="60" value="#808080" name="Keys: Unknown" />
+            <color id="61" value="#fffefa" name="Keys: Selected" />
+            <color id="62" value="#2a2a2a" name="Keys: Outline" />
+            <color id="63" value="#afafaf" name="Keys: On Top Outline" />
+            <color id="65" value="#009577" name="Sound Track: Right Channel" />
+            <color id="66" value="#9c2541" name="Sound Track: Left Channel" />
+            <color id="68" value="#810000" name="Keys: Position" />
+            <color id="69" value="#007a00" name="Keys: Rotation" />
+            <color id="70" value="#3737bc" name="Keys: Scale" />
+            <color id="71" value="#808080" name="Keys: Transform" />
+            <color id="72" value="#808080" name="Keys: Objects" />
+            <color id="73" value="#808080" name="Keys: Materials" />
+            <color id="74" value="#000000" name="Tangent Handles: Adjustable" />
+            <color id="75" value="#6f6fff" name="Tangent Handles: Auto" />
+            <color id="76" value="#595959" name="Keys: Mixed" />
+            <color id="77" value="#c3c3c3" name="Keys: Fake" />
+            <color id="86" value="#b66732" name="Scale Value Origin" />
+            <color id="87" value="#ffffff" name="Keys: Function Curve Selected" />
+            <color id="88" value="#797979" name="Keys: Function Curve Unselected" />
+            <color id="91" value="#a09fb7" name="Scale Value Origin" />
+            <color id="92" value="#d3d2e7" name="Scale Value Origin" />
+            <color id="94" value="#d0d0d0" name="Controller Window Toggle" />
+            <color id="95" value="#0a0a0a" name="Region Select: Border" />
+            <color id="96" value="#fafafa" name="Region Select: Grip" />
+            <color id="97" value="#c8c8c8" name="Region Select: Region" />
+            <color id="98" value="#969696" name="Region Select: Outer Region" />
+            <color id="99" value="#ebeb00" name="Retime Tool: Marker" />
+            <color id="100" value="#d7d700" name="Retime Tool: Marker Handle" />
+            <color id="101" value="#fafa87" name="Retime Tool: Marker/Handle Mouse Over" />
+            <color id="102" value="#adaaa5" name="Retime Tool: Marker/Handle Selected" />
+            <color id="103" value="#ffffff" name="Retime Tool: Marker/Handle Selected Mouse Over" />
+        </category>
+        <category name="Manipulators">
+            <color id="41" value="#00e100" name="Active Manipulators" />
+            <color id="42" value="#ff0000" name="Selected Manipulators" />
+            <color id="43" value="#ffe100" name="Inactive Manipulators" />
+        </category>
+        <category name="Objects">
+            <color id="67" value="#ff0000" name="Assembly Object" />
+            <color id="17338" value="#a868aa" name="Space Warp" />
+            <color id="17339" value="#0eff02" name="Dummy Object" />
+            <color id="17340" value="#0eff02" name="Point Object" />
+            <color id="17341" value="#d5d5d5" name="Point Axis" />
+            <color id="17342" value="#0eff02" name="Tape Object" />
+            <color id="17343" value="#aebacb" name="Bones" />
+            <color id="17350" value="#5778cc" name="Camera Object" />
+            <color id="17355" value="#ffe500" name="Light Object" />
+            <color id="17387" value="#ff7fb2" name="Group Object" />
+        </category>
+        <category name="Material Editor">
+            <color id="89" value="#0000ff" name="Out of Range: Low" />
+            <color id="90" value="#ff0000" name="Out of Range: High" />
+        </category>
+        <category name="Gizmos">
+            <color id="119" value="#6f6fff" name="Motion Paths Handles: Auto" />
+            <color id="120" value="#ffff00" name="Motion Paths Handles: Adjustable" />
+            <color id="121" value="#00ff00" name="Motion Paths In Handle End" />
+            <color id="122" value="#6f6fff" name="Motion Paths Out Handle End" />
+            <color id="123" value="#0033ff" name="Motion Paths Velocity Low" />
+            <color id="124" value="#ff0000" name="Motion Paths Velocity High" />
+            <color id="125" value="#ffff00" name="Motion Paths Gradient Start" />
+            <color id="126" value="#ff0000" name="Motion Paths Gradient End" />
+            <color id="17334" value="#eaff6d" name="Link Lines" />
+            <color id="17335" value="#fa0000" name="Motion Paths" />
+            <color id="17336" value="#c82323" name="Active Axis" />
+            <color id="17337" value="#666666" name="Inactive Axis" />
+            <color id="17344" value="#fd9500" name="Gizmos" />
+            <color id="17345" value="#c8c846" name="Selected Gizmos" />
+            <color id="17349" value="#e98400" name="Particle Emitter" />
+            <color id="17351" value="#99cce5" name="Camera Cone" />
+            <color id="17352" value="#000000" name="Camera Horizon" />
+            <color id="17353" value="#e5cc99" name="Camera Near Range" />
+            <color id="17354" value="#72664c" name="Camera Far Range" />
+            <color id="17356" value="#4cb4fc" name="Target Line" />
+            <color id="17357" value="#cfba2f" name="Light Hotspot" />
+            <color id="17358" value="#867b2f" name="Light Falloff" />
+            <color id="17359" value="#1d4663" name="Light Far Range Start" />
+            <color id="17360" value="#406680" name="Light Far Range End" />
+            <color id="17362" value="#ffffff" name="Motion Paths Ticks" />
+            <color id="17363" value="#ff0000" name="Motion Paths Unused color" />
+            <color id="17364" value="#cccccc" name="Motion Paths Key Times" />
+            <color id="17368" value="#3c5f95" name="Light Near Range Start" />
+            <color id="17369" value="#4383e2" name="Light Near Range End" />
+            <color id="17370" value="#e53333" name="Camera Clipping" />
+            <color id="17379" value="#f61bd5" name="End Effector" />
+            <color id="17380" value="#6396e0" name="End Effector String" />
+            <color id="17381" value="#f9960a" name="Selected Joint Limits" />
+            <color id="17382" value="#d87f00" name="Joint Limits" />
+            <color id="17383" value="#ff4c4c" name="Terminator" />
+            <color id="17388" value="#c80000" name="Transform Gizmo X" />
+            <color id="17389" value="#009c00" name="Transform Gizmo Y" />
+            <color id="17390" value="#0000c3" name="Transform Gizmo Z" />
+            <color id="17391" value="#ffff00" name="Active Transform Gizmo" />
+            <color id="17393" value="#00a38e" name="Light Decay Start" />
+            <color id="17409" value="#00adbc" name="Atmospheric Apparatuses" />
+            <color id="17427" value="#636363" name="Rotation Gizmo Contour" />
+            <color id="17428" value="#aaaaaa" name="Screen Space Gizmo" />
+            <color id="17429" value="#595959" name="Move Gizmo Trail" />
+            <color id="1091831978" value="#ffc71b" name="Subobject Pick Highlight" />
+        </category>
+        <category name="Geometry">
+            <color id="17320" value="#ffffff" name="Selection" />
+            <color id="17321" value="#d00000" name="Subselection" />
+            <color id="17322" value="#787878" name="Freeze" />
+            <color id="17346" value="#efcc0a" name="Spline Vectors" />
+            <color id="17347" value="#00e40b" name="Spline Handles" />
+            <color id="17365" value="#26777f" name="Ghost (Before)" />
+            <color id="17366" value="#777f26" name="Ghost (After)" />
+            <color id="17371" value="#00ff00" name="NURBS Control Vertex" />
+            <color id="17372" value="#ffff00" name="NURBS Lattice" />
+            <color id="17373" value="#00ff00" name="NURBS Constrained Point" />
+            <color id="17374" value="#00ff00" name="NURBS Fit Point" />
+            <color id="17375" value="#00ff00" name="NURBS Dependent Object" />
+            <color id="17376" value="#ffb200" name="NURBS Error Object" />
+            <color id="17377" value="#0000ff" name="NURBS Highlight" />
+            <color id="17378" value="#cc33ff" name="NURBS Fuse" />
+            <color id="17385" value="#5454f0" name="Vertex Ticks" />
+            <color id="17386" value="#666666" name="See-Through" />
+            <color id="17394" value="#ff0000" name="Vertex Numbers" />
+            <color id="17410" value="#ff6600" name="SubSelection Hard" />
+            <color id="17411" value="#fff600" name="SubSelection Medium" />
+            <color id="17412" value="#0000ff" name="SubSelection Soft" />
+            <color id="17425" value="#cccccc" name="Back Face Lines" />
+            <color id="17426" value="#000066" name="Back Face Vertex Ticks" />
+            <color id="17430" value="#0000cc" name="Normals - Unspecified" />
+            <color id="17431" value="#00cccc" name="Normals - Specified" />
+            <color id="17432" value="#00cc00" name="Normals - Explicit" />
+            <color id="17444" value="#ffffff" name="Spline Knots Unselected" />
+            <color id="17445" value="#fcff00" name="Spline Knots First" />
+            <color id="503128211" value="#f2d900" name="HSDS Control Edge" />
+            <color id="981893113" value="#ffffff" name="HSDS Control Mesh" />
+        </category>
+        <category name="No Category">
+            <color id="17323" value="#000000" name="Grid" />
+            <color id="17324" value="#696969" name="GridIntensity" />
+            <color id="17333" value="#ffffff" name="Selection Handles" />
+        </category>
+        <category name="Schematic View">
+            <color id="17396" value="#3f3f3f" name="SV Window Bkg" />
+            <color id="17397" value="#7f7f7f" name="SV Node Bkg" />
+            <color id="17398" value="#ffffff" name="SV Selected Node Bkg" />
+            <color id="17399" value="#ffffff" name="SV Node Highlight" />
+            <color id="17400" value="#ffffff" name="SV Material Highlight" />
+            <color id="17401" value="#ffffff" name="SV Modifier Highlight" />
+            <color id="17402" value="#ff0000" name="SV Plugin Highlight" />
+            <color id="17403" value="#ff0000" name="SV Sub-Anim Line" />
+            <color id="17404" value="#007f00" name="SV Child Line" />
+            <color id="17405" value="#000000" name="SV Frame" />
+            <color id="17406" value="#000000" name="SV Selected Label" />
+            <color id="17407" value="#000000" name="SV Label" />
+            <color id="17413" value="#616161" name="SV Unfold Children Button" />
+            <color id="17414" value="#7f7fff" name="SV Geometry Node Bkg" />
+            <color id="17415" value="#ffe500" name="SV Light Node Bkg" />
+            <color id="17416" value="#5778cc" name="SV Camera Node Bkg" />
+            <color id="17417" value="#00ffff" name="SV Shape Node Bkg" />
+            <color id="17418" value="#48ff3f" name="SV Helper Node Bkg" />
+            <color id="17419" value="#bfff7f" name="SV System Node Bkg" />
+            <color id="17420" value="#ff7f7f" name="SV Controller Node Bkg" />
+            <color id="17421" value="#e8c53a" name="SV Modifier Node Bkg" />
+            <color id="17422" value="#ad9e70" name="SV Material Node Bkg" />
+            <color id="17423" value="#5db359" name="SV Map Node Bkg" />
+            <color id="17433" value="#343434" name="SV Grid Color" />
+            <color id="17434" value="#7f7fff" name="SV Rel Instance" />
+            <color id="17435" value="#ff7f7f" name="SV Rel Constraint" />
+            <color id="17436" value="#ff00ff" name="SV Rel Param Wire" />
+            <color id="17437" value="#48ff3f" name="SV Rel Light" />
+            <color id="17438" value="#e8c53a" name="SV Rel Modifier" />
+            <color id="17439" value="#ff7f7f" name="SV Rel Controller" />
+            <color id="17440" value="#00ff00" name="SV Rel Other" />
+            <color id="17441" value="#7c1d7f" name="SV Spacewarp Bkg" />
+            <color id="17442" value="#ecde68" name="SV Base Object Bkg" />
+        </category>
+        <category name="Snaps">
+            <color id="17448" value="#aaaaaa" name="Snap Axis Center Handle" />
+            <color id="17449" value="#ffff00" name="Snap Point Active" />
+            <color id="17450" value="#00ff00" name="Snap Point Snapped" />
+        </category>
+        <category name="SME">
+            <color id="420000" value="#373737" name="Background" />
+            <color id="420001" value="#424242" name="Background Grid" />
+            <color id="420002" value="#535353" name="Node Body" />
+            <color id="420004" value="#e5e5e5" name="Node Text" />
+            <color id="420005" value="#ffffff" name="Node Text Highlight" />
+            <color id="420006" value="#373737" name="Node Outline" />
+            <color id="420007" value="#ffffff" name="Node Outline Selected" />
+            <color id="420008" value="#e5e5e5" name="Node Open/Close Button" />
+            <color id="420009" value="#e5e5e5" name="Node Open/Close Button Hightlight" />
+            <color id="420010" value="#e5e5e5" name="Node Editing Indicator" />
+            <color id="420011" value="#e5e5e5" name="Node Editing Indicator Selected" />
+            <color id="420012" value="#434343" name="TextCtrl Editing Background" />
+            <color id="420013" value="#496a93" name="Node Slot Highlight" />
+            <color id="420014" value="#3f67ab" name="Node Header Material" />
+            <color id="420015" value="#3f67ab" name="Node Header Material Selected" />
+            <color id="420016" value="#0d8e55" name="Node Header Texmap" />
+            <color id="420017" value="#0d8e55" name="Node Header Texmap Selected" />
+            <color id="420018" value="#bb6f26" name="Node Header Controller" />
+            <color id="420019" value="#bb6f26" name="Node Header Controller Selected" />
+            <color id="420020" value="#5e40a2" name="Node Header Compound" />
+            <color id="420021" value="#5e40a2" name="Node Header Compound Selected" />
+            <color id="420022" value="#6487ce" name="Wire of type Material" />
+            <color id="420023" value="#689ed4" name="Wire of type Material with Hidden Output Selector" />
+            <color id="420024" value="#35a673" name="Wire of type Texmap" />
+            <color id="420025" value="#3bc96a" name="Wire of type Texmap with Hidden Output Selector" />
+            <color id="420026" value="#b2b2b5" name="Wire Generic" />
+            <color id="420027" value="#c85252" name="Wire Invalid" />
+        </category>
+        <category name="OSL Editor">
+            <color id="520000" value="#646464" name="Code Background" />
+            <color id="520001" value="#ffffff" name="Code Foreground" />
+            <color id="520002" value="#afafff" name="Keywords" />
+            <color id="520003" value="#20ffff" name="Globals" />
+            <color id="520010" value="#ffff00" name="Strings" />
+            <color id="520011" value="#64ff64" name="Comments" />
+            <color id="520012" value="#c0c0c0" name="Metadata" />
+            <color id="520020" value="#555555" name="Line Number Background" />
+            <color id="520021" value="#999999" name="Line Number Foreground" />
+            <color id="520022" value="#404040" name="Bracket Highlight Background" />
+            <color id="520023" value="#ff80ff" name="Bracket Highlight Foreground" />
+            <color id="520024" value="#c80000" name="Error Background" />
+            <color id="520025" value="#ffff00" name="Error Foreground" />
+            <color id="520026" value="#50505a" name="Word Highlight Background" />
+            <color id="520027" value="#ffffff" name="Word Highlight Foreground" />
+        </category>
+        <category name="Scene Explorer">
+            <color id="657632" value="#ffffff" name="Layer Highlight Foreground" />
+            <color id="657633" value="#3b5797" name="Layer Highlight Background" />
+        </category>
+        <category name="HSDS Controls">
+            <color id="6261441" value="#5f8ac1" name="Displayed Level Item" />
+            <color id="6579300" value="#646464" name="Hidden Level Item" />
+            <color id="1244031133" value="#787878" name="Level Item Separator" />
+            <color id="1637973995" value="#ff0000" name="Current Level Item" />
+            <color id="1724273072" value="#00fafa" name="Displayed Level Item" />
+            <color id="2084852526" value="#b4b4b4" name="Hidden Level Item" />
+        </category>
+        <category name="Particle Flow">
+            <color id="55791844" value="#ff0000" name="Subselection" />
+            <color id="199427397" value="#fde537" name="Test Gizmos" />
+            <color id="324632263" value="#f3b461" name="Source Gizmos" />
+            <color id="541346229" value="#447395" name="Operator Gizmos" />
+        </category>
+        <category name="Data Channel Modifier Colors">
+            <color id="73750528" value="#0000ff" name="Min Color" />
+            <color id="73750529" value="#00ff00" name="Mid Color" />
+            <color id="73750530" value="#ff0000" name="Max Color" />
+        </category>
+        <category name="Character">
+            <color id="140135570" value="#054000" name="Wire Color" />
+        </category>
+        <category name="Node Views">
+            <color id="588931057" value="#3c3c3c" name="Node View Background" />
+            <color id="1414099189" value="#414141" name="Node View Grid" />
+        </category>
+        <category name="Unwrap Colors">
+            <color id="914622688" value="#ffffff" name="Line Color" />
+            <color id="914622689" value="#ff0000" name="Selection Color" />
+            <color id="914622690" value="#00ff00" name="Open Edge Color" />
+            <color id="914622691" value="#ffff00" name="Handle Color" />
+            <color id="914622692" value="#ff6432" name="Transform Gizmo Color" />
+            <color id="914622693" value="#0000ff" name="Shared Sub Objects Color" />
+            <color id="914622694" value="#787878" name="Background Color" />
+            <color id="914622695" value="#969696" name="Grid Color" />
+            <color id="914622696" value="#e60000" name="Geom. Edge Color" />
+            <color id="914622697" value="#e60000" name="Geom. Vertex Color" />
+            <color id="914622704" value="#0db2ff" name="Pelt Seam Color" />
+            <color id="914622705" value="#00ff00" name="Edge Distortion Color" />
+            <color id="914622706" value="#ff0000" name="Edge Distortion Goal Color" />
+            <color id="914622707" value="#808080" name="Checker Color 1" />
+            <color id="914622708" value="#ffffff" name="Checker Color 2" />
+            <color id="914622709" value="#b56dda" name="Peel Color" />
+        </category>
+        <category name="UVW Map">
+            <color id="914627058" value="#00ff00" name="Map Seam Color" />
+        </category>
+        <category name="3D Painter">
+            <color id="1146357984" value="#2bffff" name="Mirror Reproject" />
+            <color id="1146357985" value="#2bffff" name="Normal Color" />
+            <color id="1146357986" value="#ff0000" name="Ring Pressed Color" />
+            <color id="1146357987" value="#ff0000" name="Normal Pressed Color" />
+            <color id="1146357988" value="#ff0000" name="Trace Color" />
+            <color id="1146357989" value="#fc9200" name="Gizmo Color" />
+        </category>
+        <category name="Skin Colors">
+            <color id="1183058175" value="#808080" name="No Weight Color" />
+        </category>
+        <category name="VertexPaint">
+            <color id="1466918928" value="#ff0000" name="Vertex Selected Color" />
+            <color id="1466918929" value="#ff0000" name="Face Selected Color" />
+            <color id="1466918930" value="#0000ff" name="Vertex Unselected Color" />
+            <color id="1466918931" value="#ffff00" name="Face Unselected Color" />
+        </category>
+        <category name="Snap Pivot">
+            <color id="1751060405" value="#00ff00" name="Preview" />
+            <color id="1751060406" value="#00ff00" name="Drag" />
+            <color id="1751060407" value="#00c8c8" name="Bounding Box" />
+        </category>
+        <category name="Particle Flow Tools">
+            <color id="1835527538" value="#ffff00" name="Collision Shape" />
+            <color id="-832773846" value="#0000ff" name="Particle Bindings" />
+            <color id="-171339374" value="#447395" name="mP World Gizmo" />
+        </category>
+    </CustomColors>
+    <GridInfo gridIntensity="103" whiteOrigin="0" useGridColor="0" />
+</ADSK_CLR>
