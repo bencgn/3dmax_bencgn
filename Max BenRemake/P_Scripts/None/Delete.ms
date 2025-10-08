@@ -1,0 +1,1 @@
+actionMan.executeAction 0 "40020"  -- Edit: Delete Objects
