@@ -83,4 +83,6 @@
     <Unassign_Hotkey Shortcut="B" Description="Edit Soft Selection Mode" Id="1250838234-40119"/>
     <Unassign_Hotkey Shortcut="B" Description="Edit Soft Selection Mode" Id="369982487-41016"/>
     <Assign_Hotkey Shortcut="B" Description="Edge Bridge" Id="647394-EdgeBridge`Ribbon - Modeling"/>
+    <Unassign_Hotkey Shortcut="Alt+Shift+E" Description="Extrude Face (Poly)" Id="647394-EPoly_FExtrude`Editable Polygon Object"/>
+    <Assign_Hotkey Shortcut="Alt+Shift+E" Description="Extrude (Poly)" Id="647394-EPoly_Extrude`Ribbon - Modeling"/>
 </MaxHotkeyTransformations>
