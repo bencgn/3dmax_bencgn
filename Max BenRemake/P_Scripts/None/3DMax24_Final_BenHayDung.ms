@@ -3,43 +3,17 @@
 rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 	(
 	label createdByLabel "Tool created by: bencgn" 
+		
 		group "Fuck" (
-	button btConvertPoly "ConvertPoly"  	width: 80  	 	across:5
-	button btInst "Select Inst"  	width:80  	 	across:5 
-	button btClean "CleanDeadFace"  	width:80  	 	across:5 
-	button ExportSelect "ExportSelect"  	width: 100  	 	across:5
-	button OpenChanel2 "OpenChanel2"  	width: 100  	 	across:5
+	button btConvertPoly "ConvertPoly"  	width: 80  	 	across:3
+	button btClean "CleanDeadFace"  	width:80  	 	across:3 
+	button ExportSelect "ExportSelect"  	width: 100  	 	across:3
 		)
-	
+	group "Fuck" (
 	button btUVMap11 "UV Map 1m"  	width:130  	 	across:1
-	button Reset00 "Reset00"  	width:130  	 	across:1	
-		
+	)
 	
 	
-
-	
-	
-
-		group "Rename" (
-			
-	label lblInstructions "Select objects and click a button to rename them:"
-	button Set_high "Set _high"  	width:130  	 	across:2
-	button Set_low  "Set _low"  	width:130  	 	across:2
-	button Set_LOD00  "Set_LOD00"  	width:130  	 	across:1
-	button Set_LOD01  "Set_LOD01"  	width:130  	 	across:1
-
-	button Set_  "Suffix _"  	width:130  	 	across:1
-	
-			)
-	
-
-	
-	group "Mirror" (
-	button XYZ "XYZ"  	width:50  	 	across:2	  	 	
-	button btMirrorx "Mirror_X"  	width:50  	 	across:2
-	button btMirrory "Mirror_Y"  	width:50  	 	across:2
-	button btMirrorz "Mirror_Z"  	width:50  	 	across:2)
-		
 
 	
 	group "ViewPort" (
@@ -47,7 +21,7 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 
 	button HideUnselected "HideUnselected"  	width: 80  	 	across:1
 	button UnhideAll "Unhide All"  	width: 80  	 	across:1
-	button Deletex "Deletex"  	width: 80  	 	across:1
+	button Deletex "-----Delete------"  	width: 150  	 	across:1
 	
 	)
 	
@@ -62,82 +36,18 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 
 	)
 
-	--Rename
-	on Set_ pressed do
-    (
-        local selectedObjects = getCurrentSelection()
-        for obj in selectedObjects do
-        (
-            obj.name = (obj.name + "_")
-        )
-    )
-	
-	
-
-		--set
 
 	
-	on Set_low pressed do
-    (
-        local selectedObjects = getCurrentSelection()
-        for obj in selectedObjects do
-        (
-            if not (matchPattern obj.name pattern:"*_low") do
-            (
-                if not (matchPattern obj.name pattern:"*_high") do
-                (
-                    obj.name = (obj.name + "_low")
-                )
-            )
-        )
-    )
+
+
 	
 	
 		
-	on Set_high pressed do
-    (
-        local selectedObjects = getCurrentSelection()
-        for obj in selectedObjects do
-        (
-            if not (matchPattern obj.name pattern:"*_high") do
-            (
-                if not (matchPattern obj.name pattern:"*_low") do
-                (
-                    obj.name = (obj.name + "_high")
-                )
-            )
-        )
-    )
+
 	
-	on Set_LOD00 pressed do
-    (
-        local selectedObjects = getCurrentSelection()
-        for obj in selectedObjects do
-        (
-            if not (matchPattern obj.name pattern:"*_LOD00") do
-            (
-                if not (matchPattern obj.name pattern:"*_LOD01") do
-                (
-                    obj.name = (obj.name + "_LOD00")
-                )
-            )
-        )
-    )
+
 	
-	on Set_LOD01 pressed do
-    (
-        local selectedObjects = getCurrentSelection()
-        for obj in selectedObjects do
-        (
-            if not (matchPattern obj.name pattern:"*_LOD01") do
-            (
-                if not (matchPattern obj.name pattern:"*_LOD00") do
-                (
-                    obj.name = (obj.name + "_LOD01")
-                )
-            )
-        )
-    )
+
 	--setPivot
 	on Move000 pressed do
 	(-- Get the selected objects
@@ -185,15 +95,7 @@ fileIn "D:\\3dmax_bencgn\\3dmax_bencgn\\polydamageV1_01\\polydamage_nm.mse"	)
 	
 
 	
---DisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplay
-	on OpenChanel2 pressed do
-	(
-	
-modPanel.addModToSelection (Unwrap_UVW ()) ui:on
-$.modifiers[#unwrap_uvw].unwrap.setMapChannel 2
-$.modifiers[#unwrap_uvw].unwrap.scale ()
-	)
-	
+
 	
 --DisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplayDisplay
 	on ExportSelect pressed do
@@ -318,32 +220,9 @@ $.modifiers[#Edit_Normals].EditNormalsMod.Break ()
 $.modifiers[#Edit_Normals].EditNormalsMod.Average ()
 $.modifiers[#Edit_Normals].EditNormalsMod.Reset ()
 	)
-	--btMirrorx
-	on btMirrorx pressed do
-	(
-modPanel.addModToSelection (mirror ()) ui:on
-	$.modifiers[#Mirror].mirror_axis = 0
-$.modifiers[#Mirror].copy = on
-maxOps.CollapseNodeTo $ 1 off
-	)
 
-	--btMirrory
-	on btMirrory pressed do
-	(
-modPanel.addModToSelection (mirror ()) ui:on
-	$.modifiers[#Mirror].mirror_axis = 1
-$.modifiers[#Mirror].copy = on
-maxOps.CollapseNodeTo $ 1 off
-	)
+
 	
-	--btMirrorz
-	on btMirrorz pressed do
-	(
-modPanel.addModToSelection (mirror ()) ui:on
-	$.modifiers[#Mirror].mirror_axis = 2
-$.modifiers[#Mirror].copy = on
-maxOps.CollapseNodeTo $ 1 off
-	)
 
 	
 
