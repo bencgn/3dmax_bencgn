@@ -30,8 +30,9 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
 
 	
 	group "Group " (
-		button setPivot "Pivot"  	width:100  	 	across:2
-		button Move000 "Move to Origin"  	width:100  	 	across:2
+		button setPivot "Pivot"  	width:100  	 	across:3
+		button Move000 "Move to Origin"  	width:100  	 	across:3
+				button  weld "Weld 001"  	width:100  	 	across:3
 
 
 	)
@@ -66,8 +67,16 @@ rollout rOSTools "BENCGN Demo" rolledUp:false width:400
             clearSelection()	)
 		)
 
-	
+	on weld pressed do (
+		$.weldThreshold = 0.001
+$.EditablePoly.weldFlaggedVertices ()
+)
 
+		
+		
+		
+		
+		
 	on setPivot pressed do
 	(
 macros.run "Tools" "PivotMode_Toggle"		)
