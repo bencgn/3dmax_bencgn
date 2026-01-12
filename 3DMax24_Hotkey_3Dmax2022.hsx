@@ -85,4 +85,6 @@
     <Assign_Hotkey Shortcut="B" Description="Edge Bridge" Id="647394-EdgeBridge`Ribbon - Modeling"/>
     <Unassign_Hotkey Shortcut="Alt+Shift+E" Description="Extrude Face (Poly)" Id="647394-EPoly_FExtrude`Editable Polygon Object"/>
     <Assign_Hotkey Shortcut="Alt+Shift+E" Description="Extrude (Poly)" Id="647394-EPoly_Extrude`Ribbon - Modeling"/>
+    <Unassign_Hotkey Shortcut="Shift+V" Description="Create Animated Sequence File..." Id="0-40033"/>
+    <Assign_Hotkey Shortcut="Alt+Shift+F" Description="Find Coinstances" Id="647394-FindCoinstances`ColinScripts"/>
 </MaxHotkeyTransformations>
