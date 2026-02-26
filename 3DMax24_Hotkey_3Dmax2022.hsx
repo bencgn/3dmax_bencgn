@@ -87,4 +87,7 @@
     <Assign_Hotkey Shortcut="Alt+Shift+E" Description="Extrude (Poly)" Id="647394-EPoly_Extrude`Ribbon - Modeling"/>
     <Unassign_Hotkey Shortcut="Shift+V" Description="Create Animated Sequence File..." Id="0-40033"/>
     <Assign_Hotkey Shortcut="Alt+Shift+F" Description="Find Coinstances" Id="647394-FindCoinstances`ColinScripts"/>
+    <Assign_Hotkey Shortcut="Ctrl+C" Description="Convert to Face (Poly)" Id="647394-EPoly_Convert_Sel_To_Face`Editable Polygon Object"/>
+    <Assign_Hotkey Shortcut="Shift+Space" Description="Delete Objects" Id="0-40020"/>
+    <Assign_Hotkey Shortcut="Alt+Shift+Q" Description="Dot Loop" Id="647394-DotLoop`PolyTools"/>
 </MaxHotkeyTransformations>
