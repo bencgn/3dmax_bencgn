@@ -90,4 +90,5 @@
     <Assign_Hotkey Shortcut="Ctrl+C" Description="Convert to Face (Poly)" Id="647394-EPoly_Convert_Sel_To_Face`Editable Polygon Object"/>
     <Assign_Hotkey Shortcut="Shift+Space" Description="Delete Objects" Id="0-40020"/>
     <Assign_Hotkey Shortcut="Alt+Shift+Q" Description="Dot Loop" Id="647394-DotLoop`PolyTools"/>
+    <Assign_Hotkey Shortcut="Alt+Shift+G" Description="Helper Manager 1.2" Id="647394-helperManager`LB Tools"/>
 </MaxHotkeyTransformations>
