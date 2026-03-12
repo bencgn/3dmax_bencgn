@@ -12,7 +12,8 @@ class ColorCheckerDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(ColorCheckerDialog, self).__init__(parent)
         self.setWindowTitle("Material Color Checker")
-        self.resize(400, 500)
+        self.resize(400, 550)
+        self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
         
         # Data storage
         self.current_obj = None
@@ -38,12 +39,27 @@ class ColorCheckerDialog(QtWidgets.QDialog):
         self.btn_prefix_mit.clicked.connect(self.add_mit_prefix)
         btn_layout.addWidget(self.btn_prefix_mit)
         
+        self.btn_list_all_mtl = QtWidgets.QPushButton("List All Mtl IDs")
+        self.btn_list_all_mtl.setMinimumHeight(40)
+        self.btn_list_all_mtl.clicked.connect(self.list_all_materials)
+        btn_layout.addWidget(self.btn_list_all_mtl)
+        
         layout.addLayout(btn_layout)
         
         # List Widget
         self.list_widget = QtWidgets.QListWidget()
         self.list_widget.itemClicked.connect(self.on_item_clicked)
         layout.addWidget(self.list_widget)
+        
+        # Rename Section
+        rename_layout = QtWidgets.QHBoxLayout()
+        self.txt_rename = QtWidgets.QLineEdit()
+        self.txt_rename.setPlaceholderText("New Material Name...")
+        self.btn_rename = QtWidgets.QPushButton("Rename")
+        self.btn_rename.clicked.connect(self.rename_material)
+        rename_layout.addWidget(self.txt_rename)
+        rename_layout.addWidget(self.btn_rename)
+        layout.addLayout(rename_layout)
         
         # Info Label
         self.lbl_info = QtWidgets.QLabel("Select an object and choose an action.")
@@ -215,6 +231,100 @@ class ColorCheckerDialog(QtWidgets.QDialog):
         else:
             self.lbl_info.setText("All materials have textures or colors could not be determined.")
 
+    def rename_material(self):
+        if not self.current_obj:
+            return
+            
+        selected_items = self.list_widget.selectedItems()
+        if not selected_items:
+            self.lbl_info.setText("Please select an item from the list to rename.")
+            return
+            
+        new_name = self.txt_rename.text().strip()
+        if not new_name:
+            self.lbl_info.setText("Please enter a new name first.")
+            return
+            
+        item = selected_items[0]
+        ids = item.data(QtCore.Qt.UserRole)
+        if not ids:
+            return
+            
+        target_id = ids[0]
+        mat = self.current_obj.material
+        if not mat or getattr(mat, 'numsubs', 0) == 0:
+            return
+            
+        for i in range(mat.numsubs):
+            if hasattr(mat, 'materialIDList') and i < len(mat.materialIDList):
+                mat_id = mat.materialIDList[i]
+            else:
+                mat_id = i + 1
+
+            if mat_id == target_id:
+                sub_mat = mat[i]
+                if sub_mat:
+                    old_name = sub_mat.name
+                    sub_mat.name = new_name
+                    self.lbl_info.setText(f"Renamed ID {target_id}: '{old_name}' -> '{new_name}'")
+                    
+                    # Update item text visually
+                    text_parts = item.text().split(" - Name: ")
+                    if len(text_parts) == 2:
+                        item.setText(f"{text_parts[0]} - Name: {new_name}")
+                        
+                    # Also update if it was from MIT prefix list
+                    elif " -> " in item.text():
+                        try:
+                            base_text = item.text().split(" -> ")[0]
+                            base_first = base_text.split(" - ")[0]
+                            item.setText(f"{base_first} - {old_name} -> {new_name}")
+                        except:
+                            pass
+                break
+
+    def list_all_materials(self):
+        self.list_widget.clear()
+        self.current_obj = self.get_target_object()
+        if not self.current_obj:
+            return
+            
+        mat = self.current_obj.material
+        self.lbl_info.setText(f"Listing all materials in: {mat.name}")
+        
+        found_any = False
+        
+        for i in range(mat.numsubs):
+            sub_mat = mat[i]
+            if sub_mat:
+                current_id = mat.materialIDList[i]
+                has_tex = self.has_texture(sub_mat)
+                hex_color = self.get_material_color_hex(sub_mat)
+                
+                tex_marker = "T" if has_tex else " "
+                color_info = f" - Color: {hex_color}" if hex_color else ""
+                
+                item_text = f"[{tex_marker}] ID: {current_id}{color_info} - Name: {sub_mat.name}"
+                item = QtWidgets.QListWidgetItem(item_text)
+                
+                if hex_color:
+                    try:
+                        pixmap = QtGui.QPixmap(20, 20)
+                        pixmap.fill(QtGui.QColor(hex_color))
+                        icon = QtGui.QIcon(pixmap)
+                        item.setIcon(icon)
+                    except:
+                        pass
+                        
+                item.setData(QtCore.Qt.UserRole, [current_id])
+                self.list_widget.addItem(item)
+                found_any = True
+                
+        if found_any:
+            self.lbl_info.setText("Listed all Sub-Materials.")
+        else:
+            self.lbl_info.setText("No Sub-Materials found.")
+
     def add_mit_prefix(self):
         self.list_widget.clear()
         self.current_obj = self.get_target_object()
@@ -293,6 +403,14 @@ class ColorCheckerDialog(QtWidgets.QDialog):
         ids = item.data(QtCore.Qt.UserRole)
         if not ids:
             return
+
+        # Auto-fill the rename text box if name is in the item text
+        text_parts = item.text().split(" - Name: ")
+        if len(text_parts) == 2:
+            self.txt_rename.setText(text_parts[1])
+        elif " -> " in item.text(): # For the MIT rename list
+            name_part = item.text().split(" -> ")[-1]
+            self.txt_rename.setText(name_part)
             
         # Select faces
         try:
