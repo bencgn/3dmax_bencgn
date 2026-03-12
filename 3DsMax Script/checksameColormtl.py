@@ -44,6 +44,16 @@ class ColorCheckerDialog(QtWidgets.QDialog):
         self.btn_list_all_mtl.clicked.connect(self.list_all_materials)
         btn_layout.addWidget(self.btn_list_all_mtl)
         
+        # Sort Layout
+        sort_layout = QtWidgets.QHBoxLayout()
+        self.lbl_sort = QtWidgets.QLabel("Sort 'List All' By:")
+        self.combo_sort = QtWidgets.QComboBox()
+        self.combo_sort.addItems(["ID (Default)", "Name", "Color"])
+        self.combo_sort.currentIndexChanged.connect(self.list_all_materials)
+        sort_layout.addWidget(self.lbl_sort)
+        sort_layout.addWidget(self.combo_sort)
+        btn_layout.addLayout(sort_layout)
+        
         layout.addLayout(btn_layout)
         
         # List Widget
@@ -293,6 +303,7 @@ class ColorCheckerDialog(QtWidgets.QDialog):
         self.lbl_info.setText(f"Listing all materials in: {mat.name}")
         
         found_any = False
+        mat_data_list = []
         
         for i in range(mat.numsubs):
             sub_mat = mat[i]
@@ -301,27 +312,52 @@ class ColorCheckerDialog(QtWidgets.QDialog):
                 has_tex = self.has_texture(sub_mat)
                 hex_color = self.get_material_color_hex(sub_mat)
                 
-                tex_marker = "T" if has_tex else " "
-                color_info = f" - Color: {hex_color}" if hex_color else ""
+                mat_data_list.append({
+                    'id': current_id,
+                    'name': sub_mat.name,
+                    'has_tex': has_tex,
+                    'hex_color': hex_color,
+                    'sub_mat': sub_mat
+                })
                 
-                item_text = f"[{tex_marker}] ID: {current_id}{color_info} - Name: {sub_mat.name}"
-                item = QtWidgets.QListWidgetItem(item_text)
-                
-                if hex_color:
-                    try:
-                        pixmap = QtGui.QPixmap(20, 20)
-                        pixmap.fill(QtGui.QColor(hex_color))
-                        icon = QtGui.QIcon(pixmap)
-                        item.setIcon(icon)
-                    except:
-                        pass
-                        
-                item.setData(QtCore.Qt.UserRole, [current_id])
-                self.list_widget.addItem(item)
-                found_any = True
+        # Get sort criteria
+        sort_by = self.combo_sort.currentText()
+        if sort_by == "Name":
+            mat_data_list.sort(key=lambda x: x['name'].lower())
+        elif sort_by == "Color":
+            def color_sort_key(x):
+                c = x['hex_color']
+                if not c:
+                    return (1, 0, 0, 0)
+                qcolor = QtGui.QColor(c)
+                return (0, qcolor.hsvHue(), qcolor.hsvSaturation(), qcolor.value())
+            mat_data_list.sort(key=color_sort_key)
+        else:
+            # Default ID sort
+            mat_data_list.sort(key=lambda x: x['id'])
+
+        for data in mat_data_list:
+            tex_marker = "T" if data['has_tex'] else " "
+            color_info = f" - Color: {data['hex_color']}" if data['hex_color'] else ""
+            
+            item_text = f"[{tex_marker}] ID: {data['id']}{color_info} - Name: {data['name']}"
+            item = QtWidgets.QListWidgetItem(item_text)
+            
+            if data['hex_color']:
+                try:
+                    pixmap = QtGui.QPixmap(20, 20)
+                    pixmap.fill(QtGui.QColor(data['hex_color']))
+                    icon = QtGui.QIcon(pixmap)
+                    item.setIcon(icon)
+                except:
+                    pass
+                    
+            item.setData(QtCore.Qt.UserRole, [data['id']])
+            self.list_widget.addItem(item)
+            found_any = True
                 
         if found_any:
-            self.lbl_info.setText("Listed all Sub-Materials.")
+            self.lbl_info.setText(f"Listed all Sub-Materials (Sorted by {sort_by}).")
         else:
             self.lbl_info.setText("No Sub-Materials found.")
 
