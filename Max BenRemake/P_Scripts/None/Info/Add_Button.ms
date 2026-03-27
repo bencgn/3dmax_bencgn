@@ -18,6 +18,7 @@
 	add_button "SelectShape" "" across:1
 	add_button "3DMax24_Final_BenHayDung" "" across:3
 	add_button "covertpoly" "" across:0
+	add_button "FindOverlapFace" "" across:0
 
 	return NTL
 )
