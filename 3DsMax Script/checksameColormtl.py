@@ -59,6 +59,7 @@ class ColorCheckerDialog(QtWidgets.QDialog):
         # List Widget
         self.list_widget = QtWidgets.QListWidget()
         self.list_widget.itemClicked.connect(self.on_item_clicked)
+        self.list_widget.itemDoubleClicked.connect(self.show_set_id_dialog)
         layout.addWidget(self.list_widget)
         
         # Rename Section
@@ -112,7 +113,25 @@ class ColorCheckerDialog(QtWidgets.QDialog):
         # Check for Standard Material
         elif rt.isKindOf(mat, rt.Standard):
             color = mat.diffuse
-        # VRay Mtl (common check, though property names vary by version, usually .diffuse)
+        # Check for glTF Material (3ds Max glTF Exporter material)
+        # Class names: glTFMaterial or glTF_Material depending on plugin version
+        elif hasattr(rt, 'glTFMaterial') and rt.isKindOf(mat, rt.glTFMaterial):
+            # baseColorFactor is the Base Color in glTF Material
+            if hasattr(mat, 'baseColorFactor'):
+                color = mat.baseColorFactor
+            elif hasattr(mat, 'baseColor'):
+                color = mat.baseColor
+        elif hasattr(rt, 'glTF_Material') and rt.isKindOf(mat, rt.glTF_Material):
+            if hasattr(mat, 'baseColorFactor'):
+                color = mat.baseColorFactor
+            elif hasattr(mat, 'baseColor'):
+                color = mat.baseColor
+        # Generic fallback: check common base color attribute names
+        elif hasattr(mat, 'baseColorFactor'):
+            color = mat.baseColorFactor
+        elif hasattr(mat, 'baseColor'):
+            color = mat.baseColor
+        # VRay Mtl fallback
         elif hasattr(mat, 'diffuse'): 
              color = mat.diffuse
         
@@ -143,7 +162,21 @@ class ColorCheckerDialog(QtWidgets.QDialog):
         elif rt.isKindOf(mat, rt.Standard):
             if mat.diffuseMap:
                 return True
-                
+
+        # glTF Material - check baseColorTexture slot
+        elif (hasattr(rt, 'glTFMaterial') and rt.isKindOf(mat, rt.glTFMaterial)) or \
+             (hasattr(rt, 'glTF_Material') and rt.isKindOf(mat, rt.glTF_Material)):
+            if hasattr(mat, 'baseColorTexture') and mat.baseColorTexture:
+                return True
+            if hasattr(mat, 'baseColor_map') and mat.baseColor_map:
+                return True
+
+        # Generic glTF fallback (any plugin exposing these attributes)
+        elif hasattr(mat, 'baseColorTexture') and mat.baseColorTexture:
+            return True
+        elif hasattr(mat, 'baseColor_map') and mat.baseColor_map:
+            return True
+
         # VRay or generic fallback (checking common map slots if attributes exist)
         elif hasattr(mat, 'texmap_diffuse'): # VRayMtl often uses texmap_diffuse
              if mat.texmap_diffuse:
@@ -158,7 +191,7 @@ class ColorCheckerDialog(QtWidgets.QDialog):
             return
 
         mat = self.current_obj.material
-        self.lbl_info.setText(f"Checking same BaseColors in: {mat.name}")
+        self.lbl_info.setText(f"Checking same BaseColors in: {mat.name} (Object: {self.current_obj.name})")
         
         # Dictionary: HEX -> List of IDs
         hex_map = {}
@@ -208,7 +241,7 @@ class ColorCheckerDialog(QtWidgets.QDialog):
             return
             
         mat = self.current_obj.material
-        self.lbl_info.setText(f"Listing non-textured colors in: {mat.name}")
+        self.lbl_info.setText(f"Listing non-textured colors in: {mat.name} (Object: {self.current_obj.name})")
         
         found_any = False
         
@@ -293,6 +326,19 @@ class ColorCheckerDialog(QtWidgets.QDialog):
                             pass
                 break
 
+    def get_used_mat_ids(self, obj):
+        """
+        Returns a set of Material IDs actually used by faces on the given object.
+        """
+        used_ids = set()
+        try:
+            num_faces = rt.polyop.getNumFaces(obj)
+            for f in range(1, num_faces + 1):
+                used_ids.add(rt.polyop.getFaceMatID(obj, f))
+        except:
+            pass
+        return used_ids
+
     def list_all_materials(self):
         self.list_widget.clear()
         self.current_obj = self.get_target_object()
@@ -300,7 +346,10 @@ class ColorCheckerDialog(QtWidgets.QDialog):
             return
             
         mat = self.current_obj.material
-        self.lbl_info.setText(f"Listing all materials in: {mat.name}")
+        self.lbl_info.setText(f"Listing all materials in: {mat.name} (Object: {self.current_obj.name})")
+        
+        # Collect IDs actually used by faces on the object
+        used_ids = self.get_used_mat_ids(self.current_obj)
         
         found_any = False
         mat_data_list = []
@@ -311,13 +360,15 @@ class ColorCheckerDialog(QtWidgets.QDialog):
                 current_id = mat.materialIDList[i]
                 has_tex = self.has_texture(sub_mat)
                 hex_color = self.get_material_color_hex(sub_mat)
+                is_used = current_id in used_ids
                 
                 mat_data_list.append({
                     'id': current_id,
                     'name': sub_mat.name,
                     'has_tex': has_tex,
                     'hex_color': hex_color,
-                    'sub_mat': sub_mat
+                    'sub_mat': sub_mat,
+                    'is_used': is_used
                 })
                 
         # Get sort criteria
@@ -338,11 +389,16 @@ class ColorCheckerDialog(QtWidgets.QDialog):
 
         for data in mat_data_list:
             tex_marker = "T" if data['has_tex'] else " "
+            none_marker = "" if data['is_used'] else " [None]"
             color_info = f" - Color: {data['hex_color']}" if data['hex_color'] else ""
             
-            item_text = f"[{tex_marker}] ID: {data['id']}{color_info} - Name: {data['name']}"
+            item_text = f"[{tex_marker}] ID: {data['id']}{none_marker}{color_info} - Name: {data['name']}"
             item = QtWidgets.QListWidgetItem(item_text)
             
+            # Dim color for unused IDs
+            if not data['is_used']:
+                item.setForeground(QtGui.QColor(160, 160, 160))
+
             if data['hex_color']:
                 try:
                     pixmap = QtGui.QPixmap(20, 20)
@@ -357,9 +413,172 @@ class ColorCheckerDialog(QtWidgets.QDialog):
             found_any = True
                 
         if found_any:
-            self.lbl_info.setText(f"Listed all Sub-Materials (Sorted by {sort_by}).")
+            used_count = sum(1 for d in mat_data_list if d['is_used'])
+            none_count = len(mat_data_list) - used_count
+            self.lbl_info.setText(
+                f"Listed all Sub-Materials (Sorted by {sort_by}). "
+                f"Used: {used_count} | Unused [None]: {none_count} | "
+                f"Double-click to Set ID."
+            )
         else:
             self.lbl_info.setText("No Sub-Materials found.")
+
+    def get_selected_faces_mxs(self, obj):
+        """
+        Read the current face selection directly via pymxs.
+        rt.polyop.getFaceSelection returns a MaxScript bitarray;
+        iterating it in Python yields the 1-based indices of selected faces.
+        """
+        try:
+            ba = rt.polyop.getFaceSelection(obj)
+            # pymxs bitarray: iterating gives 1-based indices of set bits
+            faces = [int(f) for f in ba]
+            return faces
+        except:
+            return []
+
+
+    def show_set_id_dialog(self, item):
+        """
+        Opens a dialog to set the Material ID using the native
+        $.EditablePoly.selectByMaterial / setFacesMaterial MaxScript API.
+        This avoids all face-reading issues. The object is put in face
+        sub-object mode, faces of target_id are selected, then their
+        ID is set to new_id, and the material is assigned as instance.
+        """
+        if not self.current_obj:
+            return
+        ids = item.data(QtCore.Qt.UserRole)
+        if not ids:
+            return
+        target_id = ids[0]
+
+        # Build dialog
+        dlg = QtWidgets.QDialog(self)
+        dlg.setWindowTitle("Set Material ID")
+        dlg.setWindowFlags(dlg.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
+        dlg.resize(360, 180)
+        v = QtWidgets.QVBoxLayout(dlg)
+
+        # Info
+        mat_name_text = item.text().split(" - Name: ")[-1] if " - Name: " in item.text() else ""
+        lbl = QtWidgets.QLabel(
+            f"<b>Material:</b> {mat_name_text}<br>"
+            f"<b>Source ID:</b> {target_id}<br>"
+            f"Will auto-select all faces of ID {target_id} and set to new ID."
+        )
+        lbl.setWordWrap(True)
+        v.addWidget(lbl)
+
+        # Spin box for new ID
+        spin_layout = QtWidgets.QHBoxLayout()
+        spin_layout.addWidget(QtWidgets.QLabel("Set to ID:"))
+        spin_id = QtWidgets.QSpinBox()
+        spin_id.setMinimum(1)
+        spin_id.setMaximum(9999)
+        spin_id.setValue(target_id)
+        spin_layout.addWidget(spin_id)
+        v.addLayout(spin_layout)
+
+        # Checkbox: assign material as instance to new slot
+        chk_instance = QtWidgets.QCheckBox("Also assign material as Instance to new ID slot")
+        chk_instance.setChecked(True)
+        v.addWidget(chk_instance)
+
+        info_lbl = QtWidgets.QLabel("")
+        info_lbl.setWordWrap(True)
+        v.addWidget(info_lbl)
+
+        # Buttons
+        btn_layout = QtWidgets.QHBoxLayout()
+        btn_apply = QtWidgets.QPushButton(f"Apply: Select ID {target_id} Faces → Set New ID")
+        btn_cancel = QtWidgets.QPushButton("Cancel")
+        btn_layout.addWidget(btn_apply)
+        btn_layout.addWidget(btn_cancel)
+        v.addLayout(btn_layout)
+
+        def assign_material_instance(new_id):
+            """
+            Assigns the source sub-material (at target_id slot) as an instance
+            into the new_id slot of the Multi/Sub-Object material.
+            """
+            try:
+                multi_mat = self.current_obj.material
+                # Find source sub-material
+                source_sub = None
+                for i in range(multi_mat.numsubs):
+                    if multi_mat.materialIDList[i] == target_id:
+                        source_sub = multi_mat[i]
+                        break
+
+                if source_sub is None:
+                    return False, "Source material not found."
+                if new_id == target_id:
+                    return True, "Same ID, no slot change needed."
+
+                # Find or create new_id slot
+                existing_slot_index = None
+                for i in range(multi_mat.numsubs):
+                    if multi_mat.materialIDList[i] == new_id:
+                        existing_slot_index = i
+                        break
+
+                if existing_slot_index is not None:
+                    multi_mat[existing_slot_index] = source_sub
+                else:
+                    mxs_cmd = (
+                        f"local m = selection[1].material\n"
+                        f"local newCount = m.numsubs + 1\n"
+                        f"setNumSubMtls m newCount\n"
+                        f"m.materialIDList[newCount] = {new_id}\n"
+                    )
+                    rt.execute(mxs_cmd)
+                    new_index = multi_mat.numsubs - 1
+                    multi_mat[new_index] = source_sub
+
+                return True, f"Material assigned as instance to slot ID {new_id}."
+            except Exception as e:
+                return False, str(e)
+
+        def apply_by_material_id():
+            new_id = spin_id.value()
+            try:
+                # 1. Enter modify mode + face sub-object level
+                rt.execute("max modify mode")
+                rt.subObjectLevel = 4
+
+                # 2. selectByMaterial to select faces, then use polyOp to set ID
+                # Wrap in () block so 'local' declarations are valid in MaxScript
+                mxs_script = (
+                    f"(\n"
+                    f"  max modify mode\n"
+                    f"  subObjectLevel = 4\n"
+                    f"  $.EditablePoly.selectByMaterial {target_id}\n"
+                    f"  local ba = polyOp.getFaceSelection $\n"
+                    f"  local n = polyOp.getNumFaces $\n"
+                    f"  for i = 1 to n do ( if ba[i] do polyOp.setFaceMatID $ i {new_id} )\n"
+                    f"  redrawViews()\n"
+                    f")\n"
+                )
+                rt.execute(mxs_script)
+
+                msg = f"Selected faces of ID {target_id} and set to ID {new_id}."
+
+                # 3. Assign material as instance if checked
+                if chk_instance.isChecked():
+                    ok, inst_msg = assign_material_instance(new_id)
+                    msg += f"\nInstance: {inst_msg}"
+
+                info_lbl.setText(msg)
+                self.list_all_materials()  # Refresh list
+            except Exception as e:
+                info_lbl.setText(f"Error: {str(e)}")
+
+        btn_apply.clicked.connect(apply_by_material_id)
+        btn_cancel.clicked.connect(dlg.reject)
+
+        dlg.exec()
+
 
     def add_mit_prefix(self):
         self.list_widget.clear()
@@ -368,7 +587,7 @@ class ColorCheckerDialog(QtWidgets.QDialog):
             return
 
         mat = self.current_obj.material
-        self.lbl_info.setText(f"Checking for textured materials in: {mat.name}")
+        self.lbl_info.setText(f"Checking for textured materials in: {mat.name} (Object: {self.current_obj.name})")
         
         count_renamed = 0
         count_existing = 0

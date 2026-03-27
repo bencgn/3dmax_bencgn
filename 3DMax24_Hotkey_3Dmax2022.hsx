@@ -91,4 +91,7 @@
     <Assign_Hotkey Shortcut="Shift+Space" Description="Delete Objects" Id="0-40020"/>
     <Assign_Hotkey Shortcut="Alt+Shift+Q" Description="Dot Loop" Id="647394-DotLoop`PolyTools"/>
     <Assign_Hotkey Shortcut="Alt+Shift+G" Description="Helper Manager 1.2" Id="647394-helperManager`LB Tools"/>
+    <Assign_Hotkey Shortcut="Alt+Shift+W" Description="Move Keys Horizontal" Id="1-2040"/>
+    <Assign_Hotkey Shortcut="Alt+Shift+S" Description="Move Keys Vertical" Id="1-2030"/>
+    <Assign_Hotkey Shortcut="Ctrl+F12" Description="Connection between 3dsmax and Blender" Id="647394-BMAX_Connector`Titus_Scripts"/>
 </MaxHotkeyTransformations>
