@@ -54,6 +54,17 @@ tooltip:"Run instance replace.ms"
     )
 )
 
+macroScript Run_LinkBack
+category:"BENCGNDEMO"
+buttonText:"LinkBack"
+tooltip:"Run linkback.py"
+(
+    on execute do
+    (
+        try( python.ExecuteFile @"d:\3dmax_bencgn\3dmax_bencgn\3DsMax Script\linkback.py" ) catch()
+    )
+)
+
 -- Execute in a block to avoid top-level local declaration errors
 (
     -- Check 3ds Max version to use the correct Menu API
@@ -96,6 +107,9 @@ def inject_cui_menu():
         act5 = bencgn_menu.addAction('Instance Replace')
         act5.triggered.connect(lambda: pymxs.runtime.macros.run('BENCGNDEMO', 'Run_InstanceReplace'))
         
+        act6 = bencgn_menu.addAction('LinkBack')
+        act6.triggered.connect(lambda: pymxs.runtime.macros.run('BENCGNDEMO', 'Run_LinkBack'))
+        
         menu_bar.addMenu(bencgn_menu)
         print('Menu BENCGNDEMO mapped via PySide6 to Max 2025 QMenuBar.')
     except Exception as e:
@@ -133,6 +147,7 @@ QtCore.QTimer.singleShot(2500, inject_cui_menu)
             local item3 = menuMan.createActionItem "Run_DeleteFace" "BENCGNDEMO"
             local item4 = menuMan.createActionItem "Run_CheckMaterial" "BENCGNDEMO"
             local item5 = menuMan.createActionItem "Run_InstanceReplace" "BENCGNDEMO"
+            local item6 = menuMan.createActionItem "Run_LinkBack" "BENCGNDEMO"
             
             newMenu.addItem item1 -1
             newMenu.addItem item2 -1
@@ -140,6 +155,7 @@ QtCore.QTimer.singleShot(2500, inject_cui_menu)
             newMenu.addItem item3 -1
             newMenu.addItem item4 -1
             newMenu.addItem item5 -1
+            newMenu.addItem item6 -1
 
             local subMenuItem = menuMan.createSubMenuItem menuName newMenu
             mainMenu.addItem subMenuItem -1
