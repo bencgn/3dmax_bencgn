@@ -135,13 +135,25 @@ else:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 class LinkData:
-    """Represents one child→parent relationship."""
+    """Represents one child→parent relationship plus world-space transform."""
 
-    def __init__(self, child: str, parent: str, child_handle: int = -1, parent_handle: int = -1):
+    def __init__(
+        self,
+        child: str,
+        parent: str,
+        child_handle: int = -1,
+        parent_handle: int = -1,
+        position: Optional[List[float]] = None,
+        rotation: Optional[List[float]] = None,
+    ):
         self.child         = child
         self.parent        = parent
         self.child_handle  = child_handle
         self.parent_handle = parent_handle
+        # World-space position [x, y, z] (Max units)
+        self.position: List[float] = position or [0.0, 0.0, 0.0]
+        # World-space Euler rotation [x, y, z] in degrees
+        self.rotation: List[float] = rotation or [0.0, 0.0, 0.0]
 
     def to_dict(self) -> dict:
         return {
@@ -149,6 +161,8 @@ class LinkData:
             "parent":        self.parent,
             "child_handle":  self.child_handle,
             "parent_handle": self.parent_handle,
+            "position":      self.position,
+            "rotation":      self.rotation,
         }
 
     @staticmethod
@@ -158,6 +172,8 @@ class LinkData:
             parent        = d.get("parent", ""),
             child_handle  = d.get("child_handle",  -1),
             parent_handle = d.get("parent_handle", -1),
+            position      = d.get("position", [0.0, 0.0, 0.0]),
+            rotation      = d.get("rotation", [0.0, 0.0, 0.0]),
         )
 
 
@@ -196,9 +212,31 @@ def _get_handle(node) -> int:
         return -1
 
 
+def _get_world_position(node) -> List[float]:
+    """Return the world-space position of a Max node as [x, y, z]."""
+    try:
+        p = node.pos
+        return [float(p.x), float(p.y), float(p.z)]
+    except Exception:
+        return [0.0, 0.0, 0.0]
+
+
+def _get_world_rotation_deg(node) -> List[float]:
+    """
+    Return the world-space Euler rotation of a Max node in degrees [rx, ry, rz].
+    Uses the node's transform decomposed to eulerAngles.
+    """
+    try:
+        euler = rt.quatToEuler(node.rotation)
+        return [float(euler.x), float(euler.y), float(euler.z)]
+    except Exception:
+        return [0.0, 0.0, 0.0]
+
+
 def collect_links_from_scene(scope: str = "all") -> List[LinkData]:
     """
-    Walk scene objects and return every child→parent relationship.
+    Walk scene objects and return every child→parent relationship,
+    including each child's current world-space position and rotation.
     scope: 'all'      → every object in the scene
            'selected' → only currently selected objects
     """
@@ -222,6 +260,8 @@ def collect_links_from_scene(scope: str = "all") -> List[LinkData]:
                         parent        = str(parent.name),
                         child_handle  = _get_handle(node),
                         parent_handle = _get_handle(parent),
+                        position      = _get_world_position(node),
+                        rotation      = _get_world_rotation_deg(node),
                     )
                 )
         except Exception:
@@ -311,6 +351,48 @@ def relink_objects(links: List[LinkData]) -> dict:
     return result
 
 
+def restore_transforms(links: List[LinkData]) -> dict:
+    """
+    Restore saved world-space position and Euler rotation for each child object.
+    Returns {'ok': n, 'not_found': n, 'errors': n}.
+    """
+    result = {"ok": 0, "not_found": 0, "errors": 0}
+    if not _IN_MAX:
+        return result
+
+    for link in links:
+        try:
+            # ── Find child node ───────────────────────────────────────────────
+            node = None
+            if link.child_handle > 0:
+                try:
+                    node = rt.getAnimByHandle(link.child_handle)
+                except Exception:
+                    pass
+            if node is None:
+                node = rt.getNodeByName(link.child, exact=True)
+
+            if node is None:
+                result["not_found"] += 1
+                continue
+
+            # ── Restore position (if requested) ──────────────────────────────
+            if link.position is not None:
+                px, py, pz = link.position
+                node.pos = rt.Point3(float(px), float(py), float(pz))
+
+            # ── Restore rotation (if requested) ──────────────────────────────
+            if link.rotation is not None:
+                rx, ry, rz = link.rotation
+                node.rotation = rt.eulerToQuat(rt.EulerAngles(float(rx), float(ry), float(rz)))
+
+            result["ok"] += 1
+        except Exception:
+            result["errors"] += 1
+
+    return result
+
+
 def select_objects_in_max(names: List[str]) -> None:
     """Select objects in 3ds Max by name list."""
     if not _IN_MAX:
@@ -332,14 +414,23 @@ class LinkTreeItem(QtWidgets.QTreeWidgetItem):
         super().__init__(parent_item)
         self.link_data = link
 
+        px, py, pz = link.position
+        rx, ry, rz = link.rotation
+        pos_str = f"({px:.1f}, {py:.1f}, {pz:.1f})"
+        rot_str = f"({rx:.1f}°, {ry:.1f}°, {rz:.1f}°)"
+
         self.setText(0, link.child)
         self.setText(1, link.parent)
         self.setText(2, f"#{link.child_handle}" if link.child_handle > 0 else "–")
+        self.setText(3, pos_str)
+        self.setText(4, rot_str)
 
         self.setCheckState(0, Qt.Unchecked)
         self.setForeground(0, QtGui.QColor(LINK_COLOR))
         self.setForeground(1, QtGui.QColor(TEXT_MUTED))
         self.setForeground(2, QtGui.QColor(TEXT_MUTED))
+        self.setForeground(3, QtGui.QColor(SUCCESS))
+        self.setForeground(4, QtGui.QColor(WARNING))
 
 
 class SessionComboBox(QtWidgets.QComboBox):
@@ -687,12 +778,16 @@ class LinkBackWindow(QtWidgets.QDialog):
         lay.addWidget(preview_lbl)
 
         self._preview_tree = QtWidgets.QTreeWidget()
-        self._preview_tree.setHeaderLabels(["Child Object", "Parent Object", "Handle"])
+        self._preview_tree.setHeaderLabels(
+            ["Child Object", "Parent Object", "Handle", "Position (World)", "Rotation (deg)"]
+        )
         self._preview_tree.setAlternatingRowColors(True)
         self._preview_tree.header().setStretchLastSection(False)
         self._preview_tree.header().setSectionResizeMode(0, _HV_Stretch)
         self._preview_tree.header().setSectionResizeMode(1, _HV_Stretch)
         self._preview_tree.header().setSectionResizeMode(2, _HV_ResizeContents)
+        self._preview_tree.header().setSectionResizeMode(3, _HV_ResizeContents)
+        self._preview_tree.header().setSectionResizeMode(4, _HV_ResizeContents)
         lay.addWidget(self._preview_tree, 1)
 
         # ── Buttons ───────────────────────────────────────────────────────────
@@ -758,13 +853,17 @@ class LinkBackWindow(QtWidgets.QDialog):
         lay.addWidget(tree_lbl)
 
         self._link_tree = QtWidgets.QTreeWidget()
-        self._link_tree.setHeaderLabels(["Child Object", "Parent Object", "Handle"])
+        self._link_tree.setHeaderLabels(
+            ["Child Object", "Parent Object", "Handle", "Position (World)", "Rotation (deg)"]
+        )
         self._link_tree.setAlternatingRowColors(True)
         self._link_tree.setSelectionMode(_AV_ExtendedSel)
         self._link_tree.header().setStretchLastSection(False)
         self._link_tree.header().setSectionResizeMode(0, _HV_Stretch)
         self._link_tree.header().setSectionResizeMode(1, _HV_Stretch)
         self._link_tree.header().setSectionResizeMode(2, _HV_ResizeContents)
+        self._link_tree.header().setSectionResizeMode(3, _HV_ResizeContents)
+        self._link_tree.header().setSectionResizeMode(4, _HV_ResizeContents)
         self._link_tree.itemChanged.connect(self._on_item_checked_changed)
         lay.addWidget(self._link_tree, 1)
 
@@ -786,6 +885,39 @@ class LinkBackWindow(QtWidgets.QDialog):
         sep.setFrameShape(_Frame_HLine)
         sep.setStyleSheet(f"background:{BORDER}; border:none; max-height:1px;")
         lay.addWidget(sep)
+
+        # ── Transform restore section ─────────────────────────────────────────
+        xform_box = QtWidgets.QGroupBox("📐  Load Position & Rotation")
+        xform_lay = QtWidgets.QVBoxLayout(xform_box)
+        xform_lay.setSpacing(8)
+
+        xform_info = QtWidgets.QLabel(
+            "Restore the world-space position and/or rotation of the checked"
+            " objects to the values saved in this session."
+        )
+        xform_info.setStyleSheet(f"color:{TEXT_MUTED}; font-size:11px;")
+        xform_info.setWordWrap(True)
+        xform_lay.addWidget(xform_info)
+
+        xform_opts = QtWidgets.QHBoxLayout()
+        self._chk_restore_pos = QtWidgets.QCheckBox("Restore Position")
+        self._chk_restore_rot = QtWidgets.QCheckBox("Restore Rotation")
+        self._chk_restore_pos.setChecked(True)
+        self._chk_restore_rot.setChecked(True)
+        xform_opts.addWidget(self._chk_restore_pos)
+        xform_opts.addWidget(self._chk_restore_rot)
+        xform_opts.addStretch()
+
+        btn_restore_xform = QtWidgets.QPushButton("📐  Restore Position & Rotation")
+        btn_restore_xform.setObjectName("btn_warning")
+        btn_restore_xform.setToolTip(
+            "Moves and/or rotates the checked child objects back to the"
+            " exact world-space coordinates saved during the Scan."
+        )
+        btn_restore_xform.clicked.connect(self._restore_transforms_selected)
+        xform_opts.addWidget(btn_restore_xform)
+        xform_lay.addLayout(xform_opts)
+        lay.addWidget(xform_box)
 
         # ── Action buttons ────────────────────────────────────────────────────
         action_row = QtWidgets.QHBoxLayout()
@@ -833,7 +965,8 @@ class LinkBackWindow(QtWidgets.QDialog):
 <p>In 3ds Max, objects can be <b>linked</b> (parent → child hierarchy). Sometimes
 you export or hand off a scene and some objects are still linked — causing unexpected
 transforms or pivot issues. LinkBack helps you <i>remember</i> what was linked and
-<i>undo</i> those links later.</p>
+<i>undo</i> those links later. It also remembers each object's world-space
+<b>position</b> and <b>rotation</b> so you can restore them independently.</p>
 
 <h3 style="color:{SUCCESS};">Step 1 — Save Links (before exporting / sending scene)</h3>
 <ol>
@@ -841,8 +974,8 @@ transforms or pivot issues. LinkBack helps you <i>remember</i> what was linked a
   <li>Choose <b>All objects</b> or select specific objects and pick <b>Selected only</b>.</li>
   <li>Give the session a name (optional).</li>
   <li>Click <b>Browse…</b> to choose where to save the JSON file.</li>
-  <li>Click <b>🔍 Scan Links</b> — review the preview table.</li>
-  <li>Click <b>💾 Save to JSON</b>.</li>
+  <li>Click <b>🔍 Scan Links</b> — review the preview table (includes Position &amp; Rotation columns).</li>
+  <li>Click <b>💾 Save to JSON</b>. Position and rotation are saved automatically.</li>
 </ol>
 
 <h3 style="color:{ACCENT_HOVER};">Step 2 — Restore links (when you open the scene again)</h3>
@@ -850,18 +983,25 @@ transforms or pivot issues. LinkBack helps you <i>remember</i> what was linked a
   <li>Switch to the <b>🔗 Load &amp; LinkBack</b> tab.</li>
   <li>Browse to your saved JSON and click <b>📂 Load</b>.</li>
   <li>Pick the session from the drop-down.</li>
-  <li>Review the table — each row shows a child object and its saved parent.</li>
-  <li>Tick the rows you want to re-link (or <i>Check All</i>).</li>
+  <li>Review the table — each row shows a child object, its saved parent, and its saved position/rotation.</li>
+  <li>Tick the rows you want to process (or <i>Check All</i>).</li>
   <li>Optionally click <b>📌 Select in 3ds Max</b> to highlight the child objects first.</li>
   <li>Click <b>🔗 LinkBack Selected</b> — objects are re-attached to their saved parents.</li>
+</ol>
+
+<h3 style="color:{ACCENT_HOVER};">Step 3 — Restore Position &amp; Rotation (optional)</h3>
+<ol>
+  <li>Still in the <b>🔗 Load &amp; LinkBack</b> tab, tick the rows you want.</li>
+  <li>In the <b>📐 Load Position &amp; Rotation</b> section, check <b>Restore Position</b> and/or <b>Restore Rotation</b>.</li>
+  <li>Click <b>📐 Restore Position &amp; Rotation</b> — selected objects are moved/rotated back to their saved world-space values.</li>
 </ol>
 
 <h3 style="color:{TEXT_MUTED};">Tips</h3>
 <ul>
   <li>You can save <b>multiple sessions</b> to the same JSON file and switch between them.</li>
-  <li>Objects are found by <b>handle first</b>, then by name — rename-safe as long as the
-      scene file is the same.</li>
-  <li>Undo is available in 3ds Max (Ctrl+Z) after unlinking.</li>
+  <li>Objects are found by <b>handle first</b>, then by name — rename-safe as long as the scene file is the same.</li>
+  <li>Undo is available in 3ds Max (Ctrl+Z) after linking or restoring transforms.</li>
+  <li>Position and Rotation restore works <b>independently</b> from the LinkBack operation — you can use them separately.</li>
 </ul>
 """)
         lay.addWidget(txt)
@@ -1109,6 +1249,68 @@ transforms or pivot issues. LinkBack helps you <i>remember</i> what was linked a
             f"NotFound:{result['not_found']}  Err:{result['errors']}"
         )
         QtWidgets.QMessageBox.information(self, "UnlinkBack Result", msg)
+
+    def _restore_transforms_selected(self):
+        """Restore saved world-space position and/or rotation for checked objects."""
+        links = self._collect_checked()
+        if not links:
+            QtWidgets.QMessageBox.information(
+                self, "Nothing Checked", "Tick at least one row before restoring transforms."
+            )
+            return
+
+        do_pos = self._chk_restore_pos.isChecked()
+        do_rot = self._chk_restore_rot.isChecked()
+        if not do_pos and not do_rot:
+            QtWidgets.QMessageBox.warning(
+                self, "Nothing Selected",
+                "Please check at least 'Restore Position' or 'Restore Rotation'."
+            )
+            return
+
+        # Build modified links with zero-out for the unchecked channel
+        from copy import deepcopy
+        work_links = deepcopy(links)
+        if not do_pos:
+            for l in work_links:
+                l.position = None  # signal: skip position
+        if not do_rot:
+            for l in work_links:
+                l.rotation = None  # signal: skip rotation
+
+        what = []
+        if do_pos: what.append("Position")
+        if do_rot: what.append("Rotation")
+        what_str = " + ".join(what)
+
+        names_preview = "\n".join(f"  • {l.child}" for l in links[:10])
+        if len(links) > 10:
+            names_preview += f"\n  … and {len(links) - 10} more"
+
+        confirm = QtWidgets.QMessageBox.question(
+            self,
+            "Confirm Restore Transforms",
+            f"Restore {what_str} for {len(links)} object(s):\n\n"
+            f"{names_preview}\n\n"
+            "3ds Max Undo (Ctrl+Z) is available.\n\nProceed?",
+            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+            QtWidgets.QMessageBox.No,
+        )
+        if confirm != QtWidgets.QMessageBox.Yes:
+            return
+
+        result = restore_transforms(work_links)
+        msg = (
+            f"✅  Transform restore complete.\n\n"
+            f"  Restored  : {result['ok']}\n"
+            f"  Not found : {result['not_found']}\n"
+            f"  Errors    : {result['errors']}"
+        )
+        self._status.setText(
+            f"📐  RestoreXform ({what_str}) — OK:{result['ok']}  "
+            f"NotFound:{result['not_found']}  Err:{result['errors']}"
+        )
+        QtWidgets.QMessageBox.information(self, "Restore Transforms Result", msg)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
