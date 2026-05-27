@@ -43,6 +43,20 @@ class ColorCheckerDialog(QtWidgets.QDialog):
         self.btn_list_all_mtl.setMinimumHeight(40)
         self.btn_list_all_mtl.clicked.connect(self.list_all_materials)
         btn_layout.addWidget(self.btn_list_all_mtl)
+
+        self.btn_convert_gltf = QtWidgets.QPushButton("Convert Autodesk Generic → glTF Material")
+        self.btn_convert_gltf.setMinimumHeight(40)
+        self.btn_convert_gltf.setToolTip(
+            "Convert all Autodesk Generic sub-materials in the Multi/Sub-Object\n"
+            "to glTF materials, preserving the base color and texture map."
+        )
+        self.btn_convert_gltf.setStyleSheet(
+            "QPushButton { background-color: #1a6b3a; color: white; border-radius: 4px; font-weight: bold; }"
+            "QPushButton:hover { background-color: #228a4c; }"
+            "QPushButton:pressed { background-color: #155330; }"
+        )
+        self.btn_convert_gltf.clicked.connect(self.convert_autodesk_to_gltf)
+        btn_layout.addWidget(self.btn_convert_gltf)
         
         # Sort Layout
         sort_layout = QtWidgets.QHBoxLayout()
@@ -56,6 +70,16 @@ class ColorCheckerDialog(QtWidgets.QDialog):
         
         layout.addLayout(btn_layout)
         
+        # Debug button
+        self.btn_debug_cls = QtWidgets.QPushButton("[Debug] List Material Class Names")
+        self.btn_debug_cls.setMinimumHeight(32)
+        self.btn_debug_cls.setStyleSheet(
+            "QPushButton { background-color: #444; color: #ccc; border-radius: 3px; font-size: 11px; }"
+            "QPushButton:hover { background-color: #555; }"
+        )
+        self.btn_debug_cls.clicked.connect(self.debug_list_class_names)
+        btn_layout.addWidget(self.btn_debug_cls)
+
         # List Widget
         self.list_widget = QtWidgets.QListWidget()
         self.list_widget.itemClicked.connect(self.on_item_clicked)
@@ -579,6 +603,255 @@ class ColorCheckerDialog(QtWidgets.QDialog):
 
         dlg.exec()
 
+
+    # ------------------------------------------------------------------
+    # Convert Autodesk Generic → glTF Material (keep color)
+    # ------------------------------------------------------------------
+
+    def _get_mat_class_name(self, mat):
+        """
+        Returns the real MaxScript class name of a material as a plain
+        Python string, e.g. 'Autodesk Generic', 'Physical Material', etc.
+        Uses rt.classOf() which works even when the name has spaces.
+        """
+        try:
+            return str(rt.classOf(mat))
+        except:
+            return ""
+
+    def _is_autodesk_generic(self, mat):
+        """
+        Returns True when *mat* is an Autodesk Generic material.
+        Detection order:
+          1. str(classOf) contains 'Autodesk' AND 'Generic'  (most reliable)
+          2. Heuristic: has base_color + base_color_map attrs
+        """
+        cls_name = self._get_mat_class_name(mat)
+        if "autodesk" in cls_name.lower() and "generic" in cls_name.lower():
+            return True
+        # Heuristic fallback
+        if hasattr(mat, 'base_color') and hasattr(mat, 'base_color_map'):
+            return True
+        return False
+
+    def _get_gltf_material_class(self):
+        """
+        Returns the MaxScript class for the glTF material plugin.
+        Tries several known names across different plugin versions.
+        Returns None if no glTF plugin is installed.
+        """
+        for name in ("glTFMaterial", "glTF_Material", "glTF2Material",
+                     "GLTF_Material", "BabylonMaterial"):
+            cls = getattr(rt, name, None)
+            if cls is not None:
+                return cls
+        # Try via execute as last resort
+        for mxs_name in ("glTFMaterial", "glTF_Material"):
+            try:
+                cls = rt.execute(mxs_name)
+                if cls is not None:
+                    return cls
+            except:
+                pass
+        return None
+
+    def _copy_color_to_gltf(self, new_mat, src_color):
+        """
+        Tries every known attribute name for Base Color on a glTF material.
+        Returns the hex string if successful, or None.
+        """
+        if src_color is None:
+            return None
+        try:
+            r = int(src_color.r)
+            g = int(src_color.g)
+            b = int(src_color.b)
+        except:
+            return None
+        hex_color = "#{:02X}{:02X}{:02X}".format(r, g, b)
+
+        for attr in ("baseColorFactor", "baseColor", "base_color",
+                     "diffuse", "albedo", "albedoColor"):
+            if hasattr(new_mat, attr):
+                try:
+                    setattr(new_mat, attr, src_color)
+                    return hex_color          # success
+                except:
+                    pass
+        return hex_color   # color read OK even if assignment failed
+
+    def _copy_map_to_gltf(self, new_mat, src_map):
+        """Tries every known attribute name for Base Color texture on a glTF material."""
+        if src_map is None:
+            return
+        for attr in ("baseColorTexture", "baseColor_map", "base_color_map",
+                     "diffuseMap", "albedoTexture"):
+            if hasattr(new_mat, attr):
+                try:
+                    setattr(new_mat, attr, src_map)
+                    return
+                except:
+                    pass
+
+    # --- Debug helper ---------------------------------------------------
+    def debug_list_class_names(self):
+        """
+        Lists the real MaxScript class name of every sub-material so the
+        user can verify detection and understand what plugin names are in use.
+        """
+        self.list_widget.clear()
+        self.current_obj = self.get_target_object()
+        if not self.current_obj:
+            return
+
+        multi_mat = self.current_obj.material
+        gltf_cls  = self._get_gltf_material_class()
+        gltf_cls_name = str(gltf_cls) if gltf_cls else "NOT FOUND"
+
+        # Header
+        header = QtWidgets.QListWidgetItem(
+            f"glTF plugin class detected: {gltf_cls_name}"
+        )
+        header.setBackground(QtGui.QColor(255, 245, 180))
+        self.list_widget.addItem(header)
+
+        for i in range(multi_mat.numsubs):
+            sub_mat = multi_mat[i]
+            if sub_mat is None:
+                continue
+            cls_name   = self._get_mat_class_name(sub_mat)
+            is_generic = self._is_autodesk_generic(sub_mat)
+            mat_id     = multi_mat.materialIDList[i]
+            flag       = "✓ WILL CONVERT" if is_generic else "✗ skip"
+            text = f"ID {mat_id} | class: '{cls_name}' | {flag} | name: {sub_mat.name}"
+            item = QtWidgets.QListWidgetItem(text)
+            if is_generic:
+                item.setBackground(QtGui.QColor(220, 255, 220))
+            else:
+                item.setForeground(QtGui.QColor(140, 140, 140))
+            self.list_widget.addItem(item)
+
+        self.lbl_info.setText(
+            "[Debug] Showing class names. Green = will be converted. "
+            "If 'WILL CONVERT' is wrong, report the class name shown."
+        )
+
+    # --- Main conversion ------------------------------------------------
+    def convert_autodesk_to_gltf(self):
+        """
+        For every Autodesk Generic sub-material in the Multi/Sub-Object:
+          1. Reads base_color + base_color_map.
+          2. Creates a new glTF material.
+          3. Copies color & map → preserving the look.
+          4. Names the new material  <original>_glTF.
+          5. Replaces the slot in the Multi/Sub-Object.
+        Full debug output is shown in the list widget.
+        """
+        self.list_widget.clear()
+        self.current_obj = self.get_target_object()
+        if not self.current_obj:
+            return
+
+        gltf_cls = self._get_gltf_material_class()
+        if gltf_cls is None:
+            self.lbl_info.setText(
+                "ERROR: glTF Material plugin not found. "
+                "Install Babylon.js Exporter (Max2Babylon) or the Autodesk glTF plugin, "
+                "then restart 3ds Max."
+            )
+            # Still show what classes exist so user can debug
+            self.debug_list_class_names()
+            return
+
+        multi_mat = self.current_obj.material
+        count_converted = 0
+        count_skipped   = 0
+        report = []   # list of (text, hex_color_or_None)
+
+        for i in range(multi_mat.numsubs):
+            sub_mat = multi_mat[i]
+            if sub_mat is None:
+                continue
+
+            mat_id   = multi_mat.materialIDList[i]
+            cls_name = self._get_mat_class_name(sub_mat)
+
+            if not self._is_autodesk_generic(sub_mat):
+                count_skipped += 1
+                report.append((
+                    f"[SKIP] ID {mat_id} class='{cls_name}' name={sub_mat.name}",
+                    None
+                ))
+                continue
+
+            # --- Read source color & map ---
+            src_color = None
+            src_map   = None
+            color_attr_used = "(none)"
+            for cattr in ("base_color", "baseColor", "diffuse"):
+                val = getattr(sub_mat, cattr, None)
+                if val is not None:
+                    src_color = val
+                    color_attr_used = cattr
+                    break
+            for mattr in ("base_color_map", "baseColorTexture", "baseColor_map", "diffuseMap"):
+                val = getattr(sub_mat, mattr, None)
+                if val is not None:
+                    src_map = val
+                    break
+
+            # --- Build glTF material ---
+            try:
+                new_mat = gltf_cls()
+            except Exception as e:
+                report.append((
+                    f"[ERROR] ID {mat_id} name={sub_mat.name} — could not create glTF: {e}",
+                    None
+                ))
+                continue
+
+            original_name = sub_mat.name
+            new_mat.name  = original_name + "_glTF"
+
+            # Copy color
+            hex_color = self._copy_color_to_gltf(new_mat, src_color)
+            # Copy map
+            self._copy_map_to_gltf(new_mat, src_map)
+
+            # Replace slot
+            multi_mat[i] = new_mat
+            count_converted += 1
+
+            map_info   = f" | map: {src_map.name if src_map else 'none'}"
+            color_str  = hex_color if hex_color else "(read failed)"
+            report.append((
+                f"[OK] ID {mat_id} | {original_name} → {new_mat.name} "
+                f"| color({color_attr_used}):{color_str}{map_info}",
+                hex_color
+            ))
+
+        # --- Populate list widget ---
+        for text, hex_color in report:
+            item = QtWidgets.QListWidgetItem(text)
+            if text.startswith("[OK]"):
+                item.setBackground(QtGui.QColor(210, 255, 220))
+                if hex_color:
+                    try:
+                        px = QtGui.QPixmap(20, 20)
+                        px.fill(QtGui.QColor(hex_color))
+                        item.setIcon(QtGui.QIcon(px))
+                    except:
+                        pass
+            elif text.startswith("[SKIP]"):
+                item.setForeground(QtGui.QColor(130, 130, 130))
+            elif text.startswith("[ERROR]"):
+                item.setForeground(QtGui.QColor(200, 50, 50))
+            self.list_widget.addItem(item)
+
+        self.lbl_info.setText(
+            f"Done — Converted: {count_converted} | Skipped (other type): {count_skipped}. "
+            f"Use [Debug] button first if all show SKIP."
+        )
 
     def add_mit_prefix(self):
         self.list_widget.clear()
