@@ -30,9 +30,13 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 	(
 		if selection.count > 0 then
 		(
+			-- modPanel.addModToSelection ton trong dung sub-object dang chon
+			-- (VD: chi chon vai Face) - addModifier KHONG lam duoc dieu nay,
+			-- no luon tu tat sub-object level va ap len ca object (theo tai
+			-- lieu MAXScript chinh thuc cua Autodesk)
+			modPanel.addModToSelection (Uvwmap ()) ui:on
 			for obj in selection do
 			(
-				addModifier obj (Uvwmap ())
 				obj.modifiers[#UVW_Map].maptype = 4
 				obj.modifiers[#UVW_Map].width = sz
 				obj.modifiers[#UVW_Map].height = sz
