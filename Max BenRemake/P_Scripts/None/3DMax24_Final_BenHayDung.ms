@@ -21,6 +21,11 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 	local colorBtnHover 	= (dotNetClass "System.Drawing.Color").FromArgb 40 120 215
 	local colorBtnText 	= (dotNetClass "System.Drawing.Color").White
 
+	-- MAU RIENG CHO NHOM DW PIPELINE (vang gold)
+	local colorDWDefault = (dotNetClass "System.Drawing.Color").FromArgb 180 140 20
+	local colorDWHover	 = (dotNetClass "System.Drawing.Color").FromArgb 230 190 40
+	local colorDWText	 = (dotNetClass "System.Drawing.Color").Black
+
 	------------------------------------------------------------------
 	-- HAM DUNG CHUNG: gan UVW Map (Box, kich thuoc sz) cho tung object
 	-- trong selection - lam rieng tung object de tranh loi khi chon
@@ -57,6 +62,10 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 	fn fnHoverEnter ctrl = ( ctrl.BackColor = colorBtnHover )
 	fn fnHoverLeave ctrl = ( ctrl.BackColor = colorBtnDefault )
 
+	-- Hover rieng cho DW pipeline (vang gold)
+	fn fnDWHoverEnter ctrl = ( ctrl.BackColor = colorDWHover )
+	fn fnDWHoverLeave ctrl = ( ctrl.BackColor = colorDWDefault )
+
 	------------------------------------------------------------------
 	-- TIEU DE
 	------------------------------------------------------------------
@@ -70,6 +79,7 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 		dotNetControl btConvertPoly 	"System.Windows.Forms.Button" width:100 height:20 across:2
 		dotNetControl btClean 			"System.Windows.Forms.Button" width:100 height:20 across:2
 		dotNetControl weld 			"System.Windows.Forms.Button" width:205 height:20 across:1
+		dotNetControl btCheckDouble "System.Windows.Forms.Button" width:205 height:20 across:1
 	)
 
 	------------------------------------------------------------------
@@ -115,6 +125,15 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 	)
 
 	------------------------------------------------------------------
+	-- NHOM 6: DW PIPELINE (THEM MOI - khong dung cham code cu)
+	------------------------------------------------------------------
+	label lblDW "== DW PIPELINE ==" align:#center color:(color 230 200 60)
+	group "DW pipeline" (
+		dotNetControl btHBName "System.Windows.Forms.Button" width:205 height:20 across:1
+		dotNetControl btGLTFName "System.Windows.Forms.Button" width:205 height:20 across:1
+	)
+
+	------------------------------------------------------------------
 	-- DONG TRANG THAI (hien "OK" sau khi bam nut, tu tat sau 3s)
 	------------------------------------------------------------------
 	label lblStatus "" align:#center height:16 color:(color 60 200 90)
@@ -145,6 +164,7 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 			#(btConvertPoly, 	"Convert Poly"), \
 			#(btClean, 			"Clean Dead Face"), \
 			#(weld, 			"Weld"), \
+			#(btCheckDouble, 	"Check Double Face"), \
 			#(btUVMap11, 		"UV Map 1m"), \
 			#(btUVMap5m, 		"UV Map 5m"), \
 			#(btUVMap10m, 		"UV Map 10m"), \
@@ -170,6 +190,23 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 			b.BackColor = colorBtnDefault
 			b.ForeColor = colorBtnText
 		)
+
+		-- STYLE RIENG CHO NUT DW PIPELINE (vang gold, chu den)
+		btHBName.Text = "1 click name hb"
+		btHBName.Font = dotNetObject "System.Drawing.Font" "Segoe UI" 7.5
+		btHBName.FlatStyle = (dotNetClass "System.Windows.Forms.FlatStyle").Flat
+		btHBName.FlatAppearance.BorderSize = 1
+		btHBName.UseVisualStyleBackColor = false
+		btHBName.BackColor = colorDWDefault
+		btHBName.ForeColor = colorDWText
+
+		btGLTFName.Text = "1 Click tao ten gltf"
+		btGLTFName.Font = dotNetObject "System.Drawing.Font" "Segoe UI" 7.5
+		btGLTFName.FlatStyle = (dotNetClass "System.Windows.Forms.FlatStyle").Flat
+		btGLTFName.FlatAppearance.BorderSize = 1
+		btGLTFName.UseVisualStyleBackColor = false
+		btGLTFName.BackColor = colorDWDefault
+		btGLTFName.ForeColor = colorDWText
 	)
 
 	------------------------------------------------------------------
@@ -183,6 +220,9 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 
 	on weld MouseEnter arg do ( fnHoverEnter weld )
 	on weld MouseLeave arg do ( fnHoverLeave weld )
+
+	on btCheckDouble MouseEnter arg do ( fnHoverEnter btCheckDouble )
+	on btCheckDouble MouseLeave arg do ( fnHoverLeave btCheckDouble )
 
 	on btUVMap11 MouseEnter arg do ( fnHoverEnter btUVMap11 )
 	on btUVMap11 MouseLeave arg do ( fnHoverLeave btUVMap11 )
@@ -220,6 +260,12 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 	on ExportSelect MouseEnter arg do ( fnHoverEnter ExportSelect )
 	on ExportSelect MouseLeave arg do ( fnHoverLeave ExportSelect )
 
+	on btHBName MouseEnter arg do ( fnDWHoverEnter btHBName )
+	on btHBName MouseLeave arg do ( fnDWHoverLeave btHBName )
+
+	on btGLTFName MouseEnter arg do ( fnDWHoverEnter btGLTFName )
+	on btGLTFName MouseLeave arg do ( fnDWHoverLeave btGLTFName )
+
 	------------------------------------------------------------------
 	-- HANDLERS: MESH / POLY TOOLS
 	------------------------------------------------------------------
@@ -239,6 +285,91 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 		$.weldThreshold = 0.001
 		$.EditablePoly.weldFlaggedVertices ()
 		flashStatus "OK"
+	)
+
+	------------------------------------------------------------------
+	-- btCheckDouble: quet 1 object, tim cac face bi chong len nhau
+	-- (cung tam face - la nguyen nhan gay chop / z-fighting) va chon
+	-- chung o sub-object Polygon de nguoi dung xu ly.
+	-- Ho tro Editable Poly va Editable Mesh. Sai loai -> bam Convert Poly.
+	-- Dung sai so 0.01 don vi (round toa do * 100).
+	------------------------------------------------------------------
+	on btCheckDouble Click do
+	(
+		if selection.count != 1 then
+		(
+			messageBox "Hay chon dung 1 object de kiem tra!"
+		)
+		else
+		(
+			local obj = selection[1]
+
+			-- Ham tao key tu tam face (lam tron 0.01 don vi)
+			-- Luu y: MAXScript KHONG co ham round -> tu lam tron bang floor(x+0.5)
+			fn dfKey c =
+			(
+				((((floor (c.x * 100 + 0.5)) as integer) as string)) + "_" + \
+				((((floor (c.y * 100 + 0.5)) as integer) as string)) + "_" + \
+				((((floor (c.z * 100 + 0.5)) as integer) as string))
+			)
+
+			if (classof obj == Editable_Poly) then
+			(
+				local nf = polyop.getNumFaces obj
+				local ht = dotNetObject "System.Collections.Hashtable"
+				local keys = #()
+				for i = 1 to nf do
+				(
+					local k = dfKey (polyop.getFaceCenter obj i)
+					append keys k
+					if (ht.ContainsKey k) then ht.set_Item k ((ht.get_Item k) + 1)
+					else ht.Add k 1
+				)
+				local selFaces = #{}
+				for i = 1 to nf do ( if ((ht.get_Item keys[i]) > 1) do selFaces[i] = true )
+
+				max modify mode
+				modPanel.setCurrentObject obj.baseObject
+				subobjectLevel = 4  -- Polygon
+				polyop.setFaceSelection obj selFaces
+				redrawViews()
+
+				if selFaces.numberSet > 0 then
+					flashStatus ("Double: " + selFaces.numberSet as string + " face")
+				else
+					flashStatus "Khong co double face"
+			)
+			else if (classof obj == Editable_Mesh) then
+			(
+				local nf = getNumFaces obj
+				local ht = dotNetObject "System.Collections.Hashtable"
+				local keys = #()
+				for i = 1 to nf do
+				(
+					local k = dfKey (getFaceCenter obj i)
+					append keys k
+					if (ht.ContainsKey k) then ht.set_Item k ((ht.get_Item k) + 1)
+					else ht.Add k 1
+				)
+				local selFaces = #{}
+				for i = 1 to nf do ( if ((ht.get_Item keys[i]) > 1) do selFaces[i] = true )
+
+				max modify mode
+				modPanel.setCurrentObject obj.baseObject
+				subobjectLevel = 3  -- Face (Editable Mesh)
+				obj.selectedFaces = selFaces
+				redrawViews()
+
+				if selFaces.numberSet > 0 then
+					flashStatus ("Double: " + selFaces.numberSet as string + " face")
+				else
+					flashStatus "Khong co double face"
+			)
+			else
+			(
+				messageBox "Object phai la Editable Poly hoac Editable Mesh.\nHay bam Convert Poly truoc."
+			)
+		)
 	)
 
 	------------------------------------------------------------------
@@ -373,6 +504,95 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 		select $
 		actionMan.executeAction 0 "40373"  -- File: Export Selected
 		flashStatus "OK"
+	)
+
+	------------------------------------------------------------------
+	-- HANDLERS: DW PIPELINE (THEM MOI)
+	-- btHBName: hoi so tang, tao bo dummy hb tai goc toa do [0,0,0]:
+	--   Ground, Ground_Lower, Ground_Upper, Level_01 ... Level_NN
+	------------------------------------------------------------------
+	on btHBName Click do
+	(
+		-- Hop thoai nho hoi so tang (modal, co spinner)
+		local rlDW = rollout rlDWAskLevels "DW pipeline" width:180
+		(
+			spinner spnLevels "So tang:" range:[1,200,8] type:#integer fieldWidth:60 align:#center
+			button btnDWOK "OK" width:80 height:24 align:#center
+			local result = 0
+			on btnDWOK pressed do
+			(
+				rlDWAskLevels.result = spnLevels.value
+				destroyDialog rlDWAskLevels
+			)
+		)
+		createDialog rlDW modal:true
+
+		local numLevels = rlDW.result
+		if numLevels > 0 then
+		(
+			undo "1 click name hb" on
+			(
+				-- Danh sach ten can tao
+				local hbNames = #("Ground", "Ground_Lower", "Ground_Upper")
+				for i = 1 to numLevels do
+					append hbNames ("Level_" + (formattedPrint i format:"02d"))
+
+				local madeCount = 0
+				for n in hbNames do
+				(
+					-- Tranh trung: neu da co object cung ten thi bo qua
+					if (getNodeByName n) == undefined then
+					(
+						local d = Dummy name:n pos:[0,0,0]
+						madeCount += 1
+					)
+				)
+				flashStatus ("OK - " + madeCount as string + " dummy")
+			)
+		)
+	)
+
+	------------------------------------------------------------------
+	-- btGLTFName: hoi ten du an, tao bo dummy hau to gltf tai goc [0,0,0]:
+	--   <ten>_3dassets, _building, _ghosted, _hb, _map, _map, _tree2D
+	------------------------------------------------------------------
+	on btGLTFName Click do
+	(
+		-- Hop thoai nho hoi ten du an (modal)
+		local rlGL = rollout rlGLAskName "DW pipeline" width:220
+		(
+			edittext txtProj "Ten du an:" fieldWidth:130 align:#center
+			button btnGLOK "OK" width:80 height:24 align:#center
+			local result = ""
+			on btnGLOK pressed do
+			(
+				rlGLAskName.result = (trimLeft (trimRight txtProj.text) )
+				destroyDialog rlGLAskName
+			)
+		)
+		createDialog rlGL modal:true
+
+		local projName = rlGL.result
+		if projName != undefined and projName != "" then
+		(
+			undo "1 Click tao ten gltf" on
+			(
+				-- Hau to theo dung thu tu trong anh (co 2 _map)
+				local suffixes = #("_3dassets", "_building", "_ghosted", "_hb", "_map", "_map", "_tree2D")
+
+				local madeCount = 0
+				for s in suffixes do
+				(
+					local d = Dummy name:(projName + s) pos:[0,0,0]
+					madeCount += 1
+				)
+				flashStatus ("OK - " + madeCount as string + " dummy")
+			)
+		)
+		else
+		(
+			if projName == "" then messageBox "Chua nhap ten du an!"
+		)
 	)
 )
 
