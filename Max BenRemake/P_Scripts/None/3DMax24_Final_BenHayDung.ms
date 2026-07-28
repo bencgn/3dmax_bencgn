@@ -26,6 +26,10 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 	local colorDWHover	 = (dotNetClass "System.Drawing.Color").FromArgb 230 190 40
 	local colorDWText	 = (dotNetClass "System.Drawing.Color").Black
 
+	-- MAU RIENG CHO NUT DELETE (do)
+	local colorDelDefault = (dotNetClass "System.Drawing.Color").FromArgb 170 40 40
+	local colorDelHover	  = (dotNetClass "System.Drawing.Color").FromArgb 220 60 60
+
 	------------------------------------------------------------------
 	-- HAM DUNG CHUNG: gan UVW Map (Box, kich thuoc sz) cho tung object
 	-- trong selection - lam rieng tung object de tranh loi khi chon
@@ -65,6 +69,10 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 	-- Hover rieng cho DW pipeline (vang gold)
 	fn fnDWHoverEnter ctrl = ( ctrl.BackColor = colorDWHover )
 	fn fnDWHoverLeave ctrl = ( ctrl.BackColor = colorDWDefault )
+
+	-- Hover rieng cho nut Delete (do)
+	fn fnDelHoverEnter ctrl = ( ctrl.BackColor = colorDelHover )
+	fn fnDelHoverLeave ctrl = ( ctrl.BackColor = colorDelDefault )
 
 	------------------------------------------------------------------
 	-- TIEU DE
@@ -191,6 +199,10 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 			b.ForeColor = colorBtnText
 		)
 
+		-- Override mau DO cho nut Delete (van giu Text/Font tu vong lap tren)
+		Deletex.BackColor = colorDelDefault
+		Deletex.ForeColor = colorBtnText
+
 		-- STYLE RIENG CHO NUT DW PIPELINE (vang gold, chu den)
 		btHBName.Text = "1 click name hb"
 		btHBName.Font = dotNetObject "System.Drawing.Font" "Segoe UI" 7.5
@@ -242,8 +254,8 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 	on UnhideAll MouseEnter arg do ( fnHoverEnter UnhideAll )
 	on UnhideAll MouseLeave arg do ( fnHoverLeave UnhideAll )
 
-	on Deletex MouseEnter arg do ( fnHoverEnter Deletex )
-	on Deletex MouseLeave arg do ( fnHoverLeave Deletex )
+	on Deletex MouseEnter arg do ( fnDelHoverEnter Deletex )
+	on Deletex MouseLeave arg do ( fnDelHoverLeave Deletex )
 
 	on btWireView MouseEnter arg do ( fnHoverEnter btWireView )
 	on btWireView MouseLeave arg do ( fnHoverLeave btWireView )
