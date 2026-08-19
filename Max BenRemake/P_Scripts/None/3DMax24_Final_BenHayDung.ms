@@ -88,6 +88,8 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 		dotNetControl btClean 			"System.Windows.Forms.Button" width:100 height:20 across:2
 		dotNetControl weld 			"System.Windows.Forms.Button" width:205 height:20 across:1
 		dotNetControl btCheckDouble "System.Windows.Forms.Button" width:205 height:20 across:1
+		dotNetControl btSelNoneMesh "System.Windows.Forms.Button" width:205 height:20 across:1
+		dotNetControl btRenamePart "System.Windows.Forms.Button" width:205 height:20 across:1
 	)
 
 	------------------------------------------------------------------
@@ -173,6 +175,8 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 			#(btClean, 			"Clean Dead Face"), \
 			#(weld, 			"Weld"), \
 			#(btCheckDouble, 	"Check Double Face"), \
+			#(btSelNoneMesh, 	"Select None Mesh (0 tris)"), \
+			#(btRenamePart, 	"Rename Part 1-xx"), \
 			#(btUVMap11, 		"UV Map 1m"), \
 			#(btUVMap5m, 		"UV Map 5m"), \
 			#(btUVMap10m, 		"UV Map 10m"), \
@@ -235,6 +239,12 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 
 	on btCheckDouble MouseEnter arg do ( fnHoverEnter btCheckDouble )
 	on btCheckDouble MouseLeave arg do ( fnHoverLeave btCheckDouble )
+
+	on btSelNoneMesh MouseEnter arg do ( fnHoverEnter btSelNoneMesh )
+	on btSelNoneMesh MouseLeave arg do ( fnHoverLeave btSelNoneMesh )
+
+	on btRenamePart MouseEnter arg do ( fnHoverEnter btRenamePart )
+	on btRenamePart MouseLeave arg do ( fnHoverLeave btRenamePart )
 
 	on btUVMap11 MouseEnter arg do ( fnHoverEnter btUVMap11 )
 	on btUVMap11 MouseLeave arg do ( fnHoverLeave btUVMap11 )
@@ -381,6 +391,84 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 			(
 				messageBox "Object phai la Editable Poly hoac Editable Mesh.\nHay bam Convert Poly truoc."
 			)
+		)
+	)
+
+	------------------------------------------------------------------
+	-- btSelNoneMesh: quet TOAN BO scene, tim cac object GEOMETRY co
+	-- 0 face (mesh rong / khong co gi) va CHON chung lai de nguoi dung
+	-- tu quyet dinh xoa. Chi chon geometry - KHONG dung cham Dummy,
+	-- Camera, Light, Spline (vi chung khong phai GeometryClass).
+	--
+	-- Cach dem face an toan cho tung loai:
+	--   Editable_Poly -> polyop.getNumFaces
+	--   Editable_Mesh -> getNumFaces
+	--   Con lai (primitive, co modifier...) -> obj.mesh.numfaces
+	--     (.mesh tra ve TriMesh da ap modifier, KHONG pha huy object goc)
+	-- Boc try...catch: object nao loi khi doc mesh thi BO QUA (khong chon)
+	-- de tranh chon nham.
+	------------------------------------------------------------------
+	on btSelNoneMesh Click do
+	(
+		local emptyObjs = #()
+		for obj in objects do
+		(
+			if (superclassof obj == GeometryClass) then
+			(
+				local nf = -1
+				try
+				(
+					case (classof obj) of
+					(
+						Editable_Poly: nf = polyop.getNumFaces obj
+						Editable_Mesh: nf = getNumFaces obj
+						default: nf = obj.mesh.numfaces
+					)
+				)
+				catch ( nf = -1 )
+
+				if nf == 0 then append emptyObjs obj
+			)
+		)
+
+		if emptyObjs.count > 0 then
+		(
+			clearSelection()
+			select emptyObjs
+			flashStatus ("0 tris: chon " + emptyObjs.count as string + " obj")
+		)
+		else
+		(
+			clearSelection()
+			flashStatus "Khong co object rong"
+		)
+	)
+
+	------------------------------------------------------------------
+	-- btRenamePart: doi ten cac object DANG CHON thanh part_01, part_02,
+	-- part_03 ... theo thu tu tang dan. Chon 1 -> part_01. Chon nhieu ->
+	-- danh so len tu 01. Padding toi thieu 2 chu so ("02d"): 01..09, 10,
+	-- 11 ... 99, 100, 101 ... (tu 100 tro len tu dong dung 3 chu so).
+	-- Boc undo de Ctrl+Z hoan tac 1 lan.
+	------------------------------------------------------------------
+	on btRenamePart Click do
+	(
+		if selection.count > 0 then
+		(
+			undo "rename part" on
+			(
+				local i = 1
+				for obj in selection do
+				(
+					obj.name = "part_" + (formattedPrint i format:"02d")
+					i += 1
+				)
+			)
+			flashStatus ("Rename " + selection.count as string + " part")
+		)
+		else
+		(
+			messageBox "Chua chon object nao!"
 		)
 	)
 
