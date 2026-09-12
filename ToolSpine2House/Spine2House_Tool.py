@@ -238,34 +238,34 @@ class Spine2HouseTool(QWidget):
         # Optional: Disable scene redraw during intensive operations
         rt.disableSceneRedraw()
         try:
-            with pymxs.undo(True, "Combine Spine2House"):
+            # Tat undo cho buoc combine: neu attach tung object mot duoi undo, Max phai luu lai
+            # toan bo trang thai mesh sau MOI lan attach -> mesh cang lon cang cham (gan nhu O(n^2)).
+            # Day moi la nguyen nhan chinh gay cham, khong phai ban than lenh attach.
+            with pymxs.undo(False):
                 # Take the first object and use it as base
                 base_mesh = nodes_to_combine[0]
                 rt.convertTo(base_mesh, rt.Editable_Poly)
                 base_mesh.name = rt.uniqueName("SpineHouse_Combined_")
                 
-                total_nodes = len(nodes_to_combine) - 1
+                rest_nodes = nodes_to_combine[1:]
+                total_nodes = len(rest_nodes)
+                
+                self.progress_bar.setRange(0, 1)
+                self.progress_bar.setValue(0)
+                
                 if total_nodes > 0:
-                    self.progress_bar.setRange(0, total_nodes)
-                    self.progress_bar.setValue(0)
+                    # attachList gop TAT CA object vao 1 lenh native duy nhat, nhanh hon rat nhieu
+                    # so voi goi polyop.attach() tung cai trong vong lap (tranh overhead rebuild
+                    # topology + qua lai Python/MAXScript sau moi lan attach). deleteSourceNode=True
+                    # se tu dong xoa cac node nguon sau khi attach, khong can rt.delete thu cong.
+                    rt.polyop.attachList(base_mesh, rest_nodes, deleteSourceNode=True, condenseMat=True)
                     
-                    # Attach the rest
-                    for i in range(1, len(nodes_to_combine)):
-                        node = nodes_to_combine[i]
-                        # We might need to convert it to poly first or just attach
-                        rt.polyop.attach(base_mesh, node)
-                        
-                        self.progress_bar.setValue(i)
-                        if i % 10 == 0:
-                            QApplication.processEvents()
-                            
-                    self.progress_bar.setValue(total_nodes)
+                self.progress_bar.setValue(1)
                             
                 self.generated_nodes_handles = [base_mesh.handle] # It becomes the only generated node
-                QMessageBox.information(self, "Success", f"Successfully combined into {base_mesh.name}.")
                 
-                # reset progress
-                self.progress_bar.setValue(0)
+            QMessageBox.information(self, "Success", f"Successfully combined {total_nodes + 1} objects into {base_mesh.name}.\n(Note: buoc Combine nay khong ho tro Ctrl+Z do da tat undo de tang toc do.)")
+            self.progress_bar.setValue(0)
         except Exception as e:
             QMessageBox.critical(self, "Error", f"An error occurred during combine:\n{str(e)}")
             print(f"Error Spine2House Combine: {e}")
@@ -317,7 +317,10 @@ class Spine2HouseTool(QWidget):
         # Optional: Disable scene redraw during intensive operations
         rt.disableSceneRedraw()
         try:
-            with pymxs.undo(True, "Generate Spine2House Layout"):
+            # Tat undo cho vong lap generate: tao tung node duoi undo se khien Max ghi lai
+            # RestoreObject cho MOI node/transform/layer.addNode -> cang nhieu object cang cham.
+            # Khong sao vi nut "Clear Generated Layout" da du de xoa sach layout sinh ra.
+            with pymxs.undo(False):
                 self.clear_generated_nodes()
                 
                 num_curves = rt.numSplines(spline_node)
@@ -325,6 +328,11 @@ class Spine2HouseTool(QWidget):
                 # Initial progress setup
                 self.progress_bar.setRange(0, 100)
                 self.progress_bar.setValue(0)
+                
+                # Chi goi processEvents/update progress bar dinh ky, khong lam moi vong lap
+                # (goi moi vong lap la nguyen nhan chinh gay cham khi spline dai/nhieu object)
+                ui_update_interval = 20
+                inst_counter = 0
                 
                 for curve_idx in range(1, num_curves + 1):
                     try:
@@ -398,6 +406,7 @@ class Spine2HouseTool(QWidget):
                             
                         layer.addNode(inst)
                         self.generated_nodes_handles.append(inst.handle)
+                        inst_counter += 1
                         
                         # Calculate next step distance
                         step = random.uniform(min_dist, max_dist)
@@ -408,12 +417,13 @@ class Spine2HouseTool(QWidget):
                             
                         current_dist += step
                         
-                        # Update progress based on distance covered relative to total curves approx
-                        base_prog = (curve_idx - 1) / float(num_curves) * 100
-                        curve_prog = pct * (100.0 / num_curves)
-                        self.progress_bar.setValue(int(base_prog + curve_prog))
-                        
-                        QApplication.processEvents() # Keeps UI responsive if path is massive
+                        # Chi update progress bar + processEvents dinh ky (moi ui_update_interval
+                        # object), khong lam o MOI vong lap -> tranh ep Qt repaint lien tuc gay cham
+                        if inst_counter % ui_update_interval == 0:
+                            base_prog = (curve_idx - 1) / float(num_curves) * 100
+                            curve_prog = pct * (100.0 / num_curves)
+                            self.progress_bar.setValue(int(base_prog + curve_prog))
+                            QApplication.processEvents() # Keeps UI responsive if path is massive
 
                 self.progress_bar.setValue(100)
                 
