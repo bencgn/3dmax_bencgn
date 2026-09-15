@@ -86,6 +86,9 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 	group "Mesh / Poly" (
 		dotNetControl btConvertPoly 	"System.Windows.Forms.Button" width:100 height:20 across:2
 		dotNetControl btClean 			"System.Windows.Forms.Button" width:100 height:20 across:2
+		-- tunrPoly: nut va o nhap polygonsize tren cung mot dong, khong popup.
+		dotNetControl btTunrPoly "System.Windows.Forms.Button" width:75 height:20 across:2 align:#left
+		spinner spnPolygonSize "polygonsize" range:[3,1000,5] type:#integer scale:1 fieldWidth:45 width:125 align:#right offset:[0,1]
 		dotNetControl weld 			"System.Windows.Forms.Button" width:205 height:20 across:1
 		dotNetControl btCheckDouble "System.Windows.Forms.Button" width:205 height:20 across:1
 		dotNetControl btSelNoneMesh "System.Windows.Forms.Button" width:205 height:20 across:1
@@ -173,6 +176,7 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 		local allBtns = #(
 			#(btConvertPoly, 	"Convert Poly"), \
 			#(btClean, 			"Clean Dead Face"), \
+			#(btTunrPoly, 		"tunrPoly"), \
 			#(weld, 			"Weld"), \
 			#(btCheckDouble, 	"Check Double Face"), \
 			#(btSelNoneMesh, 	"Select None Mesh (0 tris)"), \
@@ -233,6 +237,9 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 
 	on btClean MouseEnter arg do ( fnHoverEnter btClean )
 	on btClean MouseLeave arg do ( fnHoverLeave btClean )
+
+	on btTunrPoly MouseEnter arg do ( fnHoverEnter btTunrPoly )
+	on btTunrPoly MouseLeave arg do ( fnHoverLeave btTunrPoly )
 
 	on weld MouseEnter arg do ( fnHoverEnter weld )
 	on weld MouseLeave arg do ( fnHoverLeave weld )
@@ -295,6 +302,49 @@ rollout rOSTools "Bencgn Tool Thao Tac Nhanh" rolledUp:false width:230
 	(
 		macros.run "Modifier Stack" "Convert_to_Poly"
 		flashStatus "OK"
+	)
+
+	------------------------------------------------------------------
+	-- tunrPoly: them Turn_to_Poly theo polygonsize (mac dinh 5).
+	-- Moi lan bam them mot modifier MOI; khong collapse / sua modifier cu.
+	-- Dung truc tiep modifier moi, khong dung $.modifiers khi chon nhieu.
+	-- Chi bao trang thai trong tool / Listener, KHONG mo hop thoai.
+	------------------------------------------------------------------
+	on btTunrPoly Click do
+	(
+		if selection.count == 0 then
+		(
+			flashStatus "Chua chon object nao!"
+		)
+		else
+		(
+			try
+			(
+				max modify mode
+				if (modPanel.validModifier Turn_to_Poly) then
+				(
+					local polySize = spnPolygonSize.value as integer
+					undo "tunrPoly" on
+					(
+						local turnMod = Turn_to_Poly ()
+						turnMod.limitPolySize = on
+						turnMod.maxPolySize = polySize
+						modPanel.addModToSelection turnMod ui:on
+					)
+					flashStatus ("tunrPoly OK | size " + (polySize as string))
+				)
+				else
+				(
+					flashStatus "Chon Mesh/Poly hop le"
+				)
+			)
+			catch
+			(
+				local err = getCurrentException()
+				flashStatus "Loi tunrPoly - xem Listener"
+				format "tunrPoly: %\n" err
+			)
+		)
 	)
 
 	-- btClean: chua duoc gan lenh trong file goc, de trong cho ban gan sau
